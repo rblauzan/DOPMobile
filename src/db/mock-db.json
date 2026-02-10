@@ -1,0 +1,266 @@
+
+{
+  "today": "2024-12-15",
+  "tomorrow": "2024-12-16",
+  "workers": [
+    {
+      "id": 1,
+      "name": "Kaytea Moreno",
+      "role": "Team Lead",
+      "phone": "(239) 317-6096",
+      "email": "kaytea@dop.local",
+      "home": "Bonita Springs, FL",
+      "payRate": 22.5,
+      "status": "active",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kaytea",
+      "jobs": [
+        {
+          "id": 180044,
+          "status": "completed",
+          "client": "Beach Breeze 290",
+          "address": "32 1st St, Bonita Springs, FL 34134",
+          "time": "8:30am – 11:00am",
+          "duration": "2h 30m",
+          "priority": 2,
+          "notes": "Standard turnover, no issues reported. Guest left property in good condition.",
+          "date": "2024-12-15",
+          "payment": 75.0,
+          "type": "turnover",
+          "rooms": 3,
+          "sqft": 1800
+        },
+        {
+          "id": 182514,
+          "status": "assigned",
+          "client": "Nomadic Vacation Rentals",
+          "address": "587 99th Ave N, Naples, FL 34108",
+          "time": "11:30am – 3:00pm",
+          "duration": "3h 30m",
+          "priority": 1,
+          "notes": "Guest arriving early – high priority. Deep clean required in kitchen.",
+          "date": "2024-12-15",
+          "payment": 105.0,
+          "type": "deep_clean",
+          "rooms": 4,
+          "sqft": 2200
+        },
+        {
+          "id": 182900,
+          "status": "assigned",
+          "client": "Blue Diamond Beach Home",
+          "address": "3542 McComb Ave, Naples, FL 34112",
+          "time": "4:00pm – 6:00pm",
+          "duration": "2h 0m",
+          "priority": 3,
+          "notes": "Owner inspection tomorrow. Focus on bathrooms and floors.",
+          "date": "2024-12-16",
+          "payment": 60.0,
+          "type": "inspection_prep",
+          "rooms": 3,
+          "sqft": 1600
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Yailen Figuereido",
+      "role": "Cleaner Pro",
+      "phone": "(239) 763-3972",
+      "email": "yailen@dop.local",
+      "home": "Naples, FL",
+      "payRate": 18.0,
+      "status": "active",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Yailen",
+      "jobs": [
+        {
+          "id": 190210,
+          "status": "assigned",
+          "client": "Marco Luxe Retreat",
+          "address": "840 Rose Ct, Marco Island, FL 34145",
+          "time": "9:00am – 12:00pm",
+          "duration": "3h 0m",
+          "priority": 2,
+          "notes": "Deep clean requested. Special attention to outdoor patio.",
+          "date": "2024-12-15",
+          "payment": 90.0,
+          "type": "deep_clean",
+          "rooms": 3,
+          "sqft": 1900
+        },
+        {
+          "id": 190311,
+          "status": "in_progress",
+          "client": "Gulf View Condo",
+          "address": "123 Gulf Shore Blvd, Naples, FL 34102",
+          "time": "1:00pm – 3:30pm",
+          "duration": "2h 30m",
+          "priority": 1,
+          "notes": "Check-in at 5pm. Need to finish by 4pm.",
+          "date": "2024-12-15",
+          "payment": 67.5,
+          "type": "turnover",
+          "rooms": 2,
+          "sqft": 1200
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Yurleidys Rivero",
+      "role": "Cleaner Pro",
+      "phone": "(239) 555-1099",
+      "email": "yurleidys@dop.local",
+      "home": "Cape Coral, FL",
+      "payRate": 19.5,
+      "status": "active",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Yurleidys",
+      "jobs": []
+    },
+    {
+      "id": 4,
+      "name": "Carlos Rodriguez",
+      "role": "Cleaner",
+      "phone": "(239) 456-7890",
+      "email": "carlos@dop.local",
+      "home": "Fort Myers, FL",
+      "payRate": 17.5,
+      "status": "active",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
+      "jobs": [
+        {
+          "id": 190415,
+          "status": "assigned",
+          "client": "Sunset Villa",
+          "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
+          "time": "10:00am – 1:00pm",
+          "duration": "3h 0m",
+          "priority": 2,
+          "notes": "Pet-friendly unit. Extra vacuuming needed.",
+          "date": "2024-12-15",
+          "payment": 78.75,
+          "type": "standard_clean",
+          "rooms": 3,
+          "sqft": 1500
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Maria Gonzalez",
+      "role": "Team Lead",
+      "phone": "(239) 123-4567",
+      "email": "maria@dop.local",
+      "home": "Estero, FL",
+      "payRate": 21.0,
+      "status": "on_vacation",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+      "jobs": []
+    }
+  ],
+  "unassigned": [
+    {
+      "id": 300101,
+      "client": "Marco Luxe Retreat",
+      "address": "840 Rose Ct, Marco Island, FL 34145",
+      "time": "2:00pm – 5:00pm",
+      "duration": "3h",
+      "notes": "Same-day turnover. Guest arriving at 6pm.",
+      "date": "2024-12-15",
+      "priority": 1,
+      "payment": 90.0,
+      "type": "turnover",
+      "rooms": 3,
+      "sqft": 1900
+    },
+    {
+      "id": 300202,
+      "client": "Sea La Vie Beach House",
+      "address": "28124 Sunset Dr, Bonita Springs, FL 34134",
+      "time": "Anytime (flex)",
+      "duration": "2h 30m",
+      "notes": "Flexible window. Owner will leave key under mat.",
+      "date": "2024-12-15",
+      "priority": 3,
+      "payment": 62.5,
+      "type": "standard_clean",
+      "rooms": 2,
+      "sqft": 1300
+    },
+    {
+      "id": 300303,
+      "client": "Palm Paradise",
+      "address": "456 Palm Tree Ln, Naples, FL 34109",
+      "time": "9:00am – 12:00pm",
+      "duration": "3h",
+      "notes": "Post-construction clean. Dust control needed.",
+      "date": "2024-12-16",
+      "priority": 2,
+      "payment": 120.0,
+      "type": "post_construction",
+      "rooms": 4,
+      "sqft": 2400
+    },
+    {
+      "id": 300404,
+      "client": "Island View Resort",
+      "address": "789 Island Blvd, Sanibel, FL 33957",
+      "time": "1:00pm – 4:00pm",
+      "duration": "3h",
+      "notes": "Weekly maintenance clean. Focus on common areas.",
+      "date": "2024-12-16",
+      "priority": 2,
+      "payment": 85.0,
+      "type": "maintenance",
+      "rooms": 5,
+      "sqft": 2800
+    }
+  ],
+  "clients": [
+    {
+      "id": 1001,
+      "name": "Beach Breeze Properties",
+      "contact": "Sarah Johnson",
+      "phone": "(239) 555-1001",
+      "email": "sarah@beachbreeze.com",
+      "properties": 12,
+      "preferredCleaner": 1
+    },
+    {
+      "id": 1002,
+      "name": "Nomadic Vacation Rentals",
+      "contact": "Mike Chen",
+      "phone": "(239) 555-1002",
+      "email": "mike@nomadicvr.com",
+      "properties": 8,
+      "preferredCleaner": 2
+    },
+    {
+      "id": 1003,
+      "name": "Gulf Coast Luxury Homes",
+      "contact": "Robert Williams",
+      "phone": "(239) 555-1003",
+      "email": "robert@gulfcoastluxury.com",
+      "properties": 15,
+      "preferredCleaner": null
+    }
+  ],
+  "statistics": {
+    "totalJobs": 28,
+    "completedToday": 12,
+    "inProgress": 5,
+    "assigned": 7,
+    "unassigned": 4,
+    "revenueToday": 845.75,
+    "revenueThisWeek": 4250.5,
+    "averageRating": 4.8,
+    "activeWorkers": 4,
+    "availableWorkers": 2
+  },
+  "jobTypes": [
+    { "id": 1, "name": "Standard Clean", "rate": 25, "duration": "2-3h" },
+    { "id": 2, "name": "Deep Clean", "rate": 35, "duration": "3-4h" },
+    { "id": 3, "name": "Turnover", "rate": 30, "duration": "2-3h" },
+    { "id": 4, "name": "Post-Construction", "rate": 40, "duration": "4-6h" },
+    { "id": 5, "name": "Maintenance", "rate": 28, "duration": "2-3h" }
+  ]
+}

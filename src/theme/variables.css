@@ -1,0 +1,52 @@
+/* For information on how to create your own theme, please refer to:
+http://ionicframework.com/docs/theming/ */
+:root {
+  --ion-font-family: "Inter", sans-serif;
+  --color: #ffffff;
+}
+/* Fondo global tipo tu body (para Tabs + cualquier pantalla) */
+ion-content {
+  --background:
+    radial-gradient(
+      800px 500px at 80% 20%,
+      rgba(56, 189, 248, 0.35),
+      transparent 70%
+    ),
+    linear-gradient(135deg, #020617, #062874);
+}
+
+/* (Opcional) Evita línea/borde superior del header */
+ion-header {
+  --border-width: 0 !important;
+}
+ion-toolbar {
+  --border-width: 0 !important;
+  --border-color: transparent !important;
+  box-shadow: none !important;
+}
+.header-md::after {
+  background: transparent !important;
+}
+
+/* (Opcional) Tab bar “glass” y sin fondo sólido */
+ion-tab-bar {
+  --background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #041b4d;
+    --ion-text-color: #ffffff;
+  }
+}
+
+/* LIGHT MODE */
+@media (prefers-color-scheme: light) {
+  :root {
+    --ion-background-color: #f4f6fb;
+    --ion-text-color: #0f172a;
+  }
+}
