@@ -13,7 +13,7 @@ const Calendar: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Calendario</IonTitle>
+          <IonTitle>Calendar</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
