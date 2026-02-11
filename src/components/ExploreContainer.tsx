@@ -21,7 +21,6 @@ import Fab from "./UI/Fab.js";
 import BottomSheet from "./UI/BottomSheet.js";
 import IconBtn from "./UI/IconBtn.js";
 import SheetTitle from "./UI/SheetTitle.js";
-import { UserMenu } from "./UI/user/UserMenu.js";
 import Badge from "./UI/Badge.js";
 
 interface ContainerProps {
@@ -108,6 +107,74 @@ const seed = {
       home: "Cape Coral, FL",
       payRate: 19.5,
       jobs: [],
+    },    
+    {
+      "id": 4,
+      "name": "Carlos Rodriguez",
+      "role": "Cleaner",
+      "phone": "(239) 456-7890",
+      "email": "carlos@dop.local",
+      "home": "Fort Myers, FL",
+      "payRate": 17.5,
+      "status": "active",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
+      "jobs": [
+        {
+          "id": 190415,
+          "status": "assigned",
+          "client": "Sunset Villa",
+          "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
+          "time": "10:00am – 1:00pm",
+          "duration": "3h 0m",
+          "priority": 2,
+          "notes": "Pet-friendly unit. Extra vacuuming needed.",
+          "date": TODAY,
+          "payment": 78.75,
+          "type": "standard_clean",
+          "rooms": 3,
+          "sqft": 1500
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Maria Gonzalez",
+      "role": "Team Lead",
+      "phone": "(239) 123-4567",
+      "email": "maria@dop.local",
+      "home": "Estero, FL",
+      "payRate": 21.0,
+      "status": "on_vacation",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+      "jobs": []
+    },
+     {
+      "id": 4,
+      "name": "Alfredo Perez",
+      "role": "Cleaner",
+      "phone": "(239) 456-7890",
+      "email": "carlos@dop.local",
+      "home": "Fort Myers, FL",
+      "payRate": 17.5,
+      "status": "active",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
+      "jobs": [
+        {
+          "id": 190415,
+          "status": "assigned",
+          "client": "Sunset Villa",
+          "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
+          "time": "10:00am – 1:00pm",
+          "duration": "3h 0m",
+          "priority": 2,
+          "notes": "Pet-friendly unit. Extra vacuuming needed.",
+          "date": "2026-02-25",
+          "payment": 78.75,
+          "type": "standard_clean",
+          "rooms": 3,
+          "sqft": 1500
+        }
+      ]
     },
   ],
   unassigned: [
@@ -129,6 +196,34 @@ const seed = {
       notes: "Flexible window",
       date: TODAY,
     },
+     {
+      "id": 300303,
+      "client": "Palm Paradise",
+      "address": "456 Palm Tree Ln, Naples, FL 34109",
+      "time": "9:00am – 12:00pm",
+      "duration": "3h",
+      "notes": "Post-construction clean. Dust control needed.",
+      "date": TODAY,
+      "priority": 2,
+      "payment": 120.0,
+      "type": "post_construction",
+      "rooms": 4,
+      "sqft": 2400
+    },
+    {
+      "id": 300404,
+      "client": "Island View Resort",
+      "address": "789 Island Blvd, Sanibel, FL 33957",
+      "time": "1:00pm – 4:00pm",
+      "duration": "3h",
+      "notes": "Weekly maintenance clean. Focus on common areas.",
+      "date": TOMORROW,
+      "priority": 2,
+      "payment": 85.0,
+      "type": "maintenance",
+      "rooms": 5,
+      "sqft": 2800
+    }
   ],
 };
 
