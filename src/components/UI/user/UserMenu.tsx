@@ -1,20 +1,34 @@
-import { useState } from "react";
-import { UserAvatar } from "./UserAvatar";
-import { UserMenuDropdown } from "./UserMenuDropdown";
+
+import { useId } from "react";
 import IconBtn from "../IconBtn";
+import { UserAvatar } from "./UserAvatar";
+import { IonPopover } from "@ionic/react";
+import { UserMenuDropdown } from "./UserMenuDropdown";
+import { useHistory } from "react-router-dom";
 
 export function UserMenu({ user, onLogout }) {
-  const [open, setOpen] = useState(false);
+  const triggerId = useId();
+  const history = useHistory();
+
+  const goProfile = () => {
+    history.push("/profile");
+  };
 
   return (
-    <div className="relative">
-      <IconBtn
-        icon={<UserAvatar />}
-        onClick={() => setOpen((v) => !v)}
-      ></IconBtn>
-      {open && (
-        <UserMenuDropdown onClose={() => setOpen(false)} onLogout={onLogout} />
-      )}
-    </div>
+    <>
+      <IconBtn id={triggerId} icon={<UserAvatar user={user} />} />
+
+      <IonPopover
+        className="user-menu-popover"
+        trigger={triggerId}
+        triggerAction="click"
+        showBackdrop={false}
+        side="bottom"
+        alignment="end"
+        dismissOnSelect={true}
+      >
+        <UserMenuDropdown onProfile={goProfile} onLogout={onLogout} />
+      </IonPopover>
+    </>
   );
 }

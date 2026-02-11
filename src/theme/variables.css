@@ -34,6 +34,27 @@ ion-tab-bar {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px);
 }
+.user-menu-popover::part(content) {
+  background: transparent;
+  box-shadow: none;
+
+  padding: 0;            /* elimina padding interno de Ionic */
+  margin: 0;
+  padding-top: 10px;
+
+  width: auto;
+  min-width: 0;
+  max-width: none;
+
+  height: auto;
+  min-height: 0;
+
+  display: inline-block; /* hace que colapse al contenido */
+}
+
+.user-menu-popover::part(arrow) {
+  display: none;
+}
 
 /* DARK MODE */
 @media (prefers-color-scheme: dark) {
