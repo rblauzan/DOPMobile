@@ -22,6 +22,7 @@ import BottomSheet from "./UI/BottomSheet.js";
 import IconBtn from "./UI/IconBtn.js";
 import SheetTitle from "./UI/SheetTitle.js";
 import Badge from "./UI/Badge.js";
+import { EmptyWorkersState } from "./UI/Empty.js";
 
 interface ContainerProps {
   name: string;
@@ -231,6 +232,7 @@ const statusPill = {
   completed: "bg-emerald-400/20 text-emerald-100",
   assigned: "bg-white/15 text-white",
 };
+
 const ownerUser = {
   name: "Roberto Lauzan",
   role: "Owner",
@@ -331,13 +333,19 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     setDate(pendingDate);
     setDateSheetOpen(false);
   };
+
+    if (filteredWorkers.length === 0) {
+          return (
+            <EmptyWorkersState />
+          )
+        }
+        
   if (view === "employees") {
     return (
       <Screen>
         <Header
           title="Today"
-          subtitle={`Workers with jobs · ${date}`}         
-        />
+          subtitle={`Workers with jobs · ${date}`} onBack={undefined}        />
         <SearchBar value={query} onChange={setQuery} />
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {filteredWorkers.map((emp) => (
@@ -392,13 +400,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               </div>
             </Card>
           ))}
-
-          {filteredWorkers.length === 0 && (
-            <div className="text-center text-sm opacity-70 mt-10">
-              No workers with jobs for this day
-            </div>
-          )}
         </div>
+        
 
         <Fab
           open={fabOpen}
