@@ -31,17 +31,6 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-// import "@ionic/react/css/palettes/dark.always.css";
-// import "@ionic/react/css/palettes/dark.class.css";
-// import "@ionic/react/css/themes/dark.css";
-
 /* Theme variables */
 import "./theme/variables.css";
 
@@ -65,10 +54,11 @@ const App: React.FC = () => (
             <Redirect to="/Calendar" />
           </Route>
         </IonRouterOutlet>
+     
         <IonTabBar slot="bottom">
           <IonTabButton tab="Calendar" href="/Calendar">
             <IonIcon aria-hidden="true" icon={calendar} />
-            <IonLabel>Calendario</IonLabel>
+            <IonLabel>Calendar</IonLabel>
           </IonTabButton>
           <IonTabButton tab="Settings" href="/Settings">
             <IonIcon aria-hidden="true" icon={settings} />

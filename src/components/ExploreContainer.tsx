@@ -1,5 +1,5 @@
 import Screen from "./Layout/Screen.js";
-import Header from "./Layout/Header.js";
+import Header from "./UI/Header.js";
 import SearchBar from "./UI/SearchBar.jsx";
 import { useMemo, useState } from "react";
 import Card from "./UI/Card.jsx";
@@ -15,6 +15,7 @@ import {
   ArrowDown,
   ArrowUp,
   ArrowUpDown,
+  X,
 } from "lucide-react";
 import Fab from "./UI/Fab.js";
 import BottomSheet from "./UI/BottomSheet.js";
@@ -22,7 +23,6 @@ import IconBtn from "./UI/IconBtn.js";
 import SheetTitle from "./UI/SheetTitle.js";
 import { UserMenu } from "./UI/user/UserMenu.js";
 import Badge from "./UI/Badge.js";
-import LanguagePillToggle, { LanguagePills } from "./UI/LanguagePills.js";
 
 interface ContainerProps {
   name: string;
@@ -241,10 +241,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       <Screen>
         <Header
           title="Today"
-          subtitle={`Workers with jobs · ${date}`}
-          rightSlot={
-            <UserMenu user={ownerUser} onLogout={() => alert("Logout")} />
-          }
+          subtitle={`Workers with jobs · ${date}`}         
         />
         <SearchBar value={query} onChange={setQuery} />
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">

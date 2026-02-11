@@ -1,12 +1,19 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Tab2.css';
+import HeaderLayout from '../components/Layout/HeaderLayout';
+import { UserMenu } from '../components/UI/user/UserMenu';
 
 const Settings: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Settings</IonTitle>
+        <IonToolbar>         
+            <HeaderLayout
+          title="Settings"         
+          rightSlot={
+            <UserMenu user={Date} onLogout={() => alert("Logout")} />
+          }          
+        />
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
