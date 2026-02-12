@@ -1,6 +1,6 @@
-
 import { Power, CircleUser } from "lucide-react";
 import MenuItem from "../MenuItem";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onProfile?: () => void;
@@ -8,9 +8,9 @@ type Props = {
 };
 
 export function UserMenuDropdown({ onProfile, onLogout }: Props) {
+  const { t } = useTranslation("");
   return (
     <div
-     
       className="
         py-2
         px-2
@@ -22,7 +22,7 @@ export function UserMenuDropdown({ onProfile, onLogout }: Props) {
     >
       <MenuItem
         icon={<CircleUser size={16} />}
-        label="Profile"
+        label={t("UserMenuDropdown.profile")}
         onClick={onProfile}
       />
 
@@ -30,7 +30,7 @@ export function UserMenuDropdown({ onProfile, onLogout }: Props) {
 
       <MenuItem
         icon={<Power size={16} />}
-        label="Log out"
+        label={t("UserMenuDropdown.logout")}
         danger
         onClick={onLogout}
       />

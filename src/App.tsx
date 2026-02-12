@@ -33,46 +33,54 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import { useTranslation } from "react-i18next";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/Calendar">
-            <CalendarTab />
-          </Route>
-          <Route exact path="/Settings">
-            <SettingsTab />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/Calendar" />
-          </Route>
-        </IonRouterOutlet>
-     
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="Calendar" href="/Calendar">
-            <IonIcon aria-hidden="true" icon={calendar} />
-            <IonLabel>Calendar</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="Settings" href="/Settings">
-            <IonIcon aria-hidden="true" icon={settings} />
-            <IonLabel>Settings</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/Calendar">
+              <CalendarTab />
+            </Route>
+            <Route exact path="/Settings">
+              <SettingsTab />
+            </Route>
+            <Route path="/tab3">
+              <Tab3 />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/Calendar" />
+            </Route>
+          </IonRouterOutlet>
+
+          {/* key fuerza re-render cuando cambia el idioma */}
+          <IonTabBar slot="bottom" key={i18n.resolvedLanguage}>
+            <IonTabButton tab="Calendar" href="/Calendar">
+              <IonIcon aria-hidden="true" icon={calendar} />
+              <IonLabel>{t("Toolbar.title1")}</IonLabel>
+            </IonTabButton>
+
+            <IonTabButton tab="Settings" href="/Settings">
+              <IonIcon aria-hidden="true" icon={settings} />
+              <IonLabel>{t("Toolbar.title2")}</IonLabel>
+            </IonTabButton>
+
+            <IonTabButton tab="tab3" href="/tab3">
+              <IonIcon aria-hidden="true" icon={square} />
+              <IonLabel>Tab 3</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
 

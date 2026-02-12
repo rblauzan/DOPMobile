@@ -1,0 +1,69 @@
+{
+  "Header": {
+    "title": "Hoy",
+    "subtitle": "Trabajadores con - "
+  },
+  "SearchBar": {
+    "placeholder": "Buscar empleado...."
+  },
+  "JobCar": {
+    "jobtext": "Seguridad",
+    "jobpill":" trabajos"
+    },
+  "Toolbar": {
+    "title1": "Calendario",
+    "title2": "Ajustes",
+    "title3": "Tab 3"
+  },
+  "HeaderLayout": {
+   "title1": "Calendario",
+    "title2": "Ajustes",
+    "title3": "Tab 3"
+  },
+  "UserMenuDropdown": {
+    "profile": "Perfil",
+    "logout": "Cerrar la sesión"
+  },
+  "Empty":{
+    "title1": "No hay trabajadores con trabajos para este día"
+  },
+  "Fab": {
+    "title1": "Hoy",
+    "title2": "Seleccionar fecha",
+    "title3": "Trabajos no asignados"
+    },
+  "ModalDate": {
+    "title": "Seleccionar fecha",
+    "subtitle": "Elija un día para ver los trabajadores asignados",
+    "subtitlecard": "Fecha",
+    "button1": "Aplicar",
+    "button2": "Cancelar"
+  },
+  "Unassigned": {
+    "title": "Trabajos no asignados",
+    "subtitle": "Para",
+    "button": "Asignar"
+
+   },
+  "ModalDispatch": {
+    "title": "Asignar Trabajo",
+    "subtitle": "Trabajos no asignados",
+    "subtitle2": "Trabajos asignados",
+    "cardsubtitle": "Confirmar, marcará este trabajo como asignado.",
+    "cardsubtitle2": "Vista previa de la pantalla de confirmación de envío",
+    "button": "Confirmar Asignación",
+    "button2": "Confirmar",
+    "button3": "Cancelar"
+  },
+  "SheetTitle": {
+    "title" : "Seleccionar fecha",
+    "subtitle" : "Filtrar trabajos no asignados por día",
+    "title2" : "Fecha",
+    "button1" : "Aplicar",
+    "button2" : "Cancelar"
+  },
+  "Move" : {
+    "up" : "subir",
+    "down" : "bajar"
+  }
+}

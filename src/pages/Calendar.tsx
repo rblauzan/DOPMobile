@@ -9,14 +9,16 @@ import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
 import { UserMenu } from "../components/UI/user/UserMenu";
 import HeaderLayout from "../components/Layout/HeaderLayout";
+import { useTranslation } from "react-i18next";
 
 const Calendar: React.FC = () => {
+  const { t } = useTranslation("");
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className="!overflow-visible relative z-40">         
           <HeaderLayout
-          title="Calendar"         
+          title={t("HeaderLayout.title1")}         
           rightSlot={
             <UserMenu user={Date} onLogout={() => alert("Logout")} />
           }          
@@ -27,7 +29,7 @@ const Calendar: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Calendar</IonTitle>
+            <IonTitle size="large">{t("Toolbar.title1")}  </IonTitle>
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Calendar page" />

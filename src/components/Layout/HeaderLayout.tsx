@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import LanguagePillToggle from "../UI/LanguagePills";
 
 export default function HeaderLayout({ title, rightSlot }) {
+  const { t } = useTranslation("");
   return (
     <div className="px-4 pt-6 pb-4 flex items-center justify-between">
       <div>

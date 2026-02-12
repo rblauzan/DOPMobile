@@ -1,6 +1,8 @@
 import { CalendarDays, ClipboardList } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Fab({ open, onToggle, onToday, onSelectDate, onUnassigned }) {
+  const { t } = useTranslation("");
   return (
     <div className="fixed bottom-6 right-6">
       {open && (
@@ -9,19 +11,19 @@ export default function Fab({ open, onToggle, onToday, onSelectDate, onUnassigne
             onClick={onToday}
             className="px-4 py-3 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 shadow text-sm"
           >
-            Today
+            {t("Fab.title1")}
           </button>
           <button
             onClick={onSelectDate}
             className="px-4 py-3 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 shadow text-sm flex items-center gap-2"
           >
-            <CalendarDays size={14} /> Select date
+            <CalendarDays size={14} /> {t("Fab.title2")}
           </button>
           <button
             onClick={onUnassigned}
             className="px-4 py-3 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/20 shadow text-sm flex items-center gap-2"
           >
-            <ClipboardList size={14} /> Unassigned jobs
+            <ClipboardList size={14} /> {t("Fab.title3")}
           </button>
         </div>
       )}

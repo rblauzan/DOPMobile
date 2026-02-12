@@ -23,6 +23,7 @@ import IconBtn from "./UI/IconBtn.js";
 import SheetTitle from "./UI/SheetTitle.js";
 import Badge from "./UI/Badge.js";
 import { EmptyWorkersState } from "./UI/Empty.js";
+import { useTranslation } from "react-i18next";
 
 interface ContainerProps {
   name: string;
@@ -306,6 +307,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [selectedWorker, setSelectedWorker] = useState(null);
   const [reorderMode, setReorderMode] = useState(false);
   const [fabOpen, setFabOpen] = useState(false);
+  const { t } = useTranslation("");
 
   // Sheets
   const [dispatchJob, setDispatchJob] = useState(null);
@@ -360,8 +362,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     return (
       <Screen>
         <Header
-          title="Today"
-          subtitle={`Workers with jobs - ${date}`} onBack={undefined}        />
+          title={t("Header.title")}
+          subtitle={`${t("Header.subtitle")} ${date}`} onBack={undefined}        />
         <SearchBar value={query} onChange={setQuery} />
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {filteredWorkers.map((emp) => (
@@ -435,13 +437,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         {dateSheetOpen && (
           <BottomSheet onClose={() => setDateSheetOpen(false)}>
             <SheetTitle
-              title="Select date"
-              subtitle="Choose a day to see assigned workers"
+              title={t("ModalDate.title")}
+              subtitle={t("ModalDate.subtitle")}
               onClose={() => setDateSheetOpen(false)}
             />
 
             <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-              <label className="text-sm opacity-80">Date</label>
+              <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
               <input
                 type="date"
                 value={pendingDate}
@@ -453,13 +455,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                   className="py-3 rounded-2xl bg-white/10 border border-white/20"
                   onClick={() => setDateSheetOpen(false)}
                 >
-                  Cancel
+                  {t("ModalDate.button2")}
                 </button>
                 <button
                   className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
                   onClick={applyDate}
                 >
-                  Apply
+                  {t("ModalDate.button1")}
                 </button>
               </div>
             </div>
@@ -481,8 +483,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     return (
       <Screen>
         <Header
-          title="Unassigned Jobs"
-          subtitle={`For · ${date}`}
+          title={t("Unassigned.title")}
+          subtitle={`${t("Unassigned.subtitle")} · ${date}`}
           onBack={() => setView("employees")}
         />
 
@@ -502,24 +504,18 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 className="mt-4 w-full py-3 rounded-xl bg-[#148dcd] shadow-lg flex items-center justify-center gap-2"
                 onClick={() => setDispatchJob({ ...job, _unassigned: true })}
               >
-                <Layers size={14} /> Dispatch
+                <Layers size={14} /> {t("Unassigned.button")}
               </button>
             </Card>
           ))}
-
-          {unassignedForDay.length === 0 && (
-            <div className="text-center text-sm opacity-70 mt-10">
-              No unassigned jobs for this day
-            </div>
-          )}
         </div>
 
         {dispatchJob && (
           <BottomSheet onClose={() => setDispatchJob(null)}>
             <SheetTitle
-              title="Dispatch Job"
+              title={t("ModalDispatch.button")}
               subtitle={
-                dispatchJob._unassigned ? "Unassigned job" : "Assigned job"
+                dispatchJob._unassigned ? t("ModalDispatch.subtitle") : t("ModalDispatch.subtitle2")
               }
               onClose={() => setDispatchJob(null)}
             />
@@ -528,7 +524,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               <p className="text-sm opacity-80">{dispatchJob.client}</p>
               <p className="mt-1 text-xs opacity-70">{dispatchJob.address}</p>
               <p className="mt-3 text-xs opacity-60">
-                Confirm will mark this job as “Dispatched” (demo).
+                {t("ModalDispatch.cardsubtitle")} (demo).
               </p>
 
               <button
@@ -538,7 +534,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                   setDispatchJob(null);
                 }}
               >
-                Confirm Dispatch
+                {t("ModalDispatch.button")}
               </button>
             </div>
           </BottomSheet>
@@ -561,13 +557,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         {dateSheetOpen && (
           <BottomSheet onClose={() => setDateSheetOpen(false)}>
             <SheetTitle
-              title="Select date"
-              subtitle="Filter unassigned jobs by day"
+              title={t("SheetTitle.title")}
+              subtitle={t("SheetTitle.subtitle")}
               onClose={() => setDateSheetOpen(false)}
             />
 
             <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-              <label className="text-sm opacity-80">Date</label>
+              <label className="text-sm opacity-80">{t("SheetTitle.title2")}</label>
               <input
                 type="date"
                 value={pendingDate}
@@ -579,13 +575,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                   className="py-3 rounded-2xl bg-white/10 border border-white/20"
                   onClick={() => setDateSheetOpen(false)}
                 >
-                  Cancel
+                  {t("SheetTitle.button2")}
                 </button>
                 <button
                   className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
                   onClick={applyDate}
                 >
-                  Apply
+                  {t("SheetTitle.button1")}
                 </button>
               </div>
             </div>
@@ -654,13 +650,13 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     className="py-2 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center gap-2"
                     onClick={() => alert("Move Up (demo)")}
                   >
-                    <ArrowUp size={14} /> Up
+                    <ArrowUp size={14} /> {t("Move.up")}
                   </button>
                   <button
                     className="py-2 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center gap-2"
                     onClick={() => alert("Move Down (demo)")}
                   >
-                    <ArrowDown size={14} /> Down
+                    <ArrowDown size={14} /> {t("Move.down")}
                   </button>
                 </div>
               ) : (
@@ -668,25 +664,19 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                   onClick={() => setDispatchJob(job)}
                   className="mt-4 w-full py-3 rounded-xl bg-[#148dcd] shadow-lg flex items-center justify-center gap-2"
                 >
-                  <Layers size={14} /> Dispatch
+                  <Layers size={14} /> {t("Unassigned.button")}
                 </button>
               )}
             </Card>
           ))}
-
-          {jobsToday.length === 0 && (
-            <div className="text-center text-sm opacity-70 mt-10">
-              No jobs for this day
-            </div>
-          )}
         </div>
 
         {dispatchJob && (
           <BottomSheet onClose={() => setDispatchJob(null)}>
             <SheetTitle
-              title="Dispatch Job"
+              title={t("ModalDispatch.title")}
               subtitle={
-                dispatchJob._unassigned ? "Unassigned job" : "Assigned job"
+                dispatchJob._unassigned ? t("ModalDispatch.subtitle") : t("ModalDispatch.subtitle2")
               }
               onClose={() => setDispatchJob(null)}
             />
@@ -695,7 +685,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
               <p className="text-sm opacity-80">{dispatchJob.client}</p>
               <p className="mt-1 text-xs opacity-70">{dispatchJob.address}</p>
               <p className="mt-4 text-xs opacity-60">
-                Preview dispatch confirmation screen.
+                {t("ModalDispatch.cardsubtitle2")}
               </p>
 
               <div className="mt-4 grid grid-cols-2 gap-3">
@@ -703,7 +693,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                   className="py-3 rounded-2xl bg-white/10 border border-white/20"
                   onClick={() => setDispatchJob(null)}
                 >
-                  Cancel
+                  {t("ModalDispatch.button3")}
                 </button>
                 <button
                   className="py-3 rounded-2xl bg-[#ff6d00] shadow-2xl font-semibold"
@@ -712,7 +702,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     setDispatchJob(null);
                   }}
                 >
-                  Confirm
+                  {t("ModalDispatch.button2")}
                 </button>
               </div>
             </div>

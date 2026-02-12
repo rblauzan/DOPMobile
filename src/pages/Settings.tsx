@@ -2,14 +2,16 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import './Tab2.css';
 import HeaderLayout from '../components/Layout/HeaderLayout';
 import { UserMenu } from '../components/UI/user/UserMenu';
+import { useTranslation } from 'react-i18next';
 
 const Settings: React.FC = () => {
+  const { t } = useTranslation("");
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>         
             <HeaderLayout
-          title="Settings"         
+          title={t("HeaderLayout.title2")}     
           rightSlot={
             <UserMenu user={Date} onLogout={() => alert("Logout")} />
           }          
@@ -19,7 +21,7 @@ const Settings: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Settings</IonTitle>
+            <IonTitle size="large">{t("Toolbar.title2")}  </IonTitle>
           </IonToolbar>
         </IonHeader>
       </IonContent>

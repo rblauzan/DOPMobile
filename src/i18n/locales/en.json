@@ -12,17 +12,20 @@
     },
   "Toolbar": {
     "title1": "Calendar",
-    "title2": "Setting",
+    "title2": "Settings",
     "title3": "Tab 3"
   },
   "HeaderLayout": {
    "title1": "Calendar",
-    "title2": "Setting",
+    "title2": "Settings",
     "title3": "Tab 3"
   },
   "UserMenuDropdown": {
     "profile": "Profile",
     "logout": "Log Out"
+  },
+  "Empty":{
+    "title1": "No workers with jobs for this day"
   },
   "Fab": {
     "title1": "Today",
@@ -38,14 +41,29 @@
   },
   "Unassigned": {
     "title": "Unassigned Jobs",
-    "subtitle": "",
+    "subtitle": "For",
     "button": "Dispatch"
 
    },
   "ModalDispatch": {
     "title": "Dispatch Job",
     "subtitle": "Unassigned jobs",
+    "subtitle2": "Assigned jobs",
     "cardsubtitle": "Confirm will mark this job as Dispatched.",
-    "button": "Confirm Dispatch"
+    "cardsubtitle2": "Preview dispatch confirmation screen.",
+    "button": "Confirm Dispatch",
+    "button2": "Confirm",
+    "button3": "Cancel"
+  },
+  "SheetTitle": {
+    "title" : "Select date",
+    "subtitle" : "Filter unassigned jobs by day",
+    "title2" : "Date",
+    "button1" : "Apply",
+    "button2" : "Cancel"
+  },
+  "Move" : {
+    "up" : "up",
+    "down" : "down"
   }
 }
