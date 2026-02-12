@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-export default function Header({ title, subtitle, onBack }) {
+export default function Header({ title, subtitle, onBack }: { title: string, subtitle: string, onBack: () => void }) {
   return (
     <div className="px-4 pt-6 pb-4 flex items-center justify-between">
       <div>

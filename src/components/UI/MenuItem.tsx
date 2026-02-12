@@ -1,6 +1,6 @@
 
 
-export default function MenuItem({ icon, label, onClick, danger = false }) {
+export default function MenuItem({ icon, label, onClick, danger = false }: { icon: React.ReactNode, label: string, onClick: () => void, danger: boolean }) {
   return (
     <button
       onClick={onClick}

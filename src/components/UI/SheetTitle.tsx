@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-export default function SheetTitle({ title, subtitle, onClose }) {
+export default function SheetTitle({ title, subtitle, onClose }: { title: string, subtitle: string, onClose: () => void }) {
   return (
     <div className="flex items-start justify-between gap-4">
       <div>

@@ -9,7 +9,6 @@ const Tab3: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <HeaderLayout
-          title="Tab 3"         
           rightSlot={
             <UserMenu user={Date} onLogout={() => alert("Logout")} />
           }          

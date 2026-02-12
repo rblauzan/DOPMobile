@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export default function SearchBar({ value, onChange }) {
+export default function SearchBar({ value, onChange }: { value: string, onChange: (value: string) => void }) {
   const { t } = useTranslation("");
   return (
     <div className="px-4">

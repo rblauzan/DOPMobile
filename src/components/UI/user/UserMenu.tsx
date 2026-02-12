@@ -6,7 +6,7 @@ import { IonPopover } from "@ionic/react";
 import { UserMenuDropdown } from "./UserMenuDropdown";
 import { useHistory } from "react-router-dom";
 
-export function UserMenu({ user, onLogout }) {
+export function UserMenu({ user, onLogout }: { user: any, onLogout: () => void }) {
   const triggerId = useId();
   const history = useHistory();
 
@@ -16,7 +16,7 @@ export function UserMenu({ user, onLogout }) {
 
   return (
     <>
-      <IconBtn id={triggerId} icon={<UserAvatar user={user} />} />
+      <IconBtn id={triggerId} icon={<UserAvatar user={user} />} onClick={() => {}} />
 
       <IonPopover
         className="user-menu-popover"

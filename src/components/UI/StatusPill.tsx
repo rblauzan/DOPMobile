@@ -1,5 +1,4 @@
-
-const status = {
+export const status = {
   completed: "bg-emerald-400/20 text-emerald-100",
   assigned: "bg-white/15 text-white",
 };

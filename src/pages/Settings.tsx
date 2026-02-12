@@ -11,7 +11,6 @@ const Settings: React.FC = () => {
       <IonHeader>
         <IonToolbar>         
             <HeaderLayout
-          title={t("HeaderLayout.title2")}     
           rightSlot={
             <UserMenu user={Date} onLogout={() => alert("Logout")} />
           }          

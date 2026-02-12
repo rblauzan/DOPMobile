@@ -17,8 +17,7 @@ const Calendar: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="!overflow-visible relative z-40">         
-          <HeaderLayout
-          title={t("HeaderLayout.title1")}         
+          <HeaderLayout              
           rightSlot={
             <UserMenu user={Date} onLogout={() => alert("Logout")} />
           }          

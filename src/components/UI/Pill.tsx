@@ -1,4 +1,4 @@
-export default function Pill({ icon, label, accent = false }) {
+export default function Pill({ icon, label, accent = false }: { icon: React.ReactNode, label: string, accent: boolean }) {
   return (
     <span
       className={`inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full border ${

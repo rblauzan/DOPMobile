@@ -1,5 +1,4 @@
-
-export default function IconBtn({ icon, id, onClick }) {
+export default function IconBtn({ icon, id, onClick }: { icon: React.ReactNode, id: string, onClick: () => void }) {
   return (
     <button
       id={id}

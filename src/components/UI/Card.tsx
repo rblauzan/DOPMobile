@@ -1,4 +1,4 @@
-export default function Card({ children, onClick }) {
+export default function Card({ children, onClick }: { children: React.ReactNode, onClick: () => void }) {
   return (
     <div
       onClick={onClick}

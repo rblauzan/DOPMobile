@@ -15,7 +15,6 @@ import {
   ArrowDown,
   ArrowUp,
   ArrowUpDown,
-  X,
 } from "lucide-react";
 import Fab from "./UI/Fab.js";
 import BottomSheet from "./UI/BottomSheet.js";
@@ -395,7 +394,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 <div className="flex flex-col gap-2">
                   <IconBtn
                     icon={<Phone size={16} />}
-                    onClick={(e) => {
+                    onCli ck={(e) => {
                       e.stopPropagation();
                       window.open(`tel: ${emp.phone}`,'_system');
                     }}

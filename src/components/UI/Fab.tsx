@@ -1,7 +1,7 @@
 import { CalendarDays, ClipboardList } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export default function Fab({ open, onToggle, onToday, onSelectDate, onUnassigned }) {
+export default function Fab({ open, onToggle, onToday, onSelectDate, onUnassigned }: { open: boolean, onToggle: () => void, onToday: () => void, onSelectDate: () => void, onUnassigned: () => void }) {
   const { t } = useTranslation("");
   return (
     <div className="fixed bottom-6 right-6">

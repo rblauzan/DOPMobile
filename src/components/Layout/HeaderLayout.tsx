@@ -1,12 +1,11 @@
-import { useTranslation } from "react-i18next";
 import LanguagePillToggle from "../UI/LanguagePills";
 
-export default function HeaderLayout({ title, rightSlot }) {
-  const { t } = useTranslation("");
+export default function HeaderLayout({ rightSlot }: { rightSlot: React.ReactNode }) {
+ 
   return (
     <div className="px-4 pt-6 pb-4 flex items-center justify-between">
       <div>
-        <h1 className="text-2xl font-semibold">{title}</h1>
+        <h1 className="text-2xl font-semibold">DOP Owner</h1>
         
       </div>
 
