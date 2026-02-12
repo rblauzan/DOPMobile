@@ -394,7 +394,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 <div className="flex flex-col gap-2">
                   <IconBtn
                     icon={<Phone size={16} />}
-                    onCli ck={(e) => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       window.open(`tel: ${emp.phone}`,'_system');
                     }}
