@@ -336,7 +336,23 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
     if (filteredWorkers.length === 0) {
           return (
+            <>
             <EmptyWorkersState />
+            
+        <Fab
+          open={fabOpen}
+          onToggle={() => setFabOpen((v) => !v)}
+          onToday={() => {
+            setDate(seed.today);
+            setFabOpen(false);
+          }}
+          onSelectDate={openDateSheet}
+          onUnassigned={() => {
+            setView("unassigned");
+            setFabOpen(false);
+          }}
+        />
+        </>
           )
         }
         
@@ -345,7 +361,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       <Screen>
         <Header
           title="Today"
-          subtitle={`Workers with jobs · ${date}`} onBack={undefined}        />
+          subtitle={`Workers with jobs - ${date}`} onBack={undefined}        />
         <SearchBar value={query} onChange={setQuery} />
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {filteredWorkers.map((emp) => (
@@ -379,29 +395,28 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                     icon={<Phone size={16} />}
                     onClick={(e) => {
                       e.stopPropagation();
-                      alert(`Call ${emp.name}`);
+                      window.open(`tel: ${emp.phone}`,'_system');
                     }}
                   />
                   <IconBtn
                     icon={<MessageCircle size={16} />}
                     onClick={(e) => {
                       e.stopPropagation();
-                      alert(`Message ${emp.name}`);
+                      window.open(`sms: ${emp.phone}`,'_system');
                     }}
                   />
                   <IconBtn
                     icon={<Mail size={16} />}
                     onClick={(e) => {
                       e.stopPropagation();
-                      alert(`Email ${emp.name}`);
+                      window.open(`mailto: ${emp.email}`);
                     }}
                   />
                 </div>
               </div>
             </Card>
           ))}
-        </div>
-        
+        </div>       
 
         <Fab
           open={fabOpen}

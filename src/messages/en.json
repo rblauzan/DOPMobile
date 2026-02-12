@@ -1,220 +1,51 @@
 {
-  "Hero": {
-    "title": "Do you want to work in Europe?",
-    "text": "If you are from Latin America, from countries such as Argentina, Colombia, Costa Rica, Chile, Panama, Paraguay, Peru, Mexico, Uruguay, or Venezuela, we are interested in offering you work in the construction sector. If you meet our requirements, we invite you to check the requirements section on our website. Then, you can explore what we offer in the “conditions” tab. If you are ready, start the process and follow the indicated steps.",
-    "button": "Apply now"
-  },
-  "AboutSectionOne": {
-    "title": "About us",
-    "1": "Our company is headquartered in the city of Lodz, located in central Poland. We specialize in the construction sector, and we are proud to offer professional services with more than 20 years of experience. During this time, we have established a solid network of contacts and acquired the necessary wisdom to carry out projects efficiently and effectively from the beginning.",
-    "2": "Our commitment to legality is fundamental. We offer legal employment and provide legal advice to our employees. Additionally, for those who join our team, we offer accommodation and food options, which guarantees a comfortable and favorable environment to work. ",
-    "3": "Right now, we are focused on expanding to German and Italian market. We believe that our experience and dedication will allow us to establish ourselves successfully in these countries and provide exceptional service to our customers."
-  },
-  "AboutSectionTwo": {
-    "title1": "Security",
-    "title2": "Transparency",
-    "title3": "Comunication",
-    "text1": "All our job offers are made under a legal contract and based on the law.",
-    "text2": "All the conditions of our job offers are clearly detailed and explained.",
-    "text3": "We will be there to guide you and accompany you every step of the way."
-  },
-  "Testimonial": {
-    "title": "Opinions of Our Clients",
-    "op1": "At first I thought it was a lie but I needed to try because I couldn't get a job. I thank God for having tried since today I am working in Poland.",
-    "op2": "I sent the information requested in the registration and in a very short time I was working in Poland.",
-    "op3": "Thank you very much for the job opportunity, I have had a good experience working in the team."
-  },
-  "Proceso": {
-    "title": "Work process",
-    "subtitle": "What can you do to work with us?",
-    "text1": "Our process is simple and transparent. As a reliable and professional company, we strictly comply with the law and hire legally.",
-    "text2": "You may already know that, if you are from countries like Argentina, Colombia, Costa Rica, Chile, Panama, Paraguay, Peru, Mexico, Uruguay, or Venezuela you can enter the Schengen zone as a tourist with your passport, with a maximum stay of 90 days. Citizens of Bolivia, Ecuador or Cuba needs a visa to enter. The Schengen zone includes all countries of the European Union, except Ireland, the United Kingdom and Cyprus. Countries such as Albania, Belarus, Bosnia and Herzegovina, Macedonia, Moldova, Russia, Serbia, Ukraine, and Turkey do not belong to the European Union. ",
-    "text3": "What would the steps be like:",
-    "paso1": "1. Meet our requirements:",
-    "paso2": "2. Obtain a work permit:",
-    "paso3": "3. Considerations regarding legal stay:",
-    "paso4": "4. Obtaining a work permit:",
-    "paso5": "5. Transition to a residence permit called here(karta pobytu)",
-    "paso6": "6. Residence permit (karta pobytu):",
-    "button": "Apply now",
-    "text4": "Before starting the process, make sure you meet the specific requirements that our company establishes. You can find more details in the “Conditions” tab on our website.",
-    "text41": " tab on our website.",
-    "text5": "Once you have verified that you meet the requirements, we will take care of obtaining the “work permit” on your behalf.",
-    "text51": "This permit can be granted for a maximum period of 3 years. We will process it while you are in your country of origin.",
-    "text52": "Once you have a work permit, you can travel to Poland and, the next day, take medical exams, sign the contract, and start working.",
-    "text6": "It is important to distinguish between the “work permit” and the “residence permit” called here (karta pobytu).",
-    "text61": "Although the work permit may be valid for 3 years, legally you can only stay in the Schengen zone (in this case Poland) for 90 days as a tourist.",
-    "text62": "Therefore, even if you have a long-term work permit, you must ensure that you comply with the regulations for staying in the Schengen zone.",
-    "text7": "The process to obtain a work permit is carried out when you are in your country of origin.",
-    "text71": " Arriving in Poland the next day, medical examinations are carried out and the contract is signed to start work.",
-    "text72": "Before completing 90 days, you return to the country of origin in case you do not have or do not want to apply for a residence permit.",
-    "text8": "If you want to work more than 90 days and stay with our company, we will evaluate your performance after the first month.",
-    "text81": "With a positive evaluation, we will help you obtain a residence permit (karta pobytu).",
-    "text82": "There are two types: a temporary one for 3 years and a normal one for 10 years.",
-    "text83": "The obtaining process lasts approximately 30 days.",
-    "text9": "Once granted, the residence permit is valid for 3 or 10 years.",
-    "text91": "With the residence permit, you no longer need a work permit to work in Poland.",
-    "link": "Conditions"
-  },
-  "Video": {
-    "title": "Our projects"
-  },
-  "Info": {
-    "title1": "Join our team",
-    "title2": "Discover the job opportunities we have available and become part of our team of professionals.",
-    "name": "First Name",
-    "placename": "Enter your name",
-    "secondname": "Last Name",
-    "placesecondname": "Enter your last name",
-    "email": "Email",
-    "placeemail": "Enter your email",
-    "phone": "Phone number",
-    "placephone": "Enter your phone number (+53 55001133)",
-    "country": "Country of birth",
-    "profesiones": "Professions (Construction / Gastronomy / Mechanic)",
-    "tiempo": "Time worked in the profession",
-    "infoextra": "Extra information",
-    "placeinfoextra": "You can provide us with additional information to help you with your request",
-    "button": "Send",
-    "textcountry": "Country of Birth",
-    "placeholdercountry": "Enter a country, Example: Poland",
-    "option1": "Select a profession",
-    "option2": " Select a option",
-    "idiom": "Language",
-    "placeidiom": "Enter the languages you are master"
-  },
-  "Footer": {
-    "title": "Company specialized in the construction sector backed by more than 20 years of experience.",
-    "menu1": "Most used links",
-    "submenu1": "Process",
-    "submenu2": "Conditions",
-    "submenu3": "About us",
-    "menu2": "Terms",
-    "submenu4": "Security and privacy policies",
-    "menu3": " Support & help",
-    "submenu5": "Contact",
-    "made": "Developed by Edmundo Technology"
-  },
-  "Features": {
-    "title": "Requirements",
-    "paragraph": "We are currently looking for staff to work with us. What is needed:",
-    "req1": "Have a valid passport",
-    "req2": "Not having criminal record",
-    "req3": "Being between 18 and 50 years old",
-    "req4": "Having any experience in construction sector",
-    "req5": "Be a responsible person with a desire to work"
-  },
   "Header": {
-    "nav1": "Home",
-    "nav2": "About us",
-    "nav3": "Process",
-    "nav4": "Conditions",
-    "nav5": "Our projects",
-    "nav6": "Language",
-    "nav61": "Polish",
-    "nav62": "English",
-    "nav63": "Spanish"
+    "title": "Today",
+    "subtitle": "Workers with - "
   },
-  "Construction": {
-    "ayudante": "Construction assistant",
-    "albañil": "Bricklayer",
-    "solador": "Tiler",
-    "encofrador": "Carpenter",
-    "ferralista": "Steel fixer",
-    "carpintero": "Carpenter (wood)",
-    "carpintero2": "Carpenter (other materials like aluminum, pvc, marble",
-    "cerrajero": "metalworker",
-    "demolicion": "Demolition",
-    "techador": "Roofer",
-    "pintor": "Painter",
-    "cristal": "Glazier",
-    "solder": "Welder",
-    "chapista": "Metalsmith",
-    "electrico": "Electrician",
-    "plomero": "plumber",
-    "pulidor": "Floor-layer",
-    "grua": "Crane operator",
-    "conductor": "Machine operator",
-    "colador": "Assembler",
-    "tallista": "Stone mason",
-    "instalador": "Waterproofing installer",
-    "gas": "Gas fitter",
-    "calefacción": "Central heating installer",
-    "jefe": "Site engineer",
-    "aislador": "Plasterer"
+  "SearchBar": {
+    "placeholder": "Search employee...."
   },
-  "Gastronomy": {
-    "jcocina": "Chief cook",
-    "subcocina": "Assistant chef",
-    "gcocina": "Kitchen manager",
-    "cocinero": "Chef",
-    "acocinero": "Kitchen assistant",
-    "limpieza": "Cleaning service"
+  "JobCar": {
+    "jobtext": "Security",
+    "jobpill":" jobs"
+    },
+  "Toolbar": {
+    "title1": "Calendar",
+    "title2": "Setting",
+    "title3": "Tab 3"
   },
-  "Time": {
-    "time1": "0 to 6 month",
-    "time2": "1 to 2 years",
-    "time3": "3 to 5 years",
-    "time4": "More than 5 years"
+  "HeaderLayout": {
+   "title1": "Calendar",
+    "title2": "Setting",
+    "title3": "Tab 3"
   },
-  "Car": {
-    "pintor": "Car Painter",
-    "chapista": "Car Bodyworker",
-    "mecanico": "Car Mechanic"
+  "UserMenuDropdown": {
+    "profile": "Profile",
+    "logout": "Log Out"
   },
-  "Conditions": {
-    "title": "Our Work Conditions",
-    "text1": "At TCP Group, we are committed to ensuring a comfortable and supportive work environment for all our employees.",
-    "text2": "Below are the key conditions and benefits we offer:",
-    "paso1": "Accommodation:",
-    "text4": "We provide quality accommodation at a cost of 500-600 zł per month, depending on the location and available options.",
-    "paso2": "Food:",
-    "text5": "The cost of food will vary based on your selected meal option. We offer guidance to help you choose the most suitable plan.",
-    "paso3": "Medical Exams:",
-    "text6": "All necessary medical examinations required for work will be arranged and covered by the company, ensuring your readiness for the job.",
-    "paso4": "Salary:",
-    "text7": "The net hourly wage is 22 zł. For full-time employment (40 hours per week), this amounts to approximately 3,262 zł net per month.",
-    "paso5": "Work Hours:",
-    "text8": " Our standard work schedule is from Monday to Friday, 40 hours per week. Extra hours may be available and are compensated accordingly. While we typically do not work on weekends, there may occasionally be additional work on Saturdays, which will also be paid.",
-    "text10": "If you have any additional questions regarding the work conditions, feel free to contact us. We're here to support you every step of the way!",
-    "button": "Contact"
+  "Fab": {
+    "title1": "Today",
+    "title2": "Select Date",
+    "title3": "Unassigned Jobs"
+    },
+  "ModalDate": {
+    "title": "Select date",
+    "subtitle": "Choose a day to see assigned workers",
+    "subtitlecard": "Date",
+    "button1": "Apply",
+    "button2": "Cancel"
   },
-  "Contact": {
-    "title": "Contact Us",
-    "description": "At TCP Group, we value open communication and are here to assist you. You can reach us through the following methods:",
-    "email": "Email",
-    "emailtext": "For general inquiries, please email us. We strive to respond promptly.",
-    "whatsapp": "WhatsApp",
-    "whatsapptext": "For urgent matters, feel free to contact us via WhatsApp. We aim to address urgent inquiries quickly.",
-    "form": "Job Application Form",
-    "formtext": "To start your job application, please fill out our Job Application Form. We will review your application and get back to you as soon as possible.",
-    "footer": "We look forward to hearing from you!"
-  },
-  "Politicas": {
-    "title1": "Security Policies",
-    "header1": "1. ACCEPTANCE",
-    "text1": "This document sets out the terms and conditions of TCP-Group Construction Company, headquartered in the city of Łódź in central Poland, that will apply to the access and use of this website by the User (the “Website”). We kindly ask you to read this document carefully. By accessing, browsing, or using the Website, Users (You, you, User, or user) agree to comply with the terms and conditions established in this document. If you do not agree to be bound by these terms and conditions, you may not access or use the Website. TCP-Group Construction Company reserves the right to update this Agreement whenever deemed appropriate. Accordingly, we recommend that Users periodically review any changes made to the document. This Website is intended for residents in Latin America.",
-    "header2": "2. USER REQUIREMENTS",
-    "text2": "The Website and its related services are offered to Users who wish to apply for jobs and participate in the selection process with our team. Minors are not authorized to use the Website. If you are a minor, please do not use this website.",
-    "header3": "3. LICENSE",
-    "text3": "All material displayed or offered on the Website, including but not limited to graphics, documents, texts, images, illustrations, software, and HTML code (collectively, the Content), is the exclusive property of TCP- Group. The Content is protected by copyright laws as well as other applicable laws, regulations, and standards related to intellectual property rights. Users may not (i) use, copy, modify, display, delete, distribute, or publish the process; nor (ii) use the Content on other websites or in any media, such as in a networked environment. All trademarks, service marks, and logos (hereinafter referred to as the Marks) displayed on the Website are the exclusive property of TCP- Group and their respective owners. Users may not use the Marks in any way.",
-    "header4": "4. USER INFORMATION",
-    "text4": "The Website provides Users with a forum for employment and professional information. By providing or entering information on the Website ('User Information'), the User grants TCP- Group a permanent, non-exclusive, irrevocable, royalty-free license and right to use, copy, modify, display, distribute, and publish the information to the maximum extent permitted by applicable law, without imposing any obligation to do so. Users acknowledge and accept that TCP- Group is only a passive forum where users can find employment or obtain professional information. TCP- Group does not verify or control User Information, thus it makes no guarantees regarding the reliability, accuracy, completeness, validity, or truthfulness of the information submitted by users. TCP- Group reserves the right to, at its sole discretion, delete, withdraw, refuse to display, or block any User Information that it deems unacceptable. If TCP- Group receives notification about the unacceptability of certain information provided by users, it may, at its sole discretion, investigate such information. Users acknowledge and agree that TCP- Group may retain a copy of User Information: (i) to protect the integrity of the Website; (ii) to protect RH’s rights; (iii) to comply with a court order; (iv) to comply with any legal procedure; (v) to enforce TCP- Group's rights and actions pursuant to this document; and (vi) to satisfy any request related to third-party rights infringements.",
-    "header5": "5. GENERAL PROHIBITIONS",
-    "text5": "By accessing and using the Website, Users agree NOT to: (a) Violate all applicable local, state, provincial, national, and other laws, regulations, and standards, such as labor discrimination laws or equal employment opportunity laws when applicable.(b) Infringe on intellectual property and privacy rights, including, but not limited to, patent (copyright), database rights, and trademarks.(c) Download, transmit, or store material that:is illegal, offensive, defamatory, fraudulent, deceptive, misleading, harmful, threatening, hostile, obscene, or otherwise objectionable;infringes the User's contractual or confidentiality obligations;disrupts or interferes with normal Website functions, such as the transmission or sending of viruses, worms, or trojans, repeated material, or unusually large files;or is not permitted by TCP- Group, such as unauthorized advertising, unsolicited promotional material, 'junk mail', 'spam', 'chain letters', 'direct sales messages', franchises, distribution materials, club memberships, contracts of sale, or any other unacceptable material",
-    "header6": "6. USE OF THE WEBSITE AND SPECIFIC OBLIGATIONS",
-    "text6": "In addition to the general obligations outlined in Article 5, the User shall: (a) use the Website solely for lawful purposes of job searching and gathering professional information; (b) provide and maintain complete, correct, updated, and truthful personal data;(c) submit only material for which the User has the corresponding rights or license to do so;(d) exercise sound judgment, caution, and common sense when managing job opportunities and information obtained through the Website; and(e) assume the risk of relying on the content.",
-    "header7": "7. EMPLOYMENT",
-    "text7": "Users acknowledge and agree that TCP- Group: (a) does not guarantee that Users will actually receive a job offer through the Website; (b) is not responsible for job offers, verifying those offers, hiring decisions made by third parties or companies, or job positions offered by third parties or companies; (c) does not guarantee the accuracy, completeness, validity, or currentness of information provided by third parties or companies on the Website; (d) reviews third-party materials and only permits the inclusion of material that, to its knowledge and understanding, does not violate applicable laws but assumes no responsibility for third-party material submitted, such as information related to job creation in a company or included in job listings; and (e) is neither an employer nor has any agency contract with the User.",
-    "header8": "8. PRIVACY",
-    "text8": "TCP- Group will process all personal information entered or provided by the User through our Website in accordance with the Website’s Privacy Policy and the terms and conditions related to it in this document.",
-    "header9": "9. DISCLAIMER",
-    "text9": "The user acknowledges and agrees that: (a) the user assumes all risks relating to or arising from their use, browsing, or access of the Website, which is provided as is and as available, without any warranty; (b) to the extent permitted by law, RH expressly disclaims all warranties, whether express or implied, legal or otherwise; and (c) although RH has antivirus systems and security measures to protect the Website and its content from all types of cyber attacks to reduce risk, RH hereby expressly disclaims any warranties regarding uninterrupted, error-free, or virus-free Website operation or any third-party interference.",
-    "header10": "10. GENERAL",
-    "text10": "Users declare that there is no employment relationship between them and TCP- Group based on accessing and using the Website. This document constitutes the entire agreement between Users and TCP- Group concerning Website access and use. This document will be governed by and interpreted according to Polish law, and Users submit to the exclusive jurisdiction of Polish courts."
-  },
-  "Projects": {
-    "title": "Our Projects",
-    "text": "Press the arrows to scroll through the carousel and view the images"
+  "Unassigned": {
+    "title": "Unassigned Jobs",
+    "subtitle": "",
+    "button": "Dispatch"
+
+   },
+  "ModalDispatch": {
+    "title": "Dispatch Job",
+    "subtitle": "Unassigned jobs",
+    "cardsubtitle": "Confirm will mark this job as Dispatched.",
+    "button": "Confirm Dispatch"
   }
 }
