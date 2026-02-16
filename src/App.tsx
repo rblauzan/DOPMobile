@@ -15,6 +15,7 @@ import CalendarTab from "./pages/Calendar";
 import SettingsTab from "./pages/Settings";
 import Tab3 from "./pages/Tab3";
 import Login from "./pages/Login";
+import { ProtectedRoute } from "./components/Guard/ProtectedRoute";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -47,13 +48,19 @@ const MainTabs: React.FC = () => {
     <IonTabs>
       <IonRouterOutlet>
         <Route exact path="/Calendar">
-          <CalendarTab />
+          <ProtectedRoute>
+            <CalendarTab />
+          </ProtectedRoute>
         </Route>
         <Route exact path="/Settings">
-          <SettingsTab />
+          <ProtectedRoute>
+            <SettingsTab />
+          </ProtectedRoute>
         </Route>
         <Route path="/tab3">
-          <Tab3 />
+          <ProtectedRoute>
+            <Tab3 />
+          </ProtectedRoute>
         </Route>
         <Route path="/Login">
           <Login />

@@ -5,7 +5,7 @@ import { Keyboard } from "@capacitor/keyboard";
 export default function LoginComponent() {
   // 🔐 Credenciales demo
   const ADMIN_USER = "admin123";
-  
+  const VALID_CODE = "1234";
 
   // 🚀 Inputs precargados
   const [username, setUsername] = useState(ADMIN_USER);
@@ -13,62 +13,96 @@ export default function LoginComponent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  // Solo mostrar código después de que el usuario hizo click en Sign In y el username es correcto
+  const [showCodeInput, setShowCodeInput] = useState(false);
   const navigate = useHistory();
+
+  // Verificar si el usuario ya tiene sesión activa al cargar el componente
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      // Si ya hay un usuario en localStorage, redirigir a Calendar
+      navigate.push("/Calendar");
+    }
+  }, [navigate]);
 
   // Detectar cuando el teclado se muestra/oculta
   useEffect(() => {
-    const keyboardWillShowListener = Keyboard.addListener("keyboardWillShow", () => {
-      setIsKeyboardVisible(true);
-    });
+    let listeners: Awaited<ReturnType<typeof Keyboard.addListener>>[] = [];
 
-    const keyboardWillHideListener = Keyboard.addListener("keyboardWillHide", () => {
-      setIsKeyboardVisible(false);
-    });
+    const setupListeners = async () => {
+      const keyboardWillShowListener = await Keyboard.addListener("keyboardWillShow", () => {
+        setIsKeyboardVisible(true);
+      });
 
-    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () => {
-      setIsKeyboardVisible(true);
-    });
+      const keyboardWillHideListener = await Keyboard.addListener("keyboardWillHide", () => {
+        setIsKeyboardVisible(false);
+      });
 
-    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
-      setIsKeyboardVisible(false);
-    });
+      const keyboardDidShowListener = await Keyboard.addListener("keyboardDidShow", () => {
+        setIsKeyboardVisible(true);
+      });
+
+      const keyboardDidHideListener = await Keyboard.addListener("keyboardDidHide", () => {
+        setIsKeyboardVisible(false);
+      });
+
+      listeners = [
+        keyboardWillShowListener,
+        keyboardWillHideListener,
+        keyboardDidShowListener,
+        keyboardDidHideListener,
+      ];
+    };
+
+    setupListeners();
 
     // Cleanup listeners al desmontar el componente
     return () => {
-      keyboardWillShowListener.remove();
-      keyboardWillHideListener.remove();
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
+      listeners.forEach((listener) => listener.remove());
     };
   }, []);
 
-  // Validar si el username es válido
+  // Validar si el username es válido (para borde verde)
   const isUsernameValid = username === ADMIN_USER;
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(""); // Limpiar error previo
-    
-    if (!isUsernameValid) {
-      setError("Username incorrecto. Por favor, intenta nuevamente.");
+    setError("");
+
+    // Primera etapa: validar username al hacer click en Sign In
+    if (!showCodeInput) {
+      if (username !== ADMIN_USER) {
+        setError("Username incorrecto. Por favor, intenta nuevamente.");
+        return;
+      }
+      // Usuario correcto → mostrar input del código
+      setShowCodeInput(true);
       return;
     }
 
+    // Segunda etapa: validar código
     if (!code.trim()) {
       setError("Por favor, introduce el código.");
       return;
     }
-    // Aquí puedes agregar validación del código si es necesario
+    if (code.trim() !== VALID_CODE) {
+      setError("Código incorrecto. Por favor, intenta nuevamente.");
+      return;
+    }
+
     setLoading(true);
-    localStorage.setItem('user',username)
-    navigate.push("/calendar");
+    localStorage.setItem("user", username);
+    navigate.push("/Calendar");
+    setLoading(false);
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
-    setError(""); // Limpiar error cuando el usuario empiece a escribir
-    // Si el username cambia y ya no es válido, limpiar el código
-    if (e.target.value !== ADMIN_USER) {
+    setError("");
+    // Si cambia el username, ocultar el código y limpiarlo para que tenga que validar de nuevo
+    if (showCodeInput) {
+      setShowCodeInput(false);
       setCode("");
     }
   };
@@ -108,14 +142,18 @@ export default function LoginComponent() {
             placeholder="Username"
           />
           
-          {/* Input del código - solo se muestra si el username es válido */}
-          {isUsernameValid && (
+          {/* Input del código - solo se muestra después de Sign In con username correcto */}
+          {showCodeInput && (
             <input
               type="text"
               value={code}
               onChange={handleCodeChange}
               className={`w-full px-4 py-2.5 rounded-xl bg-white/10 border transition-colors ${
-                error && !code.trim() ? "border-red-500" : "border-white/15"
+                error && (code.trim() !== VALID_CODE || !code.trim())
+                  ? "border-red-500"
+                  : code.trim() === VALID_CODE
+                  ? "border-green-500"
+                  : "border-white/15"
               }`}
               placeholder="Código"
             />

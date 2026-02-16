@@ -1,27 +1,32 @@
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ACCESS_TOKEN } from '../../constants';
+
+const USER_STORAGE_KEY = 'user';
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null); // Estado para controlar la autorización
-const Navigate = useHistory();
-  useEffect(() => {
-    const auth = async () => {
-      const token = localStorage.getItem(ACCESS_TOKEN);
 
-      if (!token) {
-        setIsAuthorized(false); // No hay token, no autorizado
+  useEffect(() => {
+    const checkAuth = () => {
+      const user = localStorage.getItem(USER_STORAGE_KEY);
+
+      if (!user) {
+        setIsAuthorized(false); // No hay usuario, no autorizado
         return;
       }
-      // Token válido
+      // Usuario existe en localStorage, sesión válida
       setIsAuthorized(true);
     };
-    auth(); // Ejecutar la validación de autenticación
+    checkAuth(); // Ejecutar la validación de autenticación
   }, []);
 
   if (isAuthorized === null) {
     return <div>Cargando...</div>; // Mostrar un spinner o mensaje de carga mientras se verifica la autenticación
   }
 
-  return isAuthorized ? children : Navigate.push("/login"); // Redirigir al login si no está autorizado
+  if (!isAuthorized) {
+    return <Redirect to="/Login" />; // Redirigir al login si no está autorizado
+  }
+
+  return <>{children}</>; // Renderizar el contenido protegido si está autorizado
 };
