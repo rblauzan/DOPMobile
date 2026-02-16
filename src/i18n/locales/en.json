@@ -65,5 +65,10 @@
   "Move" : {
     "up" : "up",
     "down" : "down"
+  },
+  "Login" : {
+    "title" : "Dop Owner",
+    "placeholder" : "Username",
+    "button" : "Sign in"
   }
 }

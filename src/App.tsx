@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useLocation } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -14,6 +14,7 @@ import { calendar, settings, square } from "ionicons/icons";
 import CalendarTab from "./pages/Calendar";
 import SettingsTab from "./pages/Settings";
 import Tab3 from "./pages/Tab3";
+import Login from "./pages/Login";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -37,46 +38,67 @@ import { useTranslation } from "react-i18next";
 
 setupIonicReact();
 
-const App: React.FC = () => {
+const MainTabs: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
 
   return (
+    // @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime
+    <IonTabs>
+      <IonRouterOutlet>
+        <Route exact path="/Calendar">
+          <CalendarTab />
+        </Route>
+        <Route exact path="/Settings">
+          <SettingsTab />
+        </Route>
+        <Route path="/tab3">
+          <Tab3 />
+        </Route>
+        <Route path="/Login">
+          <Login />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/Login" />
+        </Route>
+      </IonRouterOutlet>
+
+      {/* key fuerza re-render cuando cambia el idioma */}
+      <IonTabBar
+        slot="bottom"
+        key={i18n.resolvedLanguage}
+        style={{
+          display: location.pathname.toLowerCase() === "/login" ? "none" : "flex",
+        }}
+      >
+        {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
+        <IonTabButton tab="Calendar" href="/Calendar">
+          <IonIcon aria-hidden="true" icon={calendar} />
+          <IonLabel>{t("Toolbar.title1")}</IonLabel>
+        </IonTabButton>
+
+        {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
+        <IonTabButton tab="Settings" href="/Settings">
+          <IonIcon aria-hidden="true" icon={settings} />
+          <IonLabel>{t("Toolbar.title2")}</IonLabel>
+        </IonTabButton>
+
+        {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
+        <IonTabButton tab="tab3" href="/tab3">
+          <IonIcon aria-hidden="true" icon={square} />
+          <IonLabel>Tab 3</IonLabel>
+        </IonTabButton>
+      </IonTabBar>
+    </IonTabs>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    // @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime
     <IonApp>
       <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route exact path="/Calendar">
-              <CalendarTab />
-            </Route>
-            <Route exact path="/Settings">
-              <SettingsTab />
-            </Route>
-            <Route path="/tab3">
-              <Tab3 />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/Calendar" />
-            </Route>
-          </IonRouterOutlet>
-
-          {/* key fuerza re-render cuando cambia el idioma */}
-          <IonTabBar slot="bottom" key={i18n.resolvedLanguage}>
-            <IonTabButton tab="Calendar" href="/Calendar">
-              <IonIcon aria-hidden="true" icon={calendar} />
-              <IonLabel>{t("Toolbar.title1")}</IonLabel>
-            </IonTabButton>
-
-            <IonTabButton tab="Settings" href="/Settings">
-              <IonIcon aria-hidden="true" icon={settings} />
-              <IonLabel>{t("Toolbar.title2")}</IonLabel>
-            </IonTabButton>
-
-            <IonTabButton tab="tab3" href="/tab3">
-              <IonIcon aria-hidden="true" icon={square} />
-              <IonLabel>Tab 3</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <MainTabs />
       </IonReactRouter>
     </IonApp>
   );

@@ -23,6 +23,7 @@ import SheetTitle from "./UI/SheetTitle.js";
 import Badge from "./UI/Badge.js";
 import { EmptyWorkersState } from "./UI/Empty.js";
 import { useTranslation } from "react-i18next";
+import { filterEmployees, jobsForDate } from "../helpers/helpers.js";
 
 interface ContainerProps {
   name: string;
@@ -278,26 +279,6 @@ function DevSelfTests() {
   return null;
 }
 
-/* =========================
-   HELPERS
-   ========================= */
-
-function jobsForDate(worker, date) {
-  return (worker?.jobs || []).filter((j) => j.date === date);
-}
-
-function filterEmployees(query, workers) {
-  const q = (query || "").trim().toLowerCase();
-  if (!q) return workers;
-  return workers.filter(
-    (w) =>
-      w.name.toLowerCase().includes(q) ||
-      w.role.toLowerCase().includes(q) ||
-      w.home.toLowerCase().includes(q) ||
-      w.phone.toLowerCase().includes(q) ||
-      w.email.toLowerCase().includes(q),
-  );
-}
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
   const [view, setView] = useState("employees"); // employees | dispatch | unassigned
@@ -307,6 +288,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [reorderMode, setReorderMode] = useState(false);
   const [fabOpen, setFabOpen] = useState(false);
   const { t } = useTranslation("");
+
 
   // Sheets
   const [dispatchJob, setDispatchJob] = useState(null);
@@ -353,6 +335,40 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             setFabOpen(false);
           }}
         />
+        {dateSheetOpen && (
+          <BottomSheet onClose={() => setDateSheetOpen(false)}>
+            <SheetTitle
+              title={t("ModalDate.title")}
+              subtitle={t("ModalDate.subtitle")}
+              onClose={() => setDateSheetOpen(false)}
+            />
+
+            <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
+              <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
+              <input
+                type="date"
+                value={pendingDate}
+                onChange={(e) => setPendingDate(e.target.value)}
+                className="mt-2 w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 outline-none"
+              />
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <button
+                  className="py-3 rounded-2xl bg-white/10 border border-white/20"
+                  onClick={() => setDateSheetOpen(false)}
+                >
+                  {t("ModalDate.button2")}
+                </button>
+                <button
+                  className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
+                  onClick={applyDate}
+                >
+                  {t("ModalDate.button1")}
+                </button>
+              </div>
+            </div>
+          </BottomSheet>
+        )}
+        <DevSelfTests />
         </>
           )
         }
@@ -394,7 +410,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
                 <div className="flex flex-col gap-2">
                   <IconBtn
                     icon={<Phone size={16} />}
-                    onCli ck={(e) => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       window.open(`tel: ${emp.phone}`,'_system');
                     }}

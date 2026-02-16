@@ -6,12 +6,18 @@ import { IonPopover } from "@ionic/react";
 import { UserMenuDropdown } from "./UserMenuDropdown";
 import { useHistory } from "react-router-dom";
 
-export function UserMenu({ user, onLogout }: { user: any, onLogout: () => void }) {
+export function UserMenu({ user }: { user: any }) {
   const triggerId = useId();
   const history = useHistory();
 
   const goProfile = () => {
     history.push("/profile");
+  };
+
+  // Cerrar sesión
+  const logout = () => {
+    localStorage.clear();
+    history.push('/Login');
   };
 
   return (
@@ -27,7 +33,7 @@ export function UserMenu({ user, onLogout }: { user: any, onLogout: () => void }
         alignment="end"
         dismissOnSelect={true}
       >
-        <UserMenuDropdown onProfile={goProfile} onLogout={onLogout} />
+        <UserMenuDropdown onProfile={goProfile} onLogout={logout} />
       </IonPopover>
     </>
   );
