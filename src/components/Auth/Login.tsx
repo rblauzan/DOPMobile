@@ -1,5 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import { Keyboard } from "@capacitor/keyboard";
 
 export default function LoginComponent() {
   // 🔐 Credenciales demo
@@ -11,7 +12,35 @@ export default function LoginComponent() {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const navigate = useHistory();
+
+  // Detectar cuando el teclado se muestra/oculta
+  useEffect(() => {
+    const keyboardWillShowListener = Keyboard.addListener("keyboardWillShow", () => {
+      setIsKeyboardVisible(true);
+    });
+
+    const keyboardWillHideListener = Keyboard.addListener("keyboardWillHide", () => {
+      setIsKeyboardVisible(false);
+    });
+
+    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () => {
+      setIsKeyboardVisible(true);
+    });
+
+    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
+      setIsKeyboardVisible(false);
+    });
+
+    // Cleanup listeners al desmontar el componente
+    return () => {
+      keyboardWillShowListener.remove();
+      keyboardWillHideListener.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   // Validar si el username es válido
   const isUsernameValid = username === ADMIN_USER;
@@ -52,11 +81,15 @@ export default function LoginComponent() {
   <>
     <div className="min-h-screen flex flex-col items-center justify-center px-4">
       
-        <img src="./White-logo.png" className="w-40"></img>
-        <h2 className="text-2xl font-semibold text-center">
-        OPERATIONS PRO
-        </h2>
-        <span className="mb-2">Welcome! Sign in to continue.</span>
+        {!isKeyboardVisible && (
+            <img src="./White-logo.png" className="w-40"></img>
+        )}
+            
+            <h2 className="text-2xl font-semibold text-center">
+            OPERATIONS PRO
+            </h2>
+            <span className="mb-2">Welcome! Sign in to continue.</span>
+          
 
         <form onSubmit={handleLogin} className="space-y-4">
 
