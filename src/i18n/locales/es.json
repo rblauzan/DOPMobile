@@ -65,5 +65,16 @@
   "Move" : {
     "up" : "subir",
     "down" : "bajar"
+  },
+  "Login" : {
+    "title" : "Dop Owner",
+    "placeholder" : "Nombre de usuario",
+    "placeholderCode" : "Código",
+    "button" : "Iniciar sesión",
+    "notificacion1" : "Usuario incorrecto",
+    "notificacion2" : "Código incorrecto",
+    "notificacion3" : "Sesión iniciada",
+    "loading" : "Cargando.....",
+    "welcome" : "Bienvenido! Inicia sesión para continuar."
   }
 }

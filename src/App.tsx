@@ -106,7 +106,7 @@ const App: React.FC = () => {
     // @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime
     <IonApp>
       <IonReactRouter>
-        <Toaster position="top-center" />
+        <Toaster position="top-center" offset={{ top: 40 }} />
         <MainTabs />
       </IonReactRouter>
     </IonApp>

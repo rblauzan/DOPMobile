@@ -3,18 +3,20 @@ import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 import { Keyboard } from "@capacitor/keyboard";
 import { sileo } from "sileo";
+import { useTranslation } from "react-i18next";
 
 export default function LoginComponent() {
   // 🔐 Credenciales demo
   const ADMIN_USER = "admin123";
   const VALID_CODE = "1234";
-
+  const { t } = useTranslation();
   // 🚀 Inputs precargados
   const [username, setUsername] = useState("");
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   // Solo mostrar código después de que el usuario hizo click en Sign In y el username es correcto
   const [showCodeInput, setShowCodeInput] = useState(false);
   const navigate = useHistory();
@@ -48,21 +50,38 @@ export default function LoginComponent() {
     let listeners: Awaited<ReturnType<typeof Keyboard.addListener>>[] = [];
 
     const setupListeners = async () => {
-      const keyboardWillShowListener = await Keyboard.addListener("keyboardWillShow", () => {
-        setIsKeyboardVisible(true);
-      });
+      const keyboardWillShowListener = await Keyboard.addListener(
+        "keyboardWillShow",
+        (info) => {
+          setIsKeyboardVisible(true);
+          // Altura del teclado en píxeles para poder empujar el contenido hacia arriba
+          setKeyboardHeight(info.keyboardHeight ?? 0);
+        },
+      );
 
-      const keyboardWillHideListener = await Keyboard.addListener("keyboardWillHide", () => {
-        setIsKeyboardVisible(false);
-      });
+      const keyboardWillHideListener = await Keyboard.addListener(
+        "keyboardWillHide",
+        () => {
+          setIsKeyboardVisible(false);
+          setKeyboardHeight(0);
+        },
+      );
 
-      const keyboardDidShowListener = await Keyboard.addListener("keyboardDidShow", () => {
-        setIsKeyboardVisible(true);
-      });
+      const keyboardDidShowListener = await Keyboard.addListener(
+        "keyboardDidShow",
+        (info) => {
+          setIsKeyboardVisible(true);
+          setKeyboardHeight(info.keyboardHeight ?? 0);
+        },
+      );
 
-      const keyboardDidHideListener = await Keyboard.addListener("keyboardDidHide", () => {
-        setIsKeyboardVisible(false);
-      });
+      const keyboardDidHideListener = await Keyboard.addListener(
+        "keyboardDidHide",
+        () => {
+          setIsKeyboardVisible(false);
+          setKeyboardHeight(0);
+        },
+      );
 
       listeners = [
         keyboardWillShowListener,
@@ -92,7 +111,7 @@ export default function LoginComponent() {
       if (username !== ADMIN_USER) {
         sileo.error({
           fill: "white",
-          title: "Username incorrecto.",   
+          title: t("Login.notificacion1"),   
         });
          setError("");
         return;
@@ -115,7 +134,7 @@ export default function LoginComponent() {
     if (code.trim() !== VALID_CODE) {
       sileo.error({
           fill: "white",
-          title: "Código incorrecto."          
+          title: t("Login.notificacion2")         
         });
       setError("");
       return;
@@ -142,22 +161,32 @@ export default function LoginComponent() {
     setCode(e.target.value);
     setError(""); // Limpiar error cuando el usuario empiece a escribir el código
   };
+
+  // Desplazamiento más suave cuando aparece el teclado
+  const keyboardOffset =
+    isKeyboardVisible && keyboardHeight
+      ? keyboardHeight * 0.4 // solo un porcentaje de la altura del teclado
+      : isKeyboardVisible
+        ? 60 // fallback en caso de no tener altura
+        : 0;
+
   return (
-  <>
-    <div className="min-h-screen flex flex-col items-center justify-center px-4">
-      
+    <>
+      <div
+        className="min-h-screen flex flex-col items-center justify-center px-4 transition-all duration-300"
+        style={{
+          // Cuando el teclado está visible, movemos el contenido hacia arriba pero menos
+          transform: `translateY(-${keyboardOffset}px)`,
+        }}
+      >
         {!isKeyboardVisible && (
-            <img src="./White-logo.png" className="w-40"></img>
+          <img src="./White-logo.png" className="w-40" />
         )}
-            
-            <h2 className="text-2xl font-semibold text-center">
-            OPERATIONS PRO
-            </h2>
-            <span className="mb-2">Welcome! Sign in to continue.</span>
-          
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <h2 className="text-2xl font-semibold text-center">OPERATIONS PRO</h2>
+        <span className="mb-2">{t("Login.welcome")}</span>
 
+        <form onSubmit={handleLogin} className="space-y-4 w-full">
           {/* Usuario precargado */}
           <input
             type="text"
@@ -167,12 +196,12 @@ export default function LoginComponent() {
               error && !isUsernameValid
                 ? "border-red-500"
                 : isUsernameValid
-                ? "border-green-500"
-                : "border-white/15"
+                  ? "border-green-500"
+                  : "border-white/15"
             }`}
-            placeholder="Username"
+            placeholder={t("Login.placeholder")}
           />
-          
+
           {/* Input del código - solo se muestra después de Sign In con username correcto */}
           {showCodeInput && (
             <input
@@ -183,13 +212,13 @@ export default function LoginComponent() {
                 error && (code.trim() !== VALID_CODE || !code.trim())
                   ? "border-red-500"
                   : code.trim() === VALID_CODE
-                  ? "border-green-500"
-                  : "border-white/15"
+                    ? "border-green-500"
+                    : "border-white/15"
               }`}
-              placeholder="Código"
+              placeholder={t("Login.placeholderCode")}
             />
           )}
-          
+
           {/* Mensaje de error */}
           {error && (
             <p className="text-red-400 text-sm text-center mt-2">
@@ -201,19 +230,19 @@ export default function LoginComponent() {
             type="submit"
             disabled={loading}
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-110 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
-            // className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 hover:bg-orange-600"
           >
-            {loading ? "Cargando.....": "Sign In"}
+            {loading ? t("Login.loading") : t("Login.button")}
           </button>
         </form>
 
         {/* Mensaje claro de DEMO */}
         <p className="text-xs text-slate-400 text-center mt-6">
-         © {new Date().getFullYear()} Diamond Operations Pro Inc. 
+          © {new Date().getFullYear()} Diamond Operations Pro Inc.
         </p>
-        <span className="text-xs text-slate-400 text-center">- Owner App -</span>
-
+        <span className="text-xs text-slate-400 text-center">
+          - Owner App -
+        </span>
       </div>
-  </>
+    </>
   );
 }

@@ -69,6 +69,12 @@
   "Login" : {
     "title" : "Dop Owner",
     "placeholder" : "Username",
-    "button" : "Sign in"
+    "placeholderCode" : "Code",
+    "button" : "Sign in",
+    "notificacion1" : "User incorrect",
+    "notificacion2" : "Code incorrect",
+    "notificacion3" : "Session started",
+    "loading" : "Loading.....",
+    "welcome" : "Welcome! Sign in to continue."
   }
 }
