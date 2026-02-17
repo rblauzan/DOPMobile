@@ -142,7 +142,7 @@ export default function LoginComponent() {
 
     setLoading(true);
     localStorage.setItem("user", username);
-    sileo.success({ title: "Sesión Iniciada" });
+    sileo.success({ title: t("Login.notificacion3") });
     navigate.push("/Calendar");
     setLoading(false);
   };
