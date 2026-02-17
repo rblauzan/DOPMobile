@@ -17,7 +17,7 @@ export function UserMenu({ user }: { user: any }) {
   // Cerrar sesión
   const logout = () => {
     localStorage.clear();
-    history.push('/Login');
+    history.push("/")
   };
 
   return (

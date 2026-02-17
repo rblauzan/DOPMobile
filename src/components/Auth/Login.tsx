@@ -1,6 +1,8 @@
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router";
+import { useLocation } from "react-router-dom";
 import { Keyboard } from "@capacitor/keyboard";
+import { sileo } from "sileo";
 
 export default function LoginComponent() {
   // 🔐 Credenciales demo
@@ -8,7 +10,7 @@ export default function LoginComponent() {
   const VALID_CODE = "1234";
 
   // 🚀 Inputs precargados
-  const [username, setUsername] = useState(ADMIN_USER);
+  const [username, setUsername] = useState("");
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,13 +18,28 @@ export default function LoginComponent() {
   // Solo mostrar código después de que el usuario hizo click en Sign In y el username es correcto
   const [showCodeInput, setShowCodeInput] = useState(false);
   const navigate = useHistory();
+  const location = useLocation();
+  const prevPathRef = useRef<string | null>(null);
+
+  // Limpiar formulario al llegar a Login (p. ej. después de logout)
+  useEffect(() => {
+    const current = location.pathname;
+    const prev = prevPathRef.current;
+    prevPathRef.current = current;
+    if (current === "/Login" && prev !== "/Login") {
+      setUsername("");
+      setCode("");
+      setShowCodeInput(false);
+      setError("");
+    }
+  }, [location.pathname]);
 
   // Verificar si el usuario ya tiene sesión activa al cargar el componente
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       // Si ya hay un usuario en localStorage, redirigir a Calendar
-      navigate.push("/Calendar");
+      navigate.replace("/Calendar");
     }
   }, [navigate]);
 
@@ -73,7 +90,11 @@ export default function LoginComponent() {
     // Primera etapa: validar username al hacer click en Sign In
     if (!showCodeInput) {
       if (username !== ADMIN_USER) {
-        setError("Username incorrecto. Por favor, intenta nuevamente.");
+        sileo.error({
+          fill: "white",
+          title: "Username incorrecto.",   
+        });
+         setError("");
         return;
       }
       // Usuario correcto → mostrar input del código
@@ -82,17 +103,27 @@ export default function LoginComponent() {
     }
 
     // Segunda etapa: validar código
-    if (!code.trim()) {
-      setError("Por favor, introduce el código.");
-      return;
-    }
+    // if (!code.trim()) {
+    //    sileo.error({
+    //       fill: "white",  
+    //       title: "Debe introducir un código",
+          
+    //     });
+    //   //setError("Por favor, introduce el código.");
+    //   return;
+    // }
     if (code.trim() !== VALID_CODE) {
-      setError("Código incorrecto. Por favor, intenta nuevamente.");
+      sileo.error({
+          fill: "white",
+          title: "Código incorrecto."          
+        });
+      setError("");
       return;
     }
 
     setLoading(true);
     localStorage.setItem("user", username);
+    sileo.success({ title: "Sesión Iniciada" });
     navigate.push("/Calendar");
     setLoading(false);
   };
@@ -169,10 +200,10 @@ export default function LoginComponent() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) px-6 py-3 font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white w-fit cursor-pointer [&:hover]:scale-110 transition duration-300 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-110 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
             // className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 hover:bg-orange-600"
           >
-            {loading ? "Cargando..." : "Sign In"}
+            {loading ? "Cargando.....": "Sign In"}
           </button>
         </form>
 
@@ -186,82 +217,3 @@ export default function LoginComponent() {
   </>
   );
 }
-
-
-// import { useHistory } from 'react-router-dom';
-// // import { toast } from 'react-hot-toast';
-// import { ACCESS_TOKEN } from '../../constants';
-// import { useState } from 'react';
-// import { LoadingIndicator } from '../UI/LoadingIndicator';
-
-
-// export default function LoginComponent() {
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useHistory();
- 
-
-//   const onSubmit = (async (data) => {
-//     try {
-//       setLoading(true);        
-     
-//     } catch (error) {
-//     //   toast.error('Ocurrió un error durante la autenticación', {
-//     //     position: 'top-right',
-//     //   });
-//     } finally {
-//       setLoading(false);
-//     }
-//   });
-
-//   return (
-//     <div className="flex justify-center items-center p-8 h-screen w-screen bg-gray-900">
-//       <form
-//         onSubmit={onSubmit}
-//         className="flex flex-col gap-4 bg-gray-800 p-8 rounded-lg shadow-lg w-96"
-//       >
-//         {/* Logo */}
-//         <div className="flex justify-center mb-6">
-//           <img
-//             src=""
-//             alt="Logo"
-//             className="w-16 h-16"
-//           />
-//         </div>
-
-//         {/* Campo de usuario */}
-//         <div>
-//           <label className="block text-sm font-medium text-gray-300 mb-2">
-//             Usuario
-//           </label>
-//           <input
-//             type="text"
-//             placeholder="Usuario"
-//             className="w-full rounded-md border border-gray-700 bg-gray-700 text-white py-2 px-3 focus:outline-none focus:border-blue-500"
-//           />
-//         </div>
-
-//         {/* Campo de contraseña */}
-//         <div>
-//           <label className="block text-sm font-medium text-gray-300 mb-2">
-//             Contraseña
-//           </label>
-//           <input
-//             type="password"
-//             placeholder="Contraseña"
-//             className="w-full rounded-md border border-gray-700 bg-gray-700 text-white py-2 px-3 focus:outline-none focus:border-blue-500"
-//           />
-          
-//         </div>
-
-//         {/* Botón de inicio de sesión */}
-//         <button
-//           type="submit"
-//           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           disabled={loading}
-//         >
-//           {loading ? <LoadingIndicator /> : 'Iniciar sesión'}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };

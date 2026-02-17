@@ -36,6 +36,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import { useTranslation } from "react-i18next";
+import { Toaster } from "sileo";
 
 setupIonicReact();
 
@@ -105,6 +106,7 @@ const App: React.FC = () => {
     // @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime
     <IonApp>
       <IonReactRouter>
+        <Toaster position="top-center" />
         <MainTabs />
       </IonReactRouter>
     </IonApp>
