@@ -10,7 +10,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { calendar, settings, square } from "ionicons/icons";
+import { calendar, settings, people } from "ionicons/icons";
 import CalendarTab from "./pages/Calendar";
 import SettingsTab from "./pages/Settings";
 import Tab3 from "./pages/Tab3";
@@ -87,14 +87,14 @@ const MainTabs: React.FC = () => {
 
         {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
         <IonTabButton tab="Settings" href="/Settings">
-          <IonIcon aria-hidden="true" icon={settings} />
-          <IonLabel>{t("Toolbar.title2")}</IonLabel>
+          <IonIcon aria-hidden="true" icon={people} />
+          <IonLabel>{t("Toolbar.title3")}</IonLabel>
         </IonTabButton>
 
         {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
         <IonTabButton tab="tab3" href="/tab3">
-          <IonIcon aria-hidden="true" icon={square} />
-          <IonLabel>Tab 3</IonLabel>
+          <IonIcon aria-hidden="true" icon={settings} />
+          <IonLabel>{t("Toolbar.title2")}</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
