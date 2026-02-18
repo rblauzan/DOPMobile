@@ -1,56 +1,62 @@
-export type Worker = {
-  id: number;
-  name: string;
-  role: string;
-  phone: string;
-  email: string;
-  home: string;
-  payRate: number;
-  jobs: Job[];
+import db from "../db/mock-db.json";
+
+const delay = (ms = 400) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+/*
+  Mock API
+  Simula llamadas HTTP reales
+*/
+
+export const api = {
+  async getWorkers() {
+    await delay();
+    return db.workers;
+  },
+
+  async getWorkerById(id: number) {
+    await delay();
+    return db.workers.find((w) => w.id === id);
+  },
+
+  async getUnassignedJobs() {
+    await delay();
+    return db.unassigned;
+  },
+
+  async getJobsByDate(date: string) {
+    await delay();
+
+    return db.workers.flatMap((w) =>
+      w.jobs.filter((job) => job.date === date)
+    );
+  },
+
+  async assignJob(workerId: number, jobId: number) {
+    await delay();
+
+    const worker = db.workers.find((w) => w.id === workerId);
+    const jobIndex = db.unassigned.findIndex((j) => j.id === jobId);
+
+    if (!worker || jobIndex === -1) return null;
+
+    const job = db.unassigned.splice(jobIndex, 1)[0];
+
+    worker.jobs.push({
+      ...job,
+      status: "assigned",
+      priority: 0,
+      payment: 0,
+      type: "",
+      rooms: 0,
+      sqft: 0
+    });
+
+    return job;
+  },
+
+  async logout() {
+    await delay(200);
+    return true;
+  }
 };
-
-export type Job = {
-  id: number;
-  client: string;
-  address: string;
-  time: string;
-  duration: string;
-  priority: number;
-  notes: string;
-  status?: "assigned" | "completed";
-  date: string;
-};
-
-type MockDB = {
-  meta: { today: string };
-  workers: Worker[];
-  unassignedJobs: Job[];
-};
-
-const DB_URL = "db/mock-db.json";
-
-/* =========================
-   FETCH DB
-   ========================= */
-
-export async function getMockDB(): Promise<MockDB> {
-  const res = await fetch(DB_URL);
-  if (!res.ok) throw new Error("Failed to load mock db");
-  return res.json();
-}
-
-/* =========================
-   HELPERS (igual backend real)
-   ========================= */
-
-export function jobsForDate(worker: Worker, date: string) {
-  return worker.jobs.filter((j) => j.date === date);
-}
-
-export function workersWithJobsForDate(workers: Worker[], date: string) {
-  return workers.filter((w) => jobsForDate(w, date).length > 0);
-}
-
-export function unassignedForDate(jobs: Job[], date: string) {
-  return jobs.filter((j) => j.date === date);
-}
