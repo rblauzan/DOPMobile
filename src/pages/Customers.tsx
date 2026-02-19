@@ -20,7 +20,7 @@ const Customers: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">{t("Toolbar.title3")}  </IonTitle>
+            <IonTitle size="large">{t("Toolbar.title2")}  </IonTitle>
           </IonToolbar>
         </IonHeader>
       </IonContent>

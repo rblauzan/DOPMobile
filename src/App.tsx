@@ -12,8 +12,8 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import { calendar, settings, people } from "ionicons/icons";
 import CalendarTab from "./pages/Calendar";
-import SettingsTab from "./pages/Customers";
-import Tab3 from "./pages/Settings";
+import SettingsTab from "./pages/Settings";
+import CustomersTab from "./pages/Customers";
 import Login from "./pages/Login";
 import { ProtectedRoute } from "./components/Guard/ProtectedRoute";
 
@@ -53,14 +53,14 @@ const MainTabs: React.FC = () => {
             <CalendarTab />
           </ProtectedRoute>
         </Route>
-        <Route exact path="/Settings">
+        <Route exact path="/Customers">
           <ProtectedRoute>
-            <SettingsTab />
+            <CustomersTab />
           </ProtectedRoute>
         </Route>
-        <Route path="/tab3">
+        <Route path="/Settings">
           <ProtectedRoute>
-            <Tab3 />
+            <SettingsTab />
           </ProtectedRoute>
         </Route>
         <Route path="/Login">
@@ -86,13 +86,13 @@ const MainTabs: React.FC = () => {
         </IonTabButton>
 
         {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
-        <IonTabButton tab="Settings" href="/Settings">
+        <IonTabButton tab="Customers" href="/Customers">
           <IonIcon aria-hidden="true" icon={people} />
           <IonLabel>{t("Toolbar.title3")}</IonLabel>
         </IonTabButton>
 
         {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
-        <IonTabButton tab="tab3" href="/tab3">
+        <IonTabButton tab="Settings" href="/Settings">
           <IonIcon aria-hidden="true" icon={settings} />
           <IonLabel>{t("Toolbar.title2")}</IonLabel>
         </IonTabButton>

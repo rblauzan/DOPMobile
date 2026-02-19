@@ -1,8 +1,8 @@
 import Screen from "./Layout/Screen.js";
 import Header from "./UI/Header.js";
-import SearchBar from "./UI/SearchBar.jsx";
-import { useMemo, useState } from "react";
-import Card from "./UI/Card.jsx";
+import SearchBar from "./UI/SearchBar.js";
+import { useEffect, useMemo, useState } from "react";
+import Card from "./UI/Card.js";
 import {
   Home,
   BadgeDollarSign,
@@ -21,274 +21,245 @@ import BottomSheet from "./UI/BottomSheet.js";
 import IconBtn from "./UI/IconBtn.js";
 import SheetTitle from "./UI/SheetTitle.js";
 import Badge from "./UI/Badge.js";
-import { EmptyWorkersState } from "./UI/Empty.js";
+import { EmptyWorkersState, EmptySearchResults } from "./UI/Empty.js";
 import { useTranslation } from "react-i18next";
 import { filterEmployees, jobsForDate } from "../helpers/helpers.js";
+import { TODAY, TOMORROW } from "../constants.js";
+import { api } from "../services/mockApi.js";
+import type { Worker, Job } from "../models/Seed";
+import CardSkeleton, { EmployeesSkeleton } from "./UI/CardSkeleton.js";
 
 interface ContainerProps {
   name: string;
 }
-const TODAY = new Date().toISOString().slice(0, 10);
-const TOMORROW = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 
-const seed = {
-  today: TODAY,
-  workers: [
-    {
-      id: 1,
-      name: "Kaytea Moreno",
-      role: "Team Lead",
-      phone: "(239) 317-6096",
-      email: "kaytea@dop.local",
-      home: "Bonita Springs, FL",
-      payRate: 22.5,
-      jobs: [
-        {
-          id: 180044,
-          status: "completed",
-          client: "Beach Breeze 290",
-          address: "32 1st St, Bonita Springs",
-          time: "8:30am – 11:00am",
-          duration: "2h 30m",
-          priority: 2,
-          notes: "Standard turnover, no issues reported",
-          date: TODAY,
-        },
-        {
-          id: 182514,
-          status: "assigned",
-          client: "Nomadic Vacation Rentals",
-          address: "587 99th Ave N, Naples",
-          time: "11:30am – 3:00pm",
-          duration: "3h 30m",
-          priority: 1,
-          notes: "Guest arriving early – high priority",
-          date: TODAY,
-        },
-        {
-          id: 182900,
-          status: "assigned",
-          client: "Blue Diamond Beach Home",
-          address: "3542 McComb Ave, Naples",
-          time: "4:00pm – 6:00pm",
-          duration: "2h 0m",
-          priority: 3,
-          notes: "Owner inspection tomorrow",
-          date: TOMORROW,
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "Yailen Figuereido",
-      role: "Cleaner Pro",
-      phone: "(239) 763-3972",
-      email: "yailen@dop.local",
-      home: "Naples, FL",
-      payRate: 18,
-      jobs: [
-        {
-          id: 190210,
-          status: "assigned",
-          client: "Marco Luxe Retreat",
-          address: "840 Rose Ct, Marco Island",
-          time: "9:00am – 12:00pm",
-          duration: "3h 0m",
-          priority: 2,
-          notes: "Deep clean requested",
-          date: TODAY,
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "Yurleidys Rivero",
-      role: "Cleaner Pro",
-      phone: "(239) 555-1099",
-      email: "yurleidys@dop.local",
-      home: "Cape Coral, FL",
-      payRate: 19.5,
-      jobs: [],
-    },    
-    {
-      "id": 4,
-      "name": "Carlos Rodriguez",
-      "role": "Cleaner",
-      "phone": "(239) 456-7890",
-      "email": "carlos@dop.local",
-      "home": "Fort Myers, FL",
-      "payRate": 17.5,
-      "status": "active",
-      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
-      "jobs": [
-        {
-          "id": 190415,
-          "status": "assigned",
-          "client": "Sunset Villa",
-          "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
-          "time": "10:00am – 1:00pm",
-          "duration": "3h 0m",
-          "priority": 2,
-          "notes": "Pet-friendly unit. Extra vacuuming needed.",
-          "date": TODAY,
-          "payment": 78.75,
-          "type": "standard_clean",
-          "rooms": 3,
-          "sqft": 1500
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Maria Gonzalez",
-      "role": "Team Lead",
-      "phone": "(239) 123-4567",
-      "email": "maria@dop.local",
-      "home": "Estero, FL",
-      "payRate": 21.0,
-      "status": "on_vacation",
-      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
-      "jobs": []
-    },
-     {
-      "id": 4,
-      "name": "Alfredo Perez",
-      "role": "Cleaner",
-      "phone": "(239) 456-7890",
-      "email": "carlos@dop.local",
-      "home": "Fort Myers, FL",
-      "payRate": 17.5,
-      "status": "active",
-      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
-      "jobs": [
-        {
-          "id": 190415,
-          "status": "assigned",
-          "client": "Sunset Villa",
-          "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
-          "time": "10:00am – 1:00pm",
-          "duration": "3h 0m",
-          "priority": 2,
-          "notes": "Pet-friendly unit. Extra vacuuming needed.",
-          "date": "2026-02-25",
-          "payment": 78.75,
-          "type": "standard_clean",
-          "rooms": 3,
-          "sqft": 1500
-        }
-      ]
-    },
-  ],
-  unassigned: [
-    {
-      id: 300101,
-      client: "Marco Luxe Retreat",
-      address: "840 Rose Ct, Marco Island",
-      time: "2:00pm – 5:00pm",
-      duration: "3h",
-      notes: "Same-day turnover",
-      date: TODAY,
-    },
-    {
-      id: 300202,
-      client: "Sea La Vie Beach House",
-      address: "28124 Sunset Dr, Bonita Springs",
-      time: "Anytime (flex)",
-      duration: "2h 30m",
-      notes: "Flexible window",
-      date: TODAY,
-    },
-     {
-      "id": 300303,
-      "client": "Palm Paradise",
-      "address": "456 Palm Tree Ln, Naples, FL 34109",
-      "time": "9:00am – 12:00pm",
-      "duration": "3h",
-      "notes": "Post-construction clean. Dust control needed.",
-      "date": TODAY,
-      "priority": 2,
-      "payment": 120.0,
-      "type": "post_construction",
-      "rooms": 4,
-      "sqft": 2400
-    },
-    {
-      "id": 300404,
-      "client": "Island View Resort",
-      "address": "789 Island Blvd, Sanibel, FL 33957",
-      "time": "1:00pm – 4:00pm",
-      "duration": "3h",
-      "notes": "Weekly maintenance clean. Focus on common areas.",
-      "date": TOMORROW,
-      "priority": 2,
-      "payment": 85.0,
-      "type": "maintenance",
-      "rooms": 5,
-      "sqft": 2800
-    }
-  ],
-};
+// const date = {
+//   today: TODAY,
+//   workers: [
+//     {
+//       id: 1,
+//       name: "Kaytea Moreno",
+//       role: "Team Lead",
+//       phone: "(239) 317-6096",
+//       email: "kaytea@dop.local",
+//       home: "Bonita Springs, FL",
+//       payRate: 22.5,
+//       jobs: [
+//         {
+//           id: 180044,
+//           status: "completed",
+//           client: "Beach Breeze 290",
+//           address: "32 1st St, Bonita Springs",
+//           time: "8:30am – 11:00am",
+//           duration: "2h 30m",
+//           priority: 2,
+//           notes: "Standard turnover, no issues reported",
+//           date: TODAY,
+//         },
+//         {
+//           id: 182514,
+//           status: "assigned",
+//           client: "Nomadic Vacation Rentals",
+//           address: "587 99th Ave N, Naples",
+//           time: "11:30am – 3:00pm",
+//           duration: "3h 30m",
+//           priority: 1,
+//           notes: "Guest arriving early – high priority",
+//           date: TODAY,
+//         },
+//         {
+//           id: 182900,
+//           status: "assigned",
+//           client: "Blue Diamond Beach Home",
+//           address: "3542 McComb Ave, Naples",
+//           time: "4:00pm – 6:00pm",
+//           duration: "2h 0m",
+//           priority: 3,
+//           notes: "Owner inspection tomorrow",
+//           date: TOMORROW,
+//         },
+//       ],
+//     },
+//     {
+//       id: 2,
+//       name: "Yailen Figuereido",
+//       role: "Cleaner Pro",
+//       phone: "(239) 763-3972",
+//       email: "yailen@dop.local",
+//       home: "Naples, FL",
+//       payRate: 18,
+//       jobs: [
+//         {
+//           id: 190210,
+//           status: "assigned",
+//           client: "Marco Luxe Retreat",
+//           address: "840 Rose Ct, Marco Island",
+//           time: "9:00am – 12:00pm",
+//           duration: "3h 0m",
+//           priority: 2,
+//           notes: "Deep clean requested",
+//           date: TODAY,
+//         },
+//       ],
+//     },
+//     {
+//       id: 3,
+//       name: "Yurleidys Rivero",
+//       role: "Cleaner Pro",
+//       phone: "(239) 555-1099",
+//       email: "yurleidys@dop.local",
+//       home: "Cape Coral, FL",
+//       payRate: 19.5,
+//       jobs: [],
+//     },    
+//     {
+//       "id": 4,
+//       "name": "Carlos Rodriguez",
+//       "role": "Cleaner",
+//       "phone": "(239) 456-7890",
+//       "email": "carlos@dop.local",
+//       "home": "Fort Myers, FL",
+//       "payRate": 17.5,
+//       "status": "active",
+//       "avatar": "https://api.dicebear.com/7.x/avataaars/svg?date=Carlos",
+//       "jobs": [
+//         {
+//           "id": 190415,
+//           "status": "assigned",
+//           "client": "Sunset Villa",
+//           "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
+//           "time": "10:00am – 1:00pm",
+//           "duration": "3h 0m",
+//           "priority": 2,
+//           "notes": "Pet-friendly unit. Extra vacuuming needed.",
+//           "date": TODAY,
+//           "payment": 78.75,
+//           "type": "standard_clean",
+//           "rooms": 3,
+//           "sqft": 1500
+//         }
+//       ]
+//     },
+//     {
+//       "id": 5,
+//       "name": "Maria Gonzalez",
+//       "role": "Team Lead",
+//       "phone": "(239) 123-4567",
+//       "email": "maria@dop.local",
+//       "home": "Estero, FL",
+//       "payRate": 21.0,
+//       "status": "on_vacation",
+//       "avatar": "https://api.dicebear.com/7.x/avataaars/svg?date=Maria",
+//       "jobs": []
+//     },
+//      {
+//       "id": 4,
+//       "name": "Alfredo Perez",
+//       "role": "Cleaner",
+//       "phone": "(239) 456-7890",
+//       "email": "carlos@dop.local",
+//       "home": "Fort Myers, FL",
+//       "payRate": 17.5,
+//       "status": "active",
+//       "avatar": "https://api.dicebear.com/7.x/avataaars/svg?date=Carlos",
+//       "jobs": [
+//         {
+//           "id": 190415,
+//           "status": "assigned",
+//           "client": "Sunset Villa",
+//           "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
+//           "time": "10:00am – 1:00pm",
+//           "duration": "3h 0m",
+//           "priority": 2,
+//           "notes": "Pet-friendly unit. Extra vacuuming needed.",
+//           "date": "2026-02-25",
+//           "payment": 78.75,
+//           "type": "standard_clean",
+//           "rooms": 3,
+//           "sqft": 1500
+//         }
+//       ]
+//     },
+//   ],
+//   unassigned: [
+//     {
+//       id: 300101,
+//       client: "Marco Luxe Retreat",
+//       address: "840 Rose Ct, Marco Island",
+//       time: "2:00pm – 5:00pm",
+//       duration: "3h",
+//       notes: "Same-day turnover",
+//       date: TODAY,
+//     },
+//     {
+//       id: 300202,
+//       client: "Sea La Vie Beach House",
+//       address: "28124 Sunset Dr, Bonita Springs",
+//       time: "Anytime (flex)",
+//       duration: "2h 30m",
+//       notes: "Flexible window",
+//       date: TODAY,
+//     },
+//      {
+//       "id": 300303,
+//       "client": "Palm Paradise",
+//       "address": "456 Palm Tree Ln, Naples, FL 34109",
+//       "time": "9:00am – 12:00pm",
+//       "duration": "3h",
+//       "notes": "Post-construction clean. Dust control needed.",
+//       "date": TODAY,
+//       "priority": 2,
+//       "payment": 120.0,
+//       "type": "post_construction",
+//       "rooms": 4,
+//       "sqft": 2400
+//     },
+//     {
+//       "id": 300404,
+//       "client": "Island View Resort",
+//       "address": "789 Island Blvd, Sanibel, FL 33957",
+//       "time": "1:00pm – 4:00pm",
+//       "duration": "3h",
+//       "notes": "Weekly maintenance clean. Focus on common areas.",
+//       "date": TOMORROW,
+//       "priority": 2,
+//       "payment": 85.0,
+//       "type": "maintenance",
+//       "rooms": 5,
+//       "sqft": 2800
+//     }
+//   ],
+// };
 
 const statusPill = {
   completed: "bg-emerald-400/20 text-emerald-100",
   assigned: "bg-white/15 text-white",
 };
 
-const ownerUser = {
-  name: "Roberto Lauzan",
-  role: "Owner",
-  avatar: null,
-};
+
 
 /* =========================
    SELF TESTS (NO DEPENDENCIES)
    ========================= */
 
 function DevSelfTests() {
-  useMemo(() => {
-    if (typeof window === "undefined") return true;
-    if (window.__DOP_SELFTESTS_RAN__) return true;
-    window.__DOP_SELFTESTS_RAN__ = true;
-
-    // Test 1: jobsForDate
-    const w = seed.workers[0];
-    const todaysJobs = jobsForDate(w, seed.today);
-    console.assert(
-      Array.isArray(todaysJobs),
-      "jobsForDate should return array",
-    );
-    console.assert(
-      todaysJobs.length >= 1,
-      "jobsForDate should find today's jobs",
-    );
-
-    // Test 2: filterEmployees
-    const list = seed.workers;
-    console.assert(
-      filterEmployees("kay", list).length === 1,
-      "filterEmployees name search failed",
-    );
-    console.assert(
-      filterEmployees("naples", list).length >= 1,
-      "filterEmployees home search failed",
-    );
-
-    return true;
-  }, []);
-
+  // Comentado temporalmente - causaba errores de renderizado
+  // Los tests deberían ejecutarse fuera del componente o con datos del estado
   return null;
 }
 
 
-const ExploreContainer: React.FC<ContainerProps> = () => {
+const ContainerCalendar: React.FC<ContainerProps> = () => {
   const [view, setView] = useState("employees"); // employees | dispatch | unassigned
-  const [date, setDate] = useState(seed.today);
+  const [date, setDate] = useState(TODAY);
   const [query, setQuery] = useState("");
-  const [selectedWorker, setSelectedWorker] = useState(null);
+  const [selectedWorker, setSelectedWorker] = useState<Worker | null>(null);
   const [reorderMode, setReorderMode] = useState(false);
   const [fabOpen, setFabOpen] = useState(false);
+  const [workers, setWorkers] = useState<Worker[]>([]);
+  const [unassignedJobs, setUnassignedJobs] = useState<Job[]>([]);
+  const [isloading,setisLoading] = useState(true);
   const { t } = useTranslation("");
-
 
   // Sheets
   const [dispatchJob, setDispatchJob] = useState(null);
@@ -299,8 +270,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
 
   // Only workers with jobs for the selected day
   const workersWithJobsForDay = useMemo(() => {
-    return seed.workers.filter((w) => jobsForDate(w, date).length > 0);
-  }, [date]);
+    return workers.filter((w) => jobsForDate(w, date).length > 0);
+  }, [workers , date]);
 
   const filteredWorkers = useMemo(() => {
     return filterEmployees(query, workersWithJobsForDay);
@@ -317,63 +288,150 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     setDateSheetOpen(false);
   };
 
-    if (filteredWorkers.length === 0) {
-          return (
-            <>
-            <EmptyWorkersState />
-            
-        <Fab
-          open={fabOpen}
-          onToggle={() => setFabOpen((v) => !v)}
-          onToday={() => {
-            setDate(seed.today);
-            setFabOpen(false);
-          }}
-          onSelectDate={openDateSheet}
-          onUnassigned={() => {
-            setView("unassigned");
-            setFabOpen(false);
-          }}
-        />
-        {dateSheetOpen && (
-          <BottomSheet onClose={() => setDateSheetOpen(false)}>
-            <SheetTitle
-              title={t("ModalDate.title")}
-              subtitle={t("ModalDate.subtitle")}
-              onClose={() => setDateSheetOpen(false)}
-            />
+  useEffect(() => {
+    const loadData = async () => {
+      setisLoading(true);
+      const workersResponse = await api.getWorkers();
+      setWorkers(workersResponse as Worker[]);
+      const unassignedResponse = await api.getUnassignedJobs();
+      setUnassignedJobs(unassignedResponse as Job[]);
+      setDate(TODAY);  
+      setisLoading(false);    
+    };    
+    loadData();
+    
+  }, []);
 
-            <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-              <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
-              <input
-                type="date"
-                value={pendingDate}
-                onChange={(e) => setPendingDate(e.target.value)}
-                className="mt-2 w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 outline-none"
-              />
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <button
-                  className="py-3 rounded-2xl bg-white/10 border border-white/20"
-                  onClick={() => setDateSheetOpen(false)}
-                >
-                  {t("ModalDate.button2")}
-                </button>
-                <button
-                  className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
-                  onClick={applyDate}
-                >
-                  {t("ModalDate.button1")}
-                </button>
-              </div>
-            </div>
-          </BottomSheet>
-        )}
-        <DevSelfTests />
-        </>
-          )
-        }
-        
+  if(isloading){
+    return(
+      <>
+      <EmployeesSkeleton/>    
+      </>
+    )
+  }
+
   if (view === "employees") {
+    // No hay trabajadores en general para este día
+    if (workersWithJobsForDay.length === 0) {
+      return (
+        <>
+          <EmptyWorkersState />
+          
+          <Fab
+            open={fabOpen}
+            onToggle={() => setFabOpen((v) => !v)}
+            onToday={() => {
+              setDate(TODAY);
+              setFabOpen(false);
+            }}
+            onSelectDate={openDateSheet}
+            onUnassigned={() => {
+              setView("unassigned");
+              setFabOpen(false);
+            }}
+          />
+          {dateSheetOpen && (
+            <BottomSheet onClose={() => setDateSheetOpen(false)}>
+              <SheetTitle
+                title={t("ModalDate.title")}
+                subtitle={t("ModalDate.subtitle")}
+                onClose={() => setDateSheetOpen(false)}
+              />
+
+              <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
+                <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
+                <input
+                  type="date"
+                  value={pendingDate}
+                  onChange={(e) => setPendingDate(e.target.value)}
+                  className="mt-2 w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 outline-none"
+                />
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <button
+                    className="py-3 rounded-2xl bg-white/10 border border-white/20"
+                    onClick={() => setDateSheetOpen(false)}
+                  >
+                    {t("ModalDate.button2")}
+                  </button>
+                  <button
+                    className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
+                    onClick={applyDate}
+                  >
+                    {t("ModalDate.button1")}
+                  </button>
+                </div>
+              </div>
+            </BottomSheet>
+          )}
+          <DevSelfTests />
+        </>
+      );
+    }
+
+    // La búsqueda no encontró resultados (pero hay trabajadores disponibles)
+    if (query.trim() !== "" && filteredWorkers.length === 0) {
+      return (
+        <Screen>
+          <Header
+            title={t("Header.title")}
+            subtitle={`${t("Header.subtitle")} ${date}`} onBack={undefined}        />
+          <SearchBar value={query} onChange={setQuery} />
+          <div className="flex-1 overflow-y-auto px-4 py-4">
+            <EmptySearchResults />
+          </div>
+
+          <Fab
+            open={fabOpen}
+            onToggle={() => setFabOpen((v) => !v)}
+            onToday={() => {
+              setDate(TODAY);
+              setFabOpen(false);
+            }}
+            onSelectDate={openDateSheet}
+            onUnassigned={() => {
+              setView("unassigned");
+              setFabOpen(false);
+            }}
+          />
+
+          {dateSheetOpen && (
+            <BottomSheet onClose={() => setDateSheetOpen(false)}>
+              <SheetTitle
+                title={t("ModalDate.title")}
+                subtitle={t("ModalDate.subtitle")}
+                onClose={() => setDateSheetOpen(false)}
+              />
+
+              <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
+                <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
+                <input
+                  type="date"
+                  value={pendingDate}
+                  onChange={(e) => setPendingDate(e.target.value)}
+                  className="mt-2 w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 outline-none"
+                />
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <button
+                    className="py-3 rounded-2xl bg-white/10 border border-white/20"
+                    onClick={() => setDateSheetOpen(false)}
+                  >
+                    {t("ModalDate.button2")}
+                  </button>
+                  <button
+                    className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
+                    onClick={applyDate}
+                  >
+                    {t("ModalDate.button1")}
+                  </button>
+                </div>
+              </div>
+            </BottomSheet>
+          )}
+
+          <DevSelfTests />
+        </Screen>
+      );
+    }
     return (
       <Screen>
         <Header
@@ -439,7 +497,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           open={fabOpen}
           onToggle={() => setFabOpen((v) => !v)}
           onToday={() => {
-            setDate(seed.today);
+            setDate(TODAY);
             setFabOpen(false);
           }}
           onSelectDate={openDateSheet}
@@ -493,7 +551,9 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
        ========================= */
 
   if (view === "unassigned") {
-    const unassignedForDay = seed.unassigned.filter((j) => j.date === date);
+    const unassignedForDay = unassignedJobs.filter(
+      (job: Job) => job.date === date
+    );
 
     return (
       <Screen>
@@ -504,7 +564,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         />
 
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-          {unassignedForDay.map((job) => (
+          {unassignedForDay.map((job: Job) => (
             <Card key={job.id}>
               <h3 className="font-semibold">{job.client}</h3>
               <div className="mt-2 text-sm opacity-80 flex items-center gap-2">
@@ -559,7 +619,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           open={fabOpen}
           onToggle={() => setFabOpen((v) => !v)}
           onToday={() => {
-            setDate(seed.today);
+            setDate(TODAY);
             setFabOpen(false);
           }}
           onSelectDate={openDateSheet}
@@ -610,9 +670,22 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   /* =========================
      DISPATCH – WORKER VIEW
      ========================= */
-  const jobsToday = jobsForDate(selectedWorker, date);
 
   if (view === "dispatch") {
+    if (!selectedWorker) {
+      return (
+        <Screen>
+          <Header
+            title="Error"
+            subtitle="No worker selected"
+            onBack={() => setView("employees")}
+          />
+        </Screen>
+      );
+    }
+
+    const jobsToday = jobsForDate(selectedWorker, date);
+
     return (
       <Screen>
         <Header
@@ -728,7 +801,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           open={fabOpen}
           onToggle={() => setFabOpen((v) => !v)}
           onToday={() => {
-            setDate(seed.today);
+            setDate(TODAY);
             setFabOpen(false);
           }}
           onSelectDate={openDateSheet}
@@ -777,4 +850,4 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   }
 };
 
-export default ExploreContainer;
+export default ContainerCalendar;

@@ -1,6 +1,7 @@
 import { Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { USER_STORAGE_KEY } from '../../constants';
+import { Loader } from 'lucide-react';
 
 
 
@@ -22,7 +23,10 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   if (isAuthorized === null) {
-    return <div>Cargando...</div>; // Mostrar un spinner o mensaje de carga mientras se verifica la autenticación
+    return(     
+      <><Loader/></> 
+    )
+    ; // Mostrar un spinner o mensaje de carga mientras se verifica la autenticación
   }
 
   if (!isAuthorized) {
