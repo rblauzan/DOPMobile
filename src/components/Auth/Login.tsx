@@ -111,9 +111,9 @@ export default function LoginComponent() {
       if (username !== ADMIN_USER) {
         sileo.error({
           fill: "white",
-          title: t("Login.notificacion1"),   
+          title: t("Login.notificacion1"),
         });
-         setError("");
+        setError("");
         return;
       }
       // Usuario correcto → mostrar input del código
@@ -124,18 +124,18 @@ export default function LoginComponent() {
     // Segunda etapa: validar código
     // if (!code.trim()) {
     //    sileo.error({
-    //       fill: "white",  
+    //       fill: "white",
     //       title: "Debe introducir un código",
-          
+
     //     });
     //   //setError("Por favor, introduce el código.");
     //   return;
     // }
     if (code.trim() !== VALID_CODE) {
       sileo.error({
-          fill: "white",
-          title: t("Login.notificacion2")         
-        });
+        fill: "white",
+        title: t("Login.notificacion2"),
+      });
       setError("");
       return;
     }
@@ -179,9 +179,7 @@ export default function LoginComponent() {
           transform: `translateY(-${keyboardOffset}px)`,
         }}
       >
-        {!isKeyboardVisible && (
-          <img src="./White-logo.png" className="w-40" />
-        )}
+        {!isKeyboardVisible && <img src="./White-logo.png" className="w-40" />}
 
         <h2 className="text-2xl font-semibold text-center">OPERATIONS PRO</h2>
         <span className="mb-2">{t("Login.welcome")}</span>
@@ -221,9 +219,7 @@ export default function LoginComponent() {
 
           {/* Mensaje de error */}
           {error && (
-            <p className="text-red-400 text-sm text-center mt-2">
-              {error}
-            </p>
+            <p className="text-red-400 text-sm text-center mt-2">{error}</p>
           )}
 
           <button
@@ -234,7 +230,22 @@ export default function LoginComponent() {
             {loading ? t("Login.loading") : t("Login.button")}
           </button>
         </form>
+        <div className="mt-5 w-full flex flex-col items-center">
+          <div className="w-full flex items-center justify-center gap-3">
+            <div className="w-16 border-t border-gray-200/50 border-[0.5px]" />
+            <span className="text-sm font-medium leading-6 text-gray-400 shrink-0">Or</span>
+            <div className="w-16 border-t border-gray-200/50 border-[0.5px]" />
+          </div>
 
+          <div className="mt-6 w-full">
+            <a
+              href="https://saasapp.diamondoperationspro.com/#/subscription/wizard/7,2"
+              className="flex justify-center items-center w-full px-4 py-3 rounded-xl bg-white/10 border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-110 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span className="text-sm font-semibold leading-6">Sign up</span>
+            </a>
+          </div>
+        </div>
         {/* Mensaje claro de DEMO */}
         <p className="text-xs text-slate-400 text-center mt-6">
           © {new Date().getFullYear()} Diamond Operations Pro Inc.
