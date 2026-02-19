@@ -76,5 +76,10 @@
     "notificacion3" : "Sesión iniciada",
     "loading" : "Cargando.....",
     "welcome" : "Bienvenido! Inicia sesión para continuar."
+  },
+  "Settings": {
+    "language": "Idioma",
+    "english": "Inglés",
+    "spanish": "Español"
   }
 }

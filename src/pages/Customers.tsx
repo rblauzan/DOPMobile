@@ -1,14 +1,16 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Tab3.css';
+import './Tab2.css';
 import HeaderLayout from '../components/Layout/HeaderLayout';
 import { UserMenu } from '../components/UI/user/UserMenu';
+import { useTranslation } from 'react-i18next';
 
-const Tab3: React.FC = () => {
+const Customers: React.FC = () => {
+  const { t } = useTranslation("");
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <HeaderLayout
+        <IonToolbar>         
+            <HeaderLayout
           rightSlot={
             <UserMenu user={Date} onLogout={() => alert("Logout")} />
           }          
@@ -18,13 +20,12 @@ const Tab3: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
+            <IonTitle size="large">{t("Toolbar.title3")}  </IonTitle>
           </IonToolbar>
         </IonHeader>
-        
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab3;
+export default Customers;

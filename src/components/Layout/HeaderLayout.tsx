@@ -1,4 +1,3 @@
-import LanguagePillToggle from "../UI/LanguagePills";
 
 export default function HeaderLayout({ rightSlot }: { rightSlot: React.ReactNode }) {
  
@@ -10,7 +9,6 @@ export default function HeaderLayout({ rightSlot }: { rightSlot: React.ReactNode
       </div>
 
       <div className="flex items-center gap-2">
-        <LanguagePillToggle />
         {rightSlot}      
       
       </div>

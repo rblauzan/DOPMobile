@@ -76,5 +76,10 @@
     "notificacion3" : "Session started",
     "loading" : "Loading.....",
     "welcome" : "Welcome! Sign in to continue."
+  },
+  "Settings": {
+    "language": "Language",
+    "english": "English",
+    "spanish": "Spanish"
   }
 }

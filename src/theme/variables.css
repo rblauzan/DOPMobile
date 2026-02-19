@@ -56,6 +56,41 @@ ion-tab-bar {
   display: none;
 }
 
+ion-list {
+  --background: transparent; 
+  --ion-item-background: transparent;
+  --ion-item-color: #ffffff;
+}
+
+ion-item {
+  --background: transparent;            
+  --color: #ffffff;                   
+  --padding-start: 0;              
+}
+
+.select-popover-glass::part(content) {
+  background: transparent;
+  box-shadow: none;
+
+  padding: 0;
+  margin: 0;
+  padding-top: 10px;
+
+  width: full;
+  min-width: 0;
+  max-width: none;
+
+  height: auto;
+  min-height: 0;
+
+  display: inline-block;
+}
+
+.select-popover-glass::part(arrow) {
+  display: none;
+}
+
+
 /* DARK MODE */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -64,10 +99,11 @@ ion-tab-bar {
   }
 }
 
+
 /* LIGHT MODE */
 @media (prefers-color-scheme: light) {
   :root {
-    --ion-background-color: #f4f6fb;
-    --ion-text-color: #0f172a;
+    --ion-background-color: #041b4d;
+    --ion-text-color: #ffffff;
   }
 }

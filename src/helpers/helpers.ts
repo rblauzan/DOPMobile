@@ -1,3 +1,4 @@
+import i18n from "../i18n";
 
   export function jobsForDate(worker, date) {
         return (worker?.jobs || []).filter((j) => j.date === date);
@@ -15,6 +16,9 @@
                 w.email.toLowerCase().includes(q),
         );
     }
-
+    export const setAppLanguage = async (lng: "es" | "en") => {
+        localStorage.setItem("app_lang", lng);
+        await i18n.changeLanguage(lng);
+      };
 
 

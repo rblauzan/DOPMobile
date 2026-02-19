@@ -12,8 +12,8 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import { calendar, settings, people } from "ionicons/icons";
 import CalendarTab from "./pages/Calendar";
-import SettingsTab from "./pages/Settings";
-import Tab3 from "./pages/Tab3";
+import SettingsTab from "./pages/Customers";
+import Tab3 from "./pages/Settings";
 import Login from "./pages/Login";
 import { ProtectedRoute } from "./components/Guard/ProtectedRoute";
 

@@ -23,7 +23,6 @@ export function UserMenu({ user }: { user: any }) {
   return (
     <>
       <IconBtn id={triggerId} icon={<UserAvatar user={user} />} onClick={() => {}} />
-
       <IonPopover
         className="user-menu-popover"
         trigger={triggerId}
