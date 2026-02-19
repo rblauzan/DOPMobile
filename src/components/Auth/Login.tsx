@@ -225,7 +225,7 @@ export default function LoginComponent() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-110 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? t("Login.loading") : t("Login.button")}
           </button>
@@ -240,9 +240,9 @@ export default function LoginComponent() {
           <div className="mt-6 w-full">
             <a
               href="https://saasapp.diamondoperationspro.com/#/subscription/wizard/7,2"
-              className="flex justify-center items-center w-full px-4 py-3 rounded-xl bg-white/10 border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-110 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex justify-center items-center w-full px-4 py-2 rounded-xl bg-white/10 border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="text-sm font-semibold leading-6">Sign up</span>
+              <span className="text-md font-semibold leading-6">Sign up</span>
             </a>
           </div>
         </div>
