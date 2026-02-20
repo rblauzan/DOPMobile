@@ -242,7 +242,7 @@ export default function LoginComponent() {
               href="https://saasapp.diamondoperationspro.com/#/subscription/wizard/7,2"
               className="flex justify-center items-center w-full px-4 py-2 rounded-xl bg-white/10 border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="text-md font-semibold leading-6">Sign up</span>
+              <span className="text-md font-semibold leading-6">{t("Login.button1")}</span>
             </a>
           </div>
         </div>

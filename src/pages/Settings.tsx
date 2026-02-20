@@ -4,23 +4,22 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonSelect,
-  IonSelectOption,
+  IonModal,
+  IonButton,
 } from "@ionic/react";
+import { useState } from "react";
 import "./Tab2.css";
 import HeaderLayout from "../components/Layout/HeaderLayout";
 import { UserMenu } from "../components/UI/user/UserMenu";
 import { useTranslation } from "react-i18next";
-import { setAppLanguage } from "../i18n"; // ajusta path si cambia
 import Screen from "../components/Layout/Screen";
+import LanguagePicker from "../components/UI/LanguagePicker";
 
 const Settings: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const [showLanguagePicker, setShowLanguagePicker] = useState(false);
 
-  const current: "en" | "es" = i18n.language?.startsWith("es") ? "es" : "en";
+  const current: "en" | "es" = i18n.language?.startsWith("en") ? "en" : "es";
 
   return (
     <IonPage>
@@ -41,7 +40,47 @@ const Settings: React.FC = () => {
         </IonHeader>
 
         <Screen>
-          <IonList className="bg-transparent mt-6 px-4">
+          <div className="px-4 mt-6">
+            <IonButton
+              expand="block"
+              fill="outline"
+              className="
+                w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed
+              "
+              onClick={() => setShowLanguagePicker(true)}
+            >
+              {current === "en" ? "🇺🇸" : "🇪🇸"} {t("Settings.language")}
+            </IonButton>
+
+            <IonModal
+              isOpen={showLanguagePicker}
+              onDidDismiss={() => setShowLanguagePicker(false)}
+              initialBreakpoint={0.5}
+              breakpoints={[0, 0.5, 0.75]}
+            >
+              <IonHeader>
+                <IonToolbar>
+                  <IonTitle>{t("Settings.language")}</IonTitle>
+                </IonToolbar>
+              </IonHeader>
+              <IonContent className="ion-padding">
+                <LanguagePicker
+                  value={current}
+                  onChange={() => setShowLanguagePicker(false)}
+                />
+              </IonContent>
+            </IonModal>
+          </div>
+        </Screen>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default Settings;
+
+
+{/* <IonList className="bg-transparent mt-6 px-4">
             <IonItem
               lines="none"
               className="
@@ -95,11 +134,4 @@ const Settings: React.FC = () => {
                 </IonSelectOption>
               </IonSelect>
             </IonItem>
-          </IonList>
-        </Screen>
-      </IonContent>
-    </IonPage>
-  );
-};
-
-export default Settings;
+          </IonList> */}

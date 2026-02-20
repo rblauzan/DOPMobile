@@ -72,6 +72,7 @@
     "placeholder" : "Nombre de usuario",
     "placeholderCode" : "Código",
     "button" : "Iniciar sesión",
+    "button1" : "Registrarse",
     "notificacion1" : "Usuario incorrecto",
     "notificacion2" : "Código incorrecto",
     "notificacion3" : "Sesión iniciada",
