@@ -5,7 +5,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ContainerCalendar";
+import ExploreContainer from "../components/Containers/ContainerCalendar";
 import "./Tab1.css";
 import { UserMenu } from "../components/UI/user/UserMenu";
 import HeaderLayout from "../components/Layout/HeaderLayout";

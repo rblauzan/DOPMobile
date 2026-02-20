@@ -1,8 +1,8 @@
-import Screen from "./Layout/Screen.js";
-import Header from "./UI/Header.js";
-import SearchBar from "./UI/SearchBar.js";
+import Screen from "../Layout/Screen.js";
+import Header from "../UI/Header.js";
+import SearchBar from "../UI/SearchBar.js";
 import { useEffect, useMemo, useState } from "react";
-import Card from "./UI/Card.js";
+import Card from "../UI/Card.js";
 import {
   Home,
   BadgeDollarSign,
@@ -16,18 +16,18 @@ import {
   ArrowUp,
   ArrowUpDown,
 } from "lucide-react";
-import Fab from "./UI/Fab.js";
-import BottomSheet from "./UI/BottomSheet.js";
-import IconBtn from "./UI/IconBtn.js";
-import SheetTitle from "./UI/SheetTitle.js";
-import Badge from "./UI/Badge.js";
-import { EmptyWorkersState, EmptySearchResults } from "./UI/Empty.js";
+import Fab from "../UI/Fab.js";
+import BottomSheet from "../UI/BottomSheet.js";
+import IconBtn from "../UI/IconBtn.js";
+import SheetTitle from "../UI/SheetTitle.js";
+import Badge from "../UI/Badge.js";
+import { EmptyWorkersState, EmptySearchResults } from "../UI/Empty.js";
 import { useTranslation } from "react-i18next";
-import { filterEmployees, jobsForDate } from "../helpers/helpers.js";
-import { TODAY, TOMORROW } from "../constants.js";
-import { api } from "../services/mockApi.js";
-import type { Worker, Job } from "../models/Seed";
-import CardSkeleton, { EmployeesSkeleton } from "./UI/CardSkeleton.js";
+import { filterEmployees, jobsForDate } from "../../helpers/helpers.js";
+import { TODAY } from "../../constants.js";
+import { api } from "../../services/mockApi.js";
+import type { Worker, Job } from "../../models/Seed.js";
+import { EmployeesSkeleton } from "../UI/CardSkeleton.js";
 
 interface ContainerProps {
   name: string;
@@ -304,9 +304,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
 
   if(isloading){
     return(
-      <>
       <EmployeesSkeleton/>    
-      </>
     )
   }
 

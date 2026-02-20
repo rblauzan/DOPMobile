@@ -3,6 +3,7 @@ import './Tab2.css';
 import HeaderLayout from '../components/Layout/HeaderLayout';
 import { UserMenu } from '../components/UI/user/UserMenu';
 import { useTranslation } from 'react-i18next';
+import DOPOwnerCRM from '../components/Containers/ContainerCustomers';
 
 const Customers: React.FC = () => {
   const { t } = useTranslation("");
@@ -23,6 +24,7 @@ const Customers: React.FC = () => {
             <IonTitle size="large">{t("Toolbar.title2")}  </IonTitle>
           </IonToolbar>
         </IonHeader>
+        <DOPOwnerCRM/>
       </IonContent>
     </IonPage>
   );
