@@ -38,14 +38,13 @@ const Settings: React.FC = () => {
             <IonTitle size="large">{t("Toolbar.title3")} </IonTitle>
           </IonToolbar>
         </IonHeader>
-
         <Screen>
-          <div className="px-4 mt-6">
+          <div className="px-10 mt-6">
             <IonButton
               expand="block"
-              fill="outline"
+              fill="clear"
               className="
-                w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed
+               py-2 rounded-2xl bg-white/10 text-balance shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed
               "
               onClick={() => setShowLanguagePicker(true)}
             >
@@ -53,13 +52,15 @@ const Settings: React.FC = () => {
             </IonButton>
 
             <IonModal
+              id="modal"
               isOpen={showLanguagePicker}
               onDidDismiss={() => setShowLanguagePicker(false)}
               initialBreakpoint={0.5}
               breakpoints={[0, 0.5, 0.75]}
+              
             >
               <IonHeader>
-                <IonToolbar>
+                <IonToolbar className="">
                   <IonTitle>{t("Settings.language")}</IonTitle>
                 </IonToolbar>
               </IonHeader>

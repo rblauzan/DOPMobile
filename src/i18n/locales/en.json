@@ -71,8 +71,8 @@
     "title" : "Dop Owner",
     "placeholder" : "Username",
     "placeholderCode" : "Code",
-    "button" : "Sign in",
-    "button1" : "Sign up",
+    "button" : "Sign in", 
+     "button1" : "Sign up",
     "notificacion1" : "User incorrect",
     "notificacion2" : "Code incorrect",
     "notificacion3" : "Session started",
@@ -85,3 +85,4 @@
     "spanish": "Spanish"
   }
 }
+
