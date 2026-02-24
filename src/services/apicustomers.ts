@@ -9,7 +9,7 @@ const delay = (ms = 400) =>
 */
 
 export const api = {
-  async getWorkers() {
+  async getCustomers() {
     await delay();
     return db.customers;
   },

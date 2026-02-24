@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Screen  from "../Layout/Screen"
 import {
   Home,
@@ -31,6 +31,9 @@ import { JOB_STATUS_OPTIONS, INVOICE_STATUS_OPTIONS } from "../../constants";
 import { textIncludesAny, fmtMoney, fmtDateShort, jobMatchesStatus, inDateRange, invoiceMatchesStatus } from "../../helpers/helpersCustomers";
 import DateRangeEditor from "../UI/DateRangeEditor";
 import SecondaryButton from "../UI/SecondaryButton";
+import { api } from "../../services/apicustomers";
+import { Customer } from "../../models/Customers";
+import { EmployeesSkeleton } from "../UI/CardSkeleton";
 
 /**
  * ============================================================
@@ -328,7 +331,7 @@ export default function DOPOwnerCRM() {
   const [statusSheetOpen, setStatusSheetOpen] = useState(false);
   const [statusSheetKind, setStatusSheetKind] = useState(/** @type {"jobs"|"invoices"} */ ("jobs"));
 
-  const customers = MOCK.customers;
+  const [customers, setCustomer] = useState<Customer[]>([]);
 
   const selectedCustomer = useMemo(() => {
     return customers.find((c) => c.id === selectedCustomerId) || null;
@@ -362,16 +365,29 @@ export default function DOPOwnerCRM() {
     setStatusSheetOpen(true);
   };
 
+
+   useEffect(() => {
+    const loadData = async () => {
+      setisLoading(true);
+      const customerResponse = await api.getCustomers();
+      setCustomer(customerResponse as Customer[]);
+      setisLoading(false);    
+    };    
+    loadData();
+    
+  }, []);
+
+  
   /* =========================
      CUSTOMERS LIST
      ========================= */
 
 
-  //    if(isloading){
-  //   return(
-  //     <EmployeesSkeleton/>    
-  //   )
-  // }
+     if(isloading){
+    return(
+      <EmployeesSkeleton/>    
+    )
+  }
 
   
   if (view === "customers") {
