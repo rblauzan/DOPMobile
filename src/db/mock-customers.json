@@ -1,0 +1,158 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "Nomadic Vacation Rentals",
+      "email": "accounting@nomadicvacays.com",
+      "phone": "(239) 317-6096",
+      "admissionDate": "2026-02-13",
+      "active": true,
+      "notes": "Hello@nomadicvacays.com",
+      "properties": [
+        {
+          "id": 101,
+          "title": "Beach Breeze 290",
+          "type": "Residential",
+          "address": "32 1st St, Bonita Springs, FL 34134",
+          "county": "Lee",
+          "lastService": "2026-02-12",
+          "lastScheduledService": "2027-03-18"
+        },
+        {
+          "id": 102,
+          "title": "Blue Wave",
+          "type": "Business",
+          "address": "600 100th Ave N, Naples, FL 34108",
+          "county": "Collier",
+          "lastService": "2026-02-10",
+          "lastScheduledService": "2026-02-20"
+        }
+      ],
+      "jobs": [
+        {
+          "id": 181484,
+          "status": "Scheduled",
+          "propertyId": 101,
+          "propertyName": "Beach Breeze 290",
+          "propertyAddress": "32 1st St, Bonita Springs, FL",
+          "service": "Rental Cleaning",
+          "price": 260,
+          "start": "2026-03-30T10:00:00",
+          "dateCompleted": null,
+          "estimatedH": 2,
+          "workedH": 0,
+          "team": "Team A",
+          "photosCount": 0,
+          "checklistDone": false
+        },
+        {
+          "id": 1814842,
+          "status": "In Progress",
+          "propertyId": 102,
+          "propertyName": "Blue Wave",
+          "propertyAddress": "600 100th Ave N, Naples, FL",
+          "service": "Outdoor",
+          "price": 0,
+          "start": "2026-03-30T13:15:00",
+          "dateCompleted": null,
+          "estimatedH": 0.3,
+          "workedH": 0,
+          "team": "Team B",
+          "photosCount": 6,
+          "checklistDone": false
+        },
+        {
+          "id": 1814841,
+          "status": "Completed",
+          "propertyId": 102,
+          "propertyName": "Blue Wave",
+          "propertyAddress": "600 100th Ave N, Naples, FL",
+          "service": "PM",
+          "price": 180,
+          "start": "2026-03-29T16:00:00",
+          "dateCompleted": "2026-03-29",
+          "estimatedH": 0.3,
+          "workedH": 0.4,
+          "team": "Team B",
+          "photosCount": 12,
+          "checklistDone": true
+        }
+      ],
+      "invoices": [
+        {
+          "id": 183023,
+          "status": "Unpaid",
+          "propertyId": 102,
+          "propertyName": "Blue Wave",
+          "service": "Rental Cleaning",
+          "date": "2026-02-16",
+          "amount": 200,
+          "discount": 0,
+          "toPaid": 200,
+          "paid": 0
+        },
+        {
+          "id": 183022,
+          "status": "Paid",
+          "propertyId": 101,
+          "propertyName": "Beach Breeze 290",
+          "service": "Rental Cleaning",
+          "date": "2026-02-16",
+          "amount": 260,
+          "discount": 0,
+          "toPaid": 260,
+          "paid": 260
+        }
+      ],
+      "batches": [
+        {
+          "id": "B-2026-02",
+          "status": "To Approval",
+          "count": 24,
+          "total": 4860,
+          "date": "2026-02-20"
+        }
+      ],
+      "transactions": [
+        {
+          "id": 1,
+          "type": "Payment",
+          "amount": 200,
+          "date": "2026-02-16",
+          "method": "Card"
+        },
+        {
+          "id": 2,
+          "type": "Refund",
+          "amount": -50,
+          "date": "2026-02-14",
+          "method": "Card"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Marco Luxe Retreat LLC",
+      "email": "info@marcoluxe.com",
+      "phone": "(239) 555-1000",
+      "admissionDate": "2026-02-07",
+      "active": true,
+      "notes": "",
+      "properties": [
+        {
+          "id": 201,
+          "title": "Marco Luxe Retreat",
+          "type": "Residential",
+          "address": "840 Rose Ct, Marco Island, FL 34145",
+          "county": "Collier",
+          "lastService": "2026-02-10",
+          "lastScheduledService": "2026-02-20"
+        }
+      ],
+      "jobs": [],
+      "invoices": [],
+      "batches": [],
+      "transactions": []
+    }
+  ]
+}

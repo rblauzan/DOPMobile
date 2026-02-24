@@ -23,9 +23,9 @@ import SheetTitle from "../UI/SheetTitle.js";
 import Badge from "../UI/Badge.js";
 import { EmptyWorkersState, EmptySearchResults } from "../UI/Empty.js";
 import { useTranslation } from "react-i18next";
-import { filterEmployees, jobsForDate } from "../../helpers/helpers.js";
-import { TODAY } from "../../constants.js";
-import { api } from "../../services/mockApi.js";
+import { filterEmployees, jobsForDate } from "../../helpers/helpersCalendar.js";
+import { statusPill, TODAY } from "../../constants.js";
+import { api } from "../../services/apicalendar.js";
 import type { Worker, Job } from "../../models/Seed.js";
 import { EmployeesSkeleton } from "../UI/CardSkeleton.js";
 
@@ -231,11 +231,6 @@ interface ContainerProps {
 //   ],
 // };
 
-const statusPill = {
-  completed: "bg-emerald-400/20 text-emerald-100",
-  assigned: "bg-white/15 text-white",
-};
-
 
 
 /* =========================
@@ -313,8 +308,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
     if (workersWithJobsForDay.length === 0) {
       return (
         <>
-          <EmptyWorkersState />
-          
+          <EmptyWorkersState />          
           <Fab
             open={fabOpen}
             onToggle={() => setFabOpen((v) => !v)}

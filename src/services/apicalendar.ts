@@ -1,4 +1,4 @@
-import db from "../db/mock-db.json";
+import db from "../db/mock-calendar.json";
 
 const delay = (ms = 400) =>
   new Promise((resolve) => setTimeout(resolve, ms));

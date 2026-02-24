@@ -1,7 +1,3 @@
-export const status = {
-  completed: "bg-emerald-400/20 text-emerald-100",
-  assigned: "bg-white/15 text-white",
-};
 
 export default function StatusPill({ status, accent = false }: { status: string, accent: boolean }) {
   return (

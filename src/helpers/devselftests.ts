@@ -5,7 +5,7 @@
    ========================= */
 
 import { useMemo } from "react";
-import { jobsForDate, filterEmployees } from "./helpers";
+import { jobsForDate, filterEmployees } from "./helpersCalendar";
 
 export function DevSelfTests() {
     useMemo(() => {
