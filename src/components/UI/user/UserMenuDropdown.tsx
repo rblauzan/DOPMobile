@@ -11,14 +11,11 @@ export function UserMenuDropdown({ onProfile, onLogout }: Props) {
   const { t } = useTranslation("");
   return (
     <div
-      className="
-        py-2
-        px-2
-        w-fit
-        whitespace-nowrap
-        rounded-2xl
-       bg-white/15 border border-white/20 backdrop-blur-2xl shadow-xl
-      "
+    className="
+    py-2 px-2 w-fit whitespace-nowrap rounded-2xl
+    bg-slate-500/75 border border-white/20
+    backdrop-blur-2xl shadow-xl
+  "
     >
       <MenuItem
         icon={<CircleUser size={16} />}
