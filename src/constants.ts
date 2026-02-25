@@ -1,5 +1,5 @@
 import { configuration } from "./lib/config";
-
+import i18n from "./i18n";
 export const ACCESS = ''
 export const USER_STORAGE_KEY = 'user';
 export const TODAY = new Date().toISOString().slice(0, 10);
@@ -7,31 +7,33 @@ export const TOMORROW = new Date(Date.now() + 86400000).toISOString().slice(0, 1
 // export const LOGIN = `${configuration.IDP_URL}Access/Login?ReturnUrl=${configuration.BASE_URL}login`
 // export const LOGOUT = `${configuration.IDP_URL}Home/Logout`
  export const AVATAR = `${configuration.AVATAR_URL}`
+ 
 export const statusPill = {
   completed: "bg-emerald-400/20 text-emerald-100",
   assigned: "bg-white/15 text-white",
 };
+
 export const JOB_STATUS_OPTIONS = [
-    "All",
-    "Completed",
-    "In Progress",
-    "Scheduled",
-    "Unscheduled",
-    "Cancelled",
-    "Estimated",
-    "Unreviewed",
-    "Bad Debt",
+  i18n.t("Customers.all"),
+  i18n.t("Customers.Completed"),
+  i18n.t("Customers.InProgress"),
+  i18n.t("Customers.Scheduled"),
+  i18n.t("Customers.Unscheduled"),
+  i18n.t("Customers.Cancelled"),
+  i18n.t("Customers.Estimated"),
+  i18n.t("Customers.Unreviewed"),
+  i18n.t("Customers.BadDebt"),
 ];
 
 export const INVOICE_STATUS_OPTIONS = [
-    "All",
-    "Unpaid",
-    "Paid",
-    "Unsent",
-    "Sent",
-    "Estimated",
-    "To Check",
-    "To Approval",
-    "Bad Debt",
-    "Batched",
+  i18n.t("Customers.all"),
+  i18n.t("Customers.Unpaid"),
+  i18n.t("Customers.Paid"),
+  i18n.t("Customers.Unsent"),
+  i18n.t("Customers.Sent"),
+  i18n.t("Customers.Estimated"),
+  i18n.t("Customers.ToCheck"),
+  i18n.t("Customers.ToApproval"),
+  i18n.t("Customers.BadDebt"),
+  i18n.t("Customers.Batched"),
 ];

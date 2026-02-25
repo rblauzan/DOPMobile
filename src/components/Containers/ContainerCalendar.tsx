@@ -367,7 +367,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
           <Header
             title={t("Header.title")}
             subtitle={`${t("Header.subtitle")} ${date}`} onBack={undefined}        />
-          <SearchBar value={query} onChange={setQuery} />
+          <SearchBar value={query} onChange={setQuery} entity={t("SearchBar.employee")} />
           <div className="flex-1 overflow-y-auto px-4 py-4">
             <EmptySearchResults />
           </div>
@@ -429,7 +429,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
         <Header
           title={t("Header.title")}
           subtitle={`${t("Header.subtitle")} ${date}`} onBack={undefined}        />
-        <SearchBar value={query} onChange={setQuery} />
+        <SearchBar value={query} onChange={setQuery} entity={t("SearchBar.employee")} />
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {filteredWorkers.map((emp) => (
             <Card

@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 export default function DateRangeEditor({ value, onChange, onClear, onApply }) {
+  const { t } = useTranslation("");
   return (
     <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs opacity-70">Start</label>
+          <label className="text-xs opacity-70">{t("Customers.start")}</label>
           <input
             type="date"
             value={value.start}
@@ -12,7 +14,7 @@ export default function DateRangeEditor({ value, onChange, onClear, onApply }) {
           />
         </div>
         <div>
-          <label className="text-xs opacity-70">End</label>
+          <label className="text-xs opacity-70">{t("Customers.end")}</label>
           <input
             type="date"
             value={value.end}

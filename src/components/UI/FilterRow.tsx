@@ -1,7 +1,9 @@
 import { Search, CalendarDays, Filter } from "lucide-react";
 import Pill from "./Pill";
+import { useTranslation } from "react-i18next";
 
 export function FilterRow({ search, setSearch, leftLabel, onOpenDate, onOpenStatus, statusLabel, rightAction }) {
+  const { t } = useTranslation("");
   return (
     <div className="px-4">
       <div className="mt-2 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-3 flex items-center gap-2">
@@ -9,7 +11,7 @@ export function FilterRow({ search, setSearch, leftLabel, onOpenDate, onOpenStat
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder={`Search ${leftLabel.toLowerCase()}...`}
+          placeholder={`${t("SearchBar.placeholder")} ${leftLabel.toLowerCase()}...`}
           className="w-full bg-transparent outline-none placeholder:text-white/50"
         />
 

@@ -34,6 +34,7 @@ import SecondaryButton from "../UI/SecondaryButton";
 import { api } from "../../services/apicustomers";
 import { Customer } from "../../models/Customers";
 import { EmployeesSkeleton } from "../UI/CardSkeleton";
+import { useTranslation } from "react-i18next";
 
 /**
  * ============================================================
@@ -315,7 +316,7 @@ export default function DOPOwnerCRM() {
     /** @type {"Dashboard"|"Jobs"|"Invoices"} */
     ("Dashboard")
   );
-
+  const { t } = useTranslation("");
   const [search, setSearch] = useState("");
   const [isloading,setisLoading] = useState(true);
   const [selectedCustomerId, setSelectedCustomerId] = useState(/** @type {number|null} */ (null));
@@ -324,7 +325,7 @@ export default function DOPOwnerCRM() {
   // Filters
   const [jobStatus, setJobStatus] = useState("All");
   const [invoiceStatus, setInvoiceStatus] = useState("All");
-  const [dateRange, setDateRange] = useState({ start: "", end: "" });
+  const [dateRange, setDateRange] = useState({ [t("Customers.start")]: "", [t("Customers.end")]: ""});
 
   // Sheets
   const [dateSheetOpen, setDateSheetOpen] = useState(false);
@@ -396,18 +397,18 @@ export default function DOPOwnerCRM() {
     return (
       <Screen>
         <Header
-          title="Customers"
-          subtitle="Owner CRM"
+          title={t("Customers.title1")}
+          subtitle={t("Customers.subtitle1")}
           right={
             <PrimaryButton
               icon={<Plus size={16} />}
-              label="Add"
+              label={t("Customers.button1")}
               onClick={() => alert("Add customer (UI placeholder)")}
             />
           }
         />
 
-        <SearchBar value={search} onChange={setSearch} placeholder="Search customers..." />
+        <SearchBar value={search} onChange={setSearch} entity= {t("SearchBar.customer")} />
 
         <List>
           {filtered.map((c) => {
@@ -419,11 +420,11 @@ export default function DOPOwnerCRM() {
                 key={c.id}
                 onClick={() => {
                   setSelectedCustomerId(c.id);
-                  setCustomerTab("Dashboard");
+                  setCustomerTab(t("Customers.tab1"));
                   setView("customer");
                   setSearch("");
-                  setJobStatus("All");
-                  setInvoiceStatus("All");
+                  setJobStatus(t("Customers.all"));
+                  setInvoiceStatus(t("Customers.all"));
                   setDateRange({ start: "", end: "" });
                 }}
               >
@@ -433,16 +434,16 @@ export default function DOPOwnerCRM() {
                     <p className="text-xs opacity-70 truncate">{c.email}</p>
 
                     <div className="mt-3 flex gap-2 flex-wrap">
-                      <Pill icon={<Home size={14} />} label={`${c.properties.length} Properties`} accent={false} />
-                      <Pill icon={<Layers size={14} />} label={`${(c.jobs || []).length} Jobs`} accent={false} />
+                      <Pill icon={<Home size={14} />} label={`${c.properties.length} ${t("Customers.tab2")}`} accent={false} />
+                      <Pill icon={<Layers size={14} />} label={`${(c.jobs || []).length} ${t("Customers.tab3")}`} accent={false} />
                     </div>
 
                     <div className="mt-3 text-xs opacity-80 space-y-1">
                       <div>
-                        <span className="opacity-70">Billed:</span> {fmtMoney(billed)} ·
-                        <span className="opacity-70"> Revenue:</span> {fmtMoney(revenue)}
+                        <span className="opacity-70">{t("Customers.Billed")}:</span> {fmtMoney(billed)} ·
+                        <span className="opacity-70"> {t("Customers.Revenue")}:</span> {fmtMoney(revenue)}
                       </div>
-                      <div className="opacity-70">Admission: {fmtDateShort(c.admissionDate)}</div>
+                      <div className="opacity-70">{t("Customers.Admission")}: {fmtDateShort(c.admissionDate)}</div>
                     </div>
                   </div>
                   <ChevronRight size={18} className="opacity-60 shrink-0" />
@@ -452,7 +453,7 @@ export default function DOPOwnerCRM() {
           })}
 
           {filtered.length === 0 && (
-            <div className="text-center text-sm opacity-70 mt-10">No customers found</div>
+            <div className="text-center text-sm opacity-70 mt-10">{t("Customers.div1")}</div>
           )}
         </List>
 
@@ -469,8 +470,8 @@ export default function DOPOwnerCRM() {
     if (!selectedCustomer) {
       return (
         <Screen>
-          <Header title="Customer" onBack={() => setView("customers")} subtitle={""} />
-          <div className="px-4 text-sm opacity-80">No customer selected.</div>
+          <Header title={t("Customers.title2")} onBack={() => setView("customers")} subtitle={""} />
+          <div className="px-4 text-sm opacity-80">{t("Customers.div2")}.</div>
           <DevSelfTests />
         </Screen>
       );
@@ -479,12 +480,12 @@ export default function DOPOwnerCRM() {
     const headerRight = (
       <div className="flex items-center gap-2">
         <IconSquare
-          title="Date range"
+          title={t("Customers.iconSquare1")}
           icon={<CalendarDays size={16} />}
           onClick={() => setDateSheetOpen(true)}
         />
         <IconSquare
-          title="Actions"
+          title={t("Customers.iconSquare2")}
           icon={<Plus size={16} />}
           onClick={() => alert("Customer actions (UI placeholder)")}
         />
@@ -495,13 +496,13 @@ export default function DOPOwnerCRM() {
       <Screen>
         <Header
           title={selectedCustomer.name}
-          subtitle="Customer Profile"
+          subtitle={t("Customers.subtitle2")}
           onBack={() => setView("customers")}
           right={headerRight}
         />
 
         <TopTabs
-          tabs={["Dashboard", "Properties", "Jobs", "Invoices", "Batches", "Transactions"]}
+          tabs={[t("Customers.tab1"), t("Customers.tab2"), t("Customers.tab3"), t("Customers.tab4"), t("Customers.tab5"), t("Customers.tab6")]}
           active={customerTab}
           onChange={(t) => {
             setCustomerTab(t);
@@ -509,27 +510,27 @@ export default function DOPOwnerCRM() {
           }}
         />
 
-        {customerTab === "Dashboard" && (
+        {customerTab === t("Customers.tab1") && (
           <>
             <Grid>
               <StatCard
                 icon={<Layers />}
-                label="Completed Jobs"
-                value={String((selectedCustomer.jobs || []).filter((j) => j.status === "Completed").length)}
+                label={t("Customers.statCard1")}
+                value={String((selectedCustomer.jobs || []).filter((j) => j.status === t("Customers.Completed")).length)}
               />
               <StatCard
                 icon={<Layers />}
-                label="Pending Jobs"
-                value={String((selectedCustomer.jobs || []).filter((j) => j.status !== "Completed").length)}
+                label={t("Customers.statCard2")}
+                value={String((selectedCustomer.jobs || []).filter((j) => j.status !== t("Customers.Completed")).length)}
               />
               <StatCard
                 icon={<DollarSign />}
-                label="Total Revenue"
+                label={t("Customers.statCard3")}
                 value={fmtMoney((selectedCustomer.invoices || []).reduce((s, i) => s + (i.paid || 0), 0))}
               />
               <StatCard
                 icon={<CreditCard />}
-                label="Receivable"
+                label={t("Customers.statCard4")}
                 value={fmtMoney(
                   (selectedCustomer.invoices || []).reduce(
                     (s, i) => s + ((i.toPaid || 0) - (i.paid || 0)),
@@ -541,16 +542,16 @@ export default function DOPOwnerCRM() {
 
             <div className="px-4 mt-4">
               <div className="rounded-3xl p-4 bg-white/12 border border-white/20 backdrop-blur-2xl shadow-xl">
-                <p className="text-xs opacity-70">Quick actions</p>
+                <p className="text-xs opacity-70">{t("Customers.QuickActions")}</p>
                 <div className="mt-3 grid grid-cols-2 gap-4">
                   <SecondaryButton
                     icon={<Home size={18} />}
-                    label="Add Property"
+                    label={t("Customers.button2")}
                     onClick={() => alert("Add property (UI placeholder)")}
                   />
                   <SecondaryButton
                     icon={<Receipt size={18} />}
-                    label="Send Invoice"
+                    label={t("Customers.button3")}
                     onClick={() => alert("Send invoice (UI placeholder)")}
                   />
                 </div>
@@ -558,7 +559,7 @@ export default function DOPOwnerCRM() {
 
               {selectedCustomer.notes && (
                 <div className="mt-4 rounded-3xl p-4 bg-white/12 border border-white/20 backdrop-blur-2xl shadow-xl">
-                  <p className="text-xs opacity-70">Notes</p>
+                  <p className="text-xs opacity-70">{t("Customers.Notes")}</p>
                   <p className="mt-2 text-sm opacity-90">{selectedCustomer.notes}</p>
                 </div>
               )}
@@ -566,15 +567,15 @@ export default function DOPOwnerCRM() {
           </>
         )}
 
-        {customerTab === "Properties" && (
+        {customerTab === t("Customers.tab2") && (
           <List>
             <SectionHeader
-              title="Properties"
-              subtitle="Tap to open property profile"
+              title={t("Customers.title3")}
+              subtitle={t("Customers.subtitle3")}
               right={
                 <PrimaryButton
                   icon={<Plus size={16} />}
-                  label="Add"
+                  label={t("Customers.button1")}
                   onClick={() => alert("Add property (UI placeholder)")}
                 />
               }
@@ -585,7 +586,7 @@ export default function DOPOwnerCRM() {
                 key={p.id}
                 onClick={() => {
                   setSelectedPropertyId(p.id);
-                  setPropertyTab("Dashboard");
+                  setPropertyTab(t("Customers.tab1"));
                   setView("property");
                 }}
               >
@@ -601,10 +602,10 @@ export default function DOPOwnerCRM() {
                       <Pill label={`${p.county} County`} icon={undefined} accent={false} />
                       <Pill
                         icon={<Layers size={14} />}
-                        label={`${(selectedCustomer.jobs || []).filter((j) => j.propertyId === p.id).length} Jobs`} accent={false}                      />
+                        label={`${(selectedCustomer.jobs || []).filter((j) => j.propertyId === p.id).length} ${t("Customers.Jobs")}`} accent={false}                      />
                       <Pill
                         icon={<Receipt size={14} />}
-                        label={`${(selectedCustomer.invoices || []).filter((i) => i.propertyId === p.id).length} Invoices`} accent={false}                      />
+                        label={`${(selectedCustomer.invoices || []).filter((i) => i.propertyId === p.id).length} ${t("Customers.Invoices")}`} accent={false}                      />
                     </div>
                   </div>
                   <ChevronRight size={18} className="opacity-60 shrink-0" />
@@ -616,19 +617,19 @@ export default function DOPOwnerCRM() {
           </List>
         )}
 
-        {customerTab === "Jobs" && (
+        {customerTab === t("Customers.tab3") && (
           <>
             <FilterRow
               search={search}
               setSearch={setSearch}
-              leftLabel="Jobs"
+              leftLabel={t("Customers.Jobs")}
               onOpenDate={() => setDateSheetOpen(true)}
               onOpenStatus={openJobStatusFilter}
               statusLabel={jobStatus}
               rightAction={
                 <PrimaryButton
                   icon={<Plus size={16} />}
-                  label="New"
+                  label={t("Customers.button4")}
                   onClick={() => alert("New job (UI placeholder)")}
                 />
               }
@@ -653,25 +654,25 @@ export default function DOPOwnerCRM() {
                 ))}
 
               {customerJobs.length === 0 && (
-                <div className="text-center text-sm opacity-70 mt-10">No jobs</div>
+                <div className="text-center text-sm opacity-70 mt-10">{t("Customers.NoJobs")}</div>
               )}
             </List>
           </>
         )}
 
-        {customerTab === "Invoices" && (
+        {customerTab === t("Customers.tab4") && (
           <>
             <FilterRow
               search={search}
               setSearch={setSearch}
-              leftLabel="Invoices"
+              leftLabel={t("Customers.leftlabel1")}
               onOpenDate={() => setDateSheetOpen(true)}
               onOpenStatus={openInvoiceStatusFilter}
               statusLabel={invoiceStatus}
               rightAction={
                 <PrimaryButton
                   icon={<Receipt size={16} />}
-                  label="Send"
+                  label={t("Customers.button5")}
                   onClick={() => alert("Send invoice (UI placeholder)")}
                 />
               }
@@ -687,21 +688,21 @@ export default function DOPOwnerCRM() {
                 ))}
 
               {customerInvoices.length === 0 && (
-                <div className="text-center text-sm opacity-70 mt-10">No invoices</div>
+                <div className="text-center text-sm opacity-70 mt-10">{t("Customers.NoInvoices")}</div>
               )}
             </List>
           </>
         )}
 
-        {customerTab === "Batches" && (
+        {customerTab === t("Customers.tab5") && (
           <List>
             <SectionHeader
-              title="Batch Invoices"
-              subtitle="Groups of invoices to process"
+              title={t("Customers.title4")}
+              subtitle={t("Customers.subtitle4")}
               right={
                 <PrimaryButton
                   icon={<Plus size={16} />}
-                  label="New"
+                  label={t("Customers.button4")}
                   onClick={() => alert("Create batch (UI placeholder)")}
                 />
               }
@@ -715,7 +716,7 @@ export default function DOPOwnerCRM() {
                   <div>
                     <h3 className="font-semibold">{b.id}</h3>
                     <p className="text-xs opacity-70 mt-1">
-                      {fmtDateShort(b.date)} · {b.count} invoices
+                      {fmtDateShort(b.date)} · {b.count} {t("Customers.invoices")}
                     </p>
                     <div className="mt-3 flex gap-2 flex-wrap">
                       <Pill label={b.status} icon={undefined} accent={false} />
@@ -728,14 +729,17 @@ export default function DOPOwnerCRM() {
             ))}
 
             {(selectedCustomer.batches || []).length === 0 && (
-              <div className="text-center text-sm opacity-70 mt-10">No batches</div>
+              <div className="text-center text-sm opacity-70 mt-10">{t("Customers.NoBatches")}</div>
             )}
           </List>
         )}
 
-        {customerTab === "Transactions" && (
+        {customerTab === t("Customers.tab6" ) && (
           <List>
-            <SectionHeader title="Transactions" subtitle="Payments, refunds, adjustments" right={undefined} />
+            <SectionHeader 
+            title={t("Customers.title5" )}
+            subtitle={t("Customers.subtitle5" )}
+            right={undefined} />
 
             {(selectedCustomer.transactions || []).map((t) => (
               <Card key={t.id}  onClick={function (): void {
@@ -756,7 +760,7 @@ export default function DOPOwnerCRM() {
             ))}
 
             {(selectedCustomer.transactions || []).length === 0 && (
-              <div className="text-center text-sm opacity-70 mt-10">No transactions</div>
+              <div className="text-center text-sm opacity-70 mt-10">{t("Customers.NoTransactions")}</div>
             )}
           </List>
         )}
@@ -765,8 +769,8 @@ export default function DOPOwnerCRM() {
         {dateSheetOpen && (
           <BottomSheet onClose={() => setDateSheetOpen(false)}>
             <SheetTitle
-              title="Date range filter"
-              subtitle="Filter Jobs / Invoices by date"
+              title={t("Customers.sheetTitle")}
+              subtitle={t("Customers.sheetSubtitle")}
               onClose={() => setDateSheetOpen(false)}
             />
 
@@ -786,8 +790,8 @@ export default function DOPOwnerCRM() {
         {statusSheetOpen && (
           <BottomSheet onClose={() => setStatusSheetOpen(false)}>
             <SheetTitle
-              title={statusSheetKind === "jobs" ? "Job status" : "Invoice status"}
-              subtitle="Pick a status filter"
+              title={statusSheetKind === "jobs" ? t("Customers.JobStatus") : t("Customers.InvoiceStatus")}
+              subtitle={t("Customers.subtitle6")}
               onClose={() => setStatusSheetOpen(false)}
             />
 
@@ -818,18 +822,18 @@ export default function DOPOwnerCRM() {
               <button
                 className="py-3 rounded-2xl bg-white/10 border border-white/20"
                 onClick={() => {
-                  if (statusSheetKind === "jobs") setJobStatus("All");
-                  else setInvoiceStatus("All");
+                  if (statusSheetKind === "jobs") setJobStatus(t("Customers.all"));
+                  else setInvoiceStatus(t("Customers.all"));
                   setStatusSheetOpen(false);
                 }}
               >
-                Clear
+                {t("Customers.Clear")}
               </button>
               <button
                 className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
                 onClick={() => setStatusSheetOpen(false)}
               >
-                Done
+                {t("Customers.Done")}
               </button>
             </div>
           </BottomSheet>
@@ -848,8 +852,8 @@ export default function DOPOwnerCRM() {
     if (!selectedCustomer || !selectedProperty) {
       return (
         <Screen>
-          <Header title="Property" onBack={() => setView("customer")} subtitle={""} />
-          <div className="px-4 text-sm opacity-80">No property selected.</div>
+          <Header title={t("Customers.title6")} onBack={() => setView("customer")} subtitle={""} />
+          <div className="px-4 text-sm opacity-80">{t("Customers.div2")}</div>
           <DevSelfTests />
         </Screen>
       );
@@ -864,14 +868,14 @@ export default function DOPOwnerCRM() {
           right={
             <PrimaryButton
               icon={<Plus size={16} />}
-              label="Add"
+              label={t("Customers.button1")}
               onClick={() => alert("Property actions (UI placeholder)")}
             />
           }
         />
 
         <TopTabs
-          tabs={["Dashboard", "Jobs", "Invoices"]}
+          tabs={[t("Customers.tab1"), t("Customers.tab3"), t("Customers.tab4")]}
           active={propertyTab}
           onChange={(t) => {
             setPropertyTab(t);
@@ -879,11 +883,11 @@ export default function DOPOwnerCRM() {
           }}
         />
 
-        {propertyTab === "Dashboard" && (
+        {propertyTab === t("Customers.tab1") && (
           <>
             <div className="px-4 mt-2">
               <div className="rounded-3xl p-4 bg-white/12 border border-white/20 backdrop-blur-2xl shadow-xl">
-                <p className="text-xs opacity-70">Address</p>
+                <p className="text-xs opacity-70">{t("Customers.Address")}</p>
                 <p className="mt-2 text-sm flex items-start gap-2">
                   <MapPin size={16} className="mt-[2px] opacity-80" />
                   <span>{selectedProperty.address}</span>
@@ -898,35 +902,35 @@ export default function DOPOwnerCRM() {
             </div>
 
             <Grid>
-              <StatCard icon={<Layers />} label="Jobs" value={String(propertyJobs.length)} />
-              <StatCard icon={<Receipt />} label="Invoices" value={String(propertyInvoices.length)} />
+              <StatCard icon={<Layers />} label={t("Customers.Jobs")} value={String(propertyJobs.length)} />
+              <StatCard icon={<Receipt />} label={t("Customers.Invoices")} value={String(propertyInvoices.length)} />
               <StatCard
                 icon={<DollarSign />}
-                label="Billed"
+                label={t("Customers.Billed")}
                 value={fmtMoney(propertyInvoices.reduce((s, i) => s + (i.amount || 0), 0))}
               />
               <StatCard
                 icon={<CreditCard />}
-                label="Paid"
+                label={t("Customers.Paid")}
                 value={fmtMoney(propertyInvoices.reduce((s, i) => s + (i.paid || 0), 0))}
               />
             </Grid>
           </>
         )}
 
-        {propertyTab === "Jobs" && (
+        {propertyTab === t("Customers.tab3") && (
           <>
             <FilterRow
               search={search}
               setSearch={setSearch}
-              leftLabel="Jobs"
+              leftLabel={t("Customers.leftlabel2")}
               onOpenDate={() => setDateSheetOpen(true)}
               onOpenStatus={openJobStatusFilter}
               statusLabel={jobStatus}
               rightAction={
                 <PrimaryButton
                   icon={<Plus size={16} />}
-                  label="New"
+                  label={t("Customers.button4")}
                   onClick={() => alert("New job (UI placeholder)")}
                 />
               }
@@ -942,25 +946,25 @@ export default function DOPOwnerCRM() {
                 ))}
 
               {propertyJobs.length === 0 && (
-                <div className="text-center text-sm opacity-70 mt-10">No jobs</div>
+                <div className="text-center text-sm opacity-70 mt-10">{t("Customers.NoJobs")}</div>
               )}
             </List>
           </>
         )}
 
-        {propertyTab === "Invoices" && (
+        {propertyTab === t("Customers.tab4") && (
           <>
             <FilterRow
               search={search}
               setSearch={setSearch}
-              leftLabel="Invoices"
+              leftLabel={t("Customers.leftLabel1")}
               onOpenDate={() => setDateSheetOpen(true)}
               onOpenStatus={openInvoiceStatusFilter}
               statusLabel={invoiceStatus}
               rightAction={
                 <PrimaryButton
                   icon={<Receipt size={16} />}
-                  label="Send"
+                  label={t("Customers.button5")}
                   onClick={() => alert("Send invoice (UI placeholder)")}
                 />
               }
@@ -976,7 +980,7 @@ export default function DOPOwnerCRM() {
                 ))}
 
               {propertyInvoices.length === 0 && (
-                <div className="text-center text-sm opacity-70 mt-10">No invoices</div>
+                <div className="text-center text-sm opacity-70 mt-10">{t("Customers.NoInvoices")}</div>
               )}
             </List>
           </>
@@ -986,8 +990,8 @@ export default function DOPOwnerCRM() {
         {dateSheetOpen && (
           <BottomSheet onClose={() => setDateSheetOpen(false)}>
             <SheetTitle
-              title="Date range filter"
-              subtitle="Filter Jobs / Invoices by date"
+              title={t("Customers.sheetTitle")}
+              subtitle={t("Customers.sheetSubtitle")}
               onClose={() => setDateSheetOpen(false)}
             />
 
@@ -1007,8 +1011,8 @@ export default function DOPOwnerCRM() {
         {statusSheetOpen && (
           <BottomSheet onClose={() => setStatusSheetOpen(false)}>
             <SheetTitle
-              title={statusSheetKind === "jobs" ? "Job status" : "Invoice status"}
-              subtitle="Pick a status filter"
+              title={statusSheetKind === "jobs" ? t("Customers.JobStatus") : t("Customers.InvoiceStatus")}
+              subtitle={t("Customers.subtitle6")}
               onClose={() => setStatusSheetOpen(false)}
             />
 
@@ -1039,18 +1043,18 @@ export default function DOPOwnerCRM() {
               <button
                 className="py-3 rounded-2xl bg-white/10 border border-white/20"
                 onClick={() => {
-                  if (statusSheetKind === "jobs") setJobStatus("All");
-                  else setInvoiceStatus("All");
+                  if (statusSheetKind === "jobs") setJobStatus(t("Customers.all"));
+                  else setInvoiceStatus(t("Customers.all"));
                   setStatusSheetOpen(false);
                 }}
               >
-                Clear
+                {t("Customers.Clear")}
               </button>
               <button
                 className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
                 onClick={() => setStatusSheetOpen(false)}
               >
-                Done
+                {t("Customers.Done")}
               </button>
             </div>
           </BottomSheet>
