@@ -26,10 +26,10 @@ export default function DateRangeEditor({ value, onChange, onClear, onApply }) {
 
       <div className="mt-4 grid grid-cols-2 gap-3">
         <button className="py-3 rounded-2xl bg-white/10 border border-white/20" onClick={onClear}>
-          Clear
+          {t("Customers.Clear")}
         </button>
         <button className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold" onClick={onApply}>
-          Apply
+          {t("Customers.Apply")}
         </button>
       </div>
     </div>
