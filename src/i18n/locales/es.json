@@ -165,7 +165,13 @@
     "Sent": "Enviado",
     "ToCheck": "Para comprobar",
     "ToApproval": "Para aprobar",
-    "Batched": "Por lotes"
+    "Batched": "Por lotes",
+    "Service": "Servicio",
+    "Date":"Fecha",
+    "Payment":"Pago",
+    "ToPay":"Por pagar",
+    "Discount":"Descuento",
+    "County":"Condado"
   }
 
 }

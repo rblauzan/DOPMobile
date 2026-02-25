@@ -2,8 +2,11 @@ import Card from "./Card";
 import { invoiceTone } from "./Tone";
 import { fmtMoney, fmtDateShort } from "../../helpers/helpersCustomers";
 import Pill from "./Pill";
+import { useTranslation } from "react-i18next";
+import { Eye } from "lucide-react";
 
 export default function InvoiceRow({ inv, compactProperty = false }) {
+  const {t} = useTranslation("");
 
   return (
     <Card  onClick={function (): void {
@@ -20,31 +23,31 @@ export default function InvoiceRow({ inv, compactProperty = false }) {
           {!compactProperty && (
             <div className="mt-3">
               <p className="font-semibold">{inv.propertyName}</p>
-              <p className="text-xs opacity-70 mt-1">Service: {inv.service}</p>
+              <p className="text-xs opacity-70 mt-1">{t("Customers.Service")} {inv.service}</p>
             </div>
           )}
 
           <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
             <div className="rounded-2xl bg-white/10 border border-white/15 p-3">
-              <p className="text-xs opacity-70">Date</p>
+              <p className="text-xs opacity-70">{t("Customers.Date")}</p>
               <p className="mt-1 font-semibold">{fmtDateShort(inv.date)}</p>
             </div>
             <div className="rounded-2xl bg-white/10 border border-white/15 p-3">
-              <p className="text-xs opacity-70">Payment</p>
-              <p className="mt-1 font-semibold">To pay: {fmtMoney(inv.toPaid)} · Paid: {fmtMoney(inv.paid)}</p>
+              <p className="text-xs opacity-70">{t("Customers.Payment")}</p>
+              <p className="mt-1 font-semibold">{t("Customers.ToPay")}: {fmtMoney(inv.toPaid)} · {t("Customers.Paid")} : {fmtMoney(inv.paid)}</p>
             </div>
           </div>
 
           <div className="mt-3 flex gap-2 flex-wrap">
-            <Pill label={`Discount: ${fmtMoney(inv.discount)}`} icon={undefined} accent={false} />
+            <Pill label={`${t("Customers.Discount")}: ${fmtMoney(inv.discount)}`} icon={undefined} accent={false} />
           </div>
         </div>
 
         <button
-          className="px-3 py-2 rounded-2xl bg-[#148dcd] shadow-lg text-sm"
+          className="w-14 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center"
           onClick={() => alert(`View invoice #${inv.id} (UI placeholder)`)}
         >
-          View
+          <Eye size={16} />
         </button>
       </div>
     </Card>

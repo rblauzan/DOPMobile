@@ -99,7 +99,7 @@ export default function LoginComponent() {
     };
   }, []);
 
-  // Validar si el username es válido (para borde verde)
+  // Validar si el username es válido
   const isUsernameValid = username === ADMIN_USER;
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
@@ -215,11 +215,6 @@ export default function LoginComponent() {
               }`}
               placeholder={t("Login.placeholderCode")}
             />
-          )}
-
-          {/* Mensaje de error */}
-          {error && (
-            <p className="text-red-400 text-sm text-center mt-2">{error}</p>
           )}
 
           <button

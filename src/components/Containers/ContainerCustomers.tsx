@@ -599,7 +599,7 @@ export default function DOPOwnerCRM() {
                     </p>
                     <div className="mt-3 flex gap-2 flex-wrap">
                       <Pill label={p.type} icon={undefined} accent={false} />
-                      <Pill label={`${p.county} County`} icon={undefined} accent={false} />
+                      <Pill label={`${p.county} ${t("Customers.County")}`} icon={undefined} accent={false} />
                       <Pill
                         icon={<Layers size={14} />}
                         label={`${(selectedCustomer.jobs || []).filter((j) => j.propertyId === p.id).length} ${t("Customers.Jobs")}`} accent={false}                      />
@@ -894,7 +894,7 @@ export default function DOPOwnerCRM() {
                 </p>
                 <div className="mt-4 flex gap-2 flex-wrap">
                   <Pill label={selectedProperty.type} icon={undefined} accent={false} />
-                  <Pill label={`${selectedProperty.county} County`} icon={undefined} accent={false} />
+                  <Pill label={`${selectedProperty.county} ${t("Customers.County")}`} icon={undefined} accent={false} />
                   <Pill label={`Last: ${fmtDateShort(selectedProperty.lastService)}`} icon={undefined} accent={false} />
                   <Pill label={`Next: ${fmtDateShort(selectedProperty.lastScheduledService)}`} icon={undefined} accent={false} />
                 </div>

@@ -19,7 +19,7 @@ export function FilterRow({ search, setSearch, leftLabel, onOpenDate, onOpenStat
 
         <button
           onClick={onOpenDate}
-          className="m-1 w-20 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center"
+          className="w-24 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center"
           title="Date range"
         >
           <CalendarDays size={16} />
@@ -27,7 +27,7 @@ export function FilterRow({ search, setSearch, leftLabel, onOpenDate, onOpenStat
 
         <button
           onClick={onOpenStatus}
-          className="m-1 w-24 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center"
+          className="w-24 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center"
           title={`Status: ${statusLabel}`}
         >
           <Filter size={16} />

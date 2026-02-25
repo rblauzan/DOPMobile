@@ -165,7 +165,14 @@
     "Sent": "Sent",
     "ToCheck": "To Check",
     "ToApproval": "To Approval",
-    "Batched": "Batched"
-  }
+    "Batched": "Batched",
+    "Service": "Service",
+    "Date":"Date",
+    "Payment":"Payment",
+    "ToPay":"To pay",
+    "Discount":"Discount",
+    "County":"County"
+  } 
+  
 }
 
