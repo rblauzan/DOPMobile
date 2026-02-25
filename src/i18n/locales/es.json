@@ -171,7 +171,8 @@
     "Payment":"Pago",
     "ToPay":"Por pagar",
     "Discount":"Descuento",
-    "County":"Condado"
+    "County":"Condado",
+    "Team": "Team"
   }
 
 }

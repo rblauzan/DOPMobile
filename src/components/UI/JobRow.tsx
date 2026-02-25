@@ -4,11 +4,12 @@ import IconSquare from "./IconSquare";
 import { statusTone } from "./Tone";
 import { fmtMoney, fmtDateTimeShort, fmtDateShort } from "../../helpers/helpersCustomers";
 import Pill from "./Pill";
+import { useTranslation } from "react-i18next";
 
 
 export default function JobRow({ job, compactProperty = false }) {
 const isCompleted = String(job.status).toLowerCase() === "completed";
-
+const { t } = useTranslation("");
   return (
     <Card  onClick={function (): void {
       throw new Error("Function not implemented.");
@@ -44,8 +45,8 @@ const isCompleted = String(job.status).toLowerCase() === "completed";
           </div>
 
           <div className="mt-3 flex gap-2 flex-wrap">
-            <Pill label={`Team: ${job.team}`} icon={undefined} accent={false} />
-            <Pill label={`Completed: ${fmtDateShort(job.dateCompleted)}`} icon={undefined} accent={false} />
+            <Pill label={`${t("Customers.Team")}: ${job.team}`} icon={undefined} accent={false} />
+            <Pill label={`${t("Customers.Completed")}: ${fmtDateShort(job.dateCompleted)}`} icon={undefined} accent={false} />
           </div>
         </div>
 
