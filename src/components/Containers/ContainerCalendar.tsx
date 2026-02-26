@@ -21,7 +21,7 @@ import BottomSheet from "../UI/BottomSheet.js";
 import IconBtn from "../UI/IconBtn.js";
 import SheetTitle from "../UI/SheetTitle.js";
 import Badge from "../UI/Badge.js";
-import { EmptyWorkersState, EmptySearchResults } from "../UI/Empty.js";
+import { EmptyWorkersState, EmptySearchResults, EmptyUnassignedJobsState } from "../UI/Empty.js";
 import { useTranslation } from "react-i18next";
 import { filterEmployees, jobsForDate } from "../../helpers/helpersCalendar.js";
 import { statusPill, TODAY } from "../../constants.js";
@@ -33,217 +33,6 @@ interface ContainerProps {
   name: string;
 }
 
-// const date = {
-//   today: TODAY,
-//   workers: [
-//     {
-//       id: 1,
-//       name: "Kaytea Moreno",
-//       role: "Team Lead",
-//       phone: "(239) 317-6096",
-//       email: "kaytea@dop.local",
-//       home: "Bonita Springs, FL",
-//       payRate: 22.5,
-//       jobs: [
-//         {
-//           id: 180044,
-//           status: "completed",
-//           client: "Beach Breeze 290",
-//           address: "32 1st St, Bonita Springs",
-//           time: "8:30am – 11:00am",
-//           duration: "2h 30m",
-//           priority: 2,
-//           notes: "Standard turnover, no issues reported",
-//           date: TODAY,
-//         },
-//         {
-//           id: 182514,
-//           status: "assigned",
-//           client: "Nomadic Vacation Rentals",
-//           address: "587 99th Ave N, Naples",
-//           time: "11:30am – 3:00pm",
-//           duration: "3h 30m",
-//           priority: 1,
-//           notes: "Guest arriving early – high priority",
-//           date: TODAY,
-//         },
-//         {
-//           id: 182900,
-//           status: "assigned",
-//           client: "Blue Diamond Beach Home",
-//           address: "3542 McComb Ave, Naples",
-//           time: "4:00pm – 6:00pm",
-//           duration: "2h 0m",
-//           priority: 3,
-//           notes: "Owner inspection tomorrow",
-//           date: TOMORROW,
-//         },
-//       ],
-//     },
-//     {
-//       id: 2,
-//       name: "Yailen Figuereido",
-//       role: "Cleaner Pro",
-//       phone: "(239) 763-3972",
-//       email: "yailen@dop.local",
-//       home: "Naples, FL",
-//       payRate: 18,
-//       jobs: [
-//         {
-//           id: 190210,
-//           status: "assigned",
-//           client: "Marco Luxe Retreat",
-//           address: "840 Rose Ct, Marco Island",
-//           time: "9:00am – 12:00pm",
-//           duration: "3h 0m",
-//           priority: 2,
-//           notes: "Deep clean requested",
-//           date: TODAY,
-//         },
-//       ],
-//     },
-//     {
-//       id: 3,
-//       name: "Yurleidys Rivero",
-//       role: "Cleaner Pro",
-//       phone: "(239) 555-1099",
-//       email: "yurleidys@dop.local",
-//       home: "Cape Coral, FL",
-//       payRate: 19.5,
-//       jobs: [],
-//     },    
-//     {
-//       "id": 4,
-//       "name": "Carlos Rodriguez",
-//       "role": "Cleaner",
-//       "phone": "(239) 456-7890",
-//       "email": "carlos@dop.local",
-//       "home": "Fort Myers, FL",
-//       "payRate": 17.5,
-//       "status": "active",
-//       "avatar": "https://api.dicebear.com/7.x/avataaars/svg?date=Carlos",
-//       "jobs": [
-//         {
-//           "id": 190415,
-//           "status": "assigned",
-//           "client": "Sunset Villa",
-//           "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
-//           "time": "10:00am – 1:00pm",
-//           "duration": "3h 0m",
-//           "priority": 2,
-//           "notes": "Pet-friendly unit. Extra vacuuming needed.",
-//           "date": TODAY,
-//           "payment": 78.75,
-//           "type": "standard_clean",
-//           "rooms": 3,
-//           "sqft": 1500
-//         }
-//       ]
-//     },
-//     {
-//       "id": 5,
-//       "name": "Maria Gonzalez",
-//       "role": "Team Lead",
-//       "phone": "(239) 123-4567",
-//       "email": "maria@dop.local",
-//       "home": "Estero, FL",
-//       "payRate": 21.0,
-//       "status": "on_vacation",
-//       "avatar": "https://api.dicebear.com/7.x/avataaars/svg?date=Maria",
-//       "jobs": []
-//     },
-//      {
-//       "id": 4,
-//       "name": "Alfredo Perez",
-//       "role": "Cleaner",
-//       "phone": "(239) 456-7890",
-//       "email": "carlos@dop.local",
-//       "home": "Fort Myers, FL",
-//       "payRate": 17.5,
-//       "status": "active",
-//       "avatar": "https://api.dicebear.com/7.x/avataaars/svg?date=Carlos",
-//       "jobs": [
-//         {
-//           "id": 190415,
-//           "status": "assigned",
-//           "client": "Sunset Villa",
-//           "address": "789 Sunset Dr, Fort Myers Beach, FL 33931",
-//           "time": "10:00am – 1:00pm",
-//           "duration": "3h 0m",
-//           "priority": 2,
-//           "notes": "Pet-friendly unit. Extra vacuuming needed.",
-//           "date": "2026-02-25",
-//           "payment": 78.75,
-//           "type": "standard_clean",
-//           "rooms": 3,
-//           "sqft": 1500
-//         }
-//       ]
-//     },
-//   ],
-//   unassigned: [
-//     {
-//       id: 300101,
-//       client: "Marco Luxe Retreat",
-//       address: "840 Rose Ct, Marco Island",
-//       time: "2:00pm – 5:00pm",
-//       duration: "3h",
-//       notes: "Same-day turnover",
-//       date: TODAY,
-//     },
-//     {
-//       id: 300202,
-//       client: "Sea La Vie Beach House",
-//       address: "28124 Sunset Dr, Bonita Springs",
-//       time: "Anytime (flex)",
-//       duration: "2h 30m",
-//       notes: "Flexible window",
-//       date: TODAY,
-//     },
-//      {
-//       "id": 300303,
-//       "client": "Palm Paradise",
-//       "address": "456 Palm Tree Ln, Naples, FL 34109",
-//       "time": "9:00am – 12:00pm",
-//       "duration": "3h",
-//       "notes": "Post-construction clean. Dust control needed.",
-//       "date": TODAY,
-//       "priority": 2,
-//       "payment": 120.0,
-//       "type": "post_construction",
-//       "rooms": 4,
-//       "sqft": 2400
-//     },
-//     {
-//       "id": 300404,
-//       "client": "Island View Resort",
-//       "address": "789 Island Blvd, Sanibel, FL 33957",
-//       "time": "1:00pm – 4:00pm",
-//       "duration": "3h",
-//       "notes": "Weekly maintenance clean. Focus on common areas.",
-//       "date": TOMORROW,
-//       "priority": 2,
-//       "payment": 85.0,
-//       "type": "maintenance",
-//       "rooms": 5,
-//       "sqft": 2800
-//     }
-//   ],
-// };
-
-
-
-/* =========================
-   SELF TESTS (NO DEPENDENCIES)
-   ========================= */
-
-function DevSelfTests() {
-  // Comentado temporalmente - causaba errores de renderizado
-  // Los tests deberían ejecutarse fuera del componente o con datos del estado
-  return null;
-}
-
-
 const ContainerCalendar: React.FC<ContainerProps> = () => {
   const [view, setView] = useState("employees"); // employees | dispatch | unassigned
   const [date, setDate] = useState(TODAY);
@@ -253,7 +42,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
   const [fabOpen, setFabOpen] = useState(false);
   const [workers, setWorkers] = useState<Worker[]>([]);
   const [unassignedJobs, setUnassignedJobs] = useState<Job[]>([]);
-  const [isloading,setisLoading] = useState(true);
+  const [isloading, setisLoading] = useState(true);
   const { t } = useTranslation("");
 
   // Sheets
@@ -266,7 +55,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
   // Only workers with jobs for the selected day
   const workersWithJobsForDay = useMemo(() => {
     return workers.filter((w) => jobsForDate(w, date).length > 0);
-  }, [workers , date]);
+  }, [workers, date]);
 
   const filteredWorkers = useMemo(() => {
     return filterEmployees(query, workersWithJobsForDay);
@@ -290,17 +79,14 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
       setWorkers(workersResponse as Worker[]);
       const unassignedResponse = await api.getUnassignedJobs();
       setUnassignedJobs(unassignedResponse as Job[]);
-      setDate(TODAY);  
-      setisLoading(false);    
-    };    
+      setDate(TODAY);
+      setisLoading(false);
+    };
     loadData();
-    
   }, []);
 
-  if(isloading){
-    return(
-      <EmployeesSkeleton/>    
-    )
+  if (isloading) {
+    return <EmployeesSkeleton />;
   }
 
   if (view === "employees") {
@@ -308,7 +94,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
     if (workersWithJobsForDay.length === 0) {
       return (
         <>
-          <EmptyWorkersState />          
+          <EmptyWorkersState />
           <Fab
             open={fabOpen}
             onToggle={() => setFabOpen((v) => !v)}
@@ -331,7 +117,9 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
               />
 
               <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-                <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
+                <label className="text-sm opacity-80">
+                  {t("ModalDate.subtitlecard")}
+                </label>
                 <input
                   type="date"
                   value={pendingDate}
@@ -355,7 +143,6 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
               </div>
             </BottomSheet>
           )}
-          <DevSelfTests />
         </>
       );
     }
@@ -366,8 +153,14 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
         <Screen>
           <Header
             title={t("Header.title")}
-            subtitle={`${t("Header.subtitle")} ${date}`} onBack={undefined}        />
-          <SearchBar value={query} onChange={setQuery} entity={t("SearchBar.employee")} />
+            subtitle={`${t("Header.subtitle")} ${date}`}
+            onBack={undefined}
+          />
+          <SearchBar
+            value={query}
+            onChange={setQuery}
+            entity={t("SearchBar.employee")}
+          />
           <div className="flex-1 overflow-y-auto px-4 py-4">
             <EmptySearchResults />
           </div>
@@ -395,7 +188,9 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
               />
 
               <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-                <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
+                <label className="text-sm opacity-80">
+                  {t("ModalDate.subtitlecard")}
+                </label>
                 <input
                   type="date"
                   value={pendingDate}
@@ -419,8 +214,6 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
               </div>
             </BottomSheet>
           )}
-
-          <DevSelfTests />
         </Screen>
       );
     }
@@ -428,8 +221,14 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
       <Screen>
         <Header
           title={t("Header.title")}
-          subtitle={`${t("Header.subtitle")} ${date}`} onBack={undefined}        />
-        <SearchBar value={query} onChange={setQuery} entity={t("SearchBar.employee")} />
+          subtitle={`${t("Header.subtitle")} ${date}`}
+          onBack={undefined}
+        />
+        <SearchBar
+          value={query}
+          onChange={setQuery}
+          entity={t("SearchBar.employee")}
+        />
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {filteredWorkers.map((emp) => (
             <Card
@@ -462,14 +261,14 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
                     icon={<Phone size={16} />}
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.open(`tel: ${emp.phone}`,'_system');
+                      window.open(`tel: ${emp.phone}`, "_system");
                     }}
                   />
                   <IconBtn
                     icon={<MessageCircle size={16} />}
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.open(`sms: ${emp.phone}`,'_system');
+                      window.open(`sms: ${emp.phone}`, "_system");
                     }}
                   />
                   <IconBtn
@@ -483,7 +282,7 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
               </div>
             </Card>
           ))}
-        </div>       
+        </div>
 
         <Fab
           open={fabOpen}
@@ -508,7 +307,9 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             />
 
             <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-              <label className="text-sm opacity-80">{t("ModalDate.subtitlecard")}</label>
+              <label className="text-sm opacity-80">
+                {t("ModalDate.subtitlecard")}
+              </label>
               <input
                 type="date"
                 value={pendingDate}
@@ -532,8 +333,6 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             </div>
           </BottomSheet>
         )}
-
-        <DevSelfTests />
       </Screen>
     );
   }
@@ -544,8 +343,64 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
 
   if (view === "unassigned") {
     const unassignedForDay = unassignedJobs.filter(
-      (job: Job) => job.date === date
+      (job: Job) => job.date === date,
     );
+    if (unassignedForDay.length === 0) {
+      return (
+        <>
+          <Header onBack={() => setView("employees")} />
+          <EmptyUnassignedJobsState />
+          <Fab
+            open={fabOpen}
+            onToggle={() => setFabOpen((v) => !v)}
+            onToday={() => {
+              setDate(TODAY);
+              setFabOpen(false);
+            }}
+            onSelectDate={openDateSheet}
+            onUnassigned={() => {
+              setView("unassigned");
+              setFabOpen(false);
+            }}
+          />
+          {dateSheetOpen && (
+            <BottomSheet onClose={() => setDateSheetOpen(false)}>
+              <SheetTitle
+                title={t("ModalDate.title")}
+                subtitle={t("ModalDate.subtitle")}
+                onClose={() => setDateSheetOpen(false)}
+              />
+
+              <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
+                <label className="text-sm opacity-80">
+                  {t("ModalDate.subtitlecard")}
+                </label>
+                <input
+                  type="date"
+                  value={pendingDate}
+                  onChange={(e) => setPendingDate(e.target.value)}
+                  className="mt-2 w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 outline-none"
+                />
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <button
+                    className="py-3 rounded-2xl bg-white/10 border border-white/20"
+                    onClick={() => setDateSheetOpen(false)}
+                  >
+                    {t("ModalDate.button2")}
+                  </button>
+                  <button
+                    className="py-3 rounded-2xl bg-[#148dcd] shadow-lg font-semibold"
+                    onClick={applyDate}
+                  >
+                    {t("ModalDate.button1")}
+                  </button>
+                </div>
+              </div>
+            </BottomSheet>
+          )}
+        </>
+      );
+    }
 
     return (
       <Screen>
@@ -582,7 +437,9 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             <SheetTitle
               title={t("ModalDispatch.button")}
               subtitle={
-                dispatchJob._unassigned ? t("ModalDispatch.subtitle") : t("ModalDispatch.subtitle2")
+                dispatchJob._unassigned
+                  ? t("ModalDispatch.subtitle")
+                  : t("ModalDispatch.subtitle2")
               }
               onClose={() => setDispatchJob(null)}
             />
@@ -630,7 +487,9 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             />
 
             <div className="mt-4 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-xl p-4">
-              <label className="text-sm opacity-80">{t("SheetTitle.title2")}</label>
+              <label className="text-sm opacity-80">
+                {t("SheetTitle.title2")}
+              </label>
               <input
                 type="date"
                 value={pendingDate}
@@ -654,7 +513,6 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             </div>
           </BottomSheet>
         )}
-        <DevSelfTests />
       </Screen>
     );
   }
@@ -756,7 +614,9 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             <SheetTitle
               title={t("ModalDispatch.title")}
               subtitle={
-                dispatchJob._unassigned ? t("ModalDispatch.subtitle") : t("ModalDispatch.subtitle2")
+                dispatchJob._unassigned
+                  ? t("ModalDispatch.subtitle")
+                  : t("ModalDispatch.subtitle2")
               }
               onClose={() => setDispatchJob(null)}
             />
@@ -836,7 +696,6 @@ const ContainerCalendar: React.FC<ContainerProps> = () => {
             </div>
           </BottomSheet>
         )}
-        <DevSelfTests />
       </Screen>
     );
   }

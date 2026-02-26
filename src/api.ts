@@ -1,13 +1,13 @@
 import axios from "axios";
-import { ACCESS_TOKEN } from "./constants";
+import { USER_STORAGE_KEY } from "./constants";
 
 export const api = axios.create({
-  baseURL: import.meta.env.API_URL || 'https://idp-bcc.sib.cu/IDP/',
+  baseURL: import.meta.env.API_URL || '',
 });
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(ACCESS_TOKEN)
+    const token = localStorage.getItem(USER_STORAGE_KEY)
     if(token) {
       config.headers.Authorization = `${token}`
     }

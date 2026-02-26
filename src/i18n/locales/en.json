@@ -28,6 +28,7 @@
   },
   "Empty":{
     "title1": "No workers with jobs for this day",
+    "title2": "There are no unassigned jobs for this day",
     "searchNoResults": "No workers found with that search"
   },
   "Fab": {
@@ -71,11 +72,12 @@
   },
   "Login" : {
     "title" : "Dop Owner",
-    "placeholder" : "Username",
+    "placeholder" : "Enter your Email",
     "placeholderCode" : "Code",
-    "button" : "Sign in", 
+    "buttonUser" : "Sign in as User", 
+    "buttonOwner" : "Sign in as Owner", 
      "button1" : "Sign up",
-    "notificacion1" : "User incorrect",
+    "notificacion1" : "Email incorrect",
     "notificacion2" : "Code incorrect",
     "notificacion3" : "Session started",
     "loading" : "Loading.....",

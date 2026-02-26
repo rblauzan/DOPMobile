@@ -17,12 +17,20 @@ ion-content {
 
 /* (Opcional) Evita línea/borde superior del header */
 ion-header {
-  --border-width: 0 !important;
+ border: none;
+  --ion-background-color: transparent;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.12); */
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.12); */
+  box-shadow: none;
+  backdrop-filter: blur(14px);
+  height: 90px;
 }
+
 ion-toolbar {
   --border-width: 0 !important;
   --border-color: transparent !important;
   box-shadow: none !important;
+ 
 }
 .header-md::after {
   background: transparent !important;
@@ -31,14 +39,22 @@ ion-toolbar {
 /* (Opcional) Tab bar “glass” y sin fondo sólido */
 ion-tab-bar {
   --background: transparent;
+  --color: #ffffffbf;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px);
+  padding-top: 6px;
+
+  /*  estilo IOS Tab flotante
+  margin: 20px; 
+  border-radius: 20px;
+ */
 }
+
 .user-menu-popover::part(content) {
   background: transparent;
   box-shadow: none;
 
-  padding: 0;            /* elimina padding interno de Ionic */
+  padding: 0; /* elimina padding interno de Ionic */
   margin: 0;
   padding-top: 10px;
 
@@ -57,15 +73,15 @@ ion-tab-bar {
 }
 
 ion-list {
-  --background: transparent; 
+  --background: transparent;
   --ion-item-background: transparent;
   --ion-item-color: #ffffff;
 }
 
 ion-item {
-  --background: transparent;            
-  --color: #ffffff;                   
-  --padding-start: 0;              
+  --background: transparent;
+  --color: #ffffff;
+  --padding-start: 0;
 }
 
 .select-popover-glass::part(content) {
@@ -90,7 +106,6 @@ ion-item {
   display: none;
 }
 
-
 /* DARK MODE */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -98,7 +113,6 @@ ion-item {
     --ion-text-color: #ffffff;
   }
 }
-
 
 /* LIGHT MODE */
 @media (prefers-color-scheme: light) {

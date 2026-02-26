@@ -76,7 +76,8 @@ const MainTabs: React.FC = () => {
         slot="bottom"
         key={i18n.resolvedLanguage}
         style={{
-          display: location.pathname.toLowerCase() === "/login" ? "none" : "flex",
+          display:
+            location.pathname.toLowerCase() === "/login" ? "none" : "flex",
         }}
       >
         {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
@@ -114,4 +115,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

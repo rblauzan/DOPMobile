@@ -32,7 +32,7 @@ const Settings: React.FC = () => {
           />
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen scrollEvents={true}>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{t("Toolbar.title3")} </IonTitle>

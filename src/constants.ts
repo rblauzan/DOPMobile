@@ -1,12 +1,11 @@
 import { configuration } from "./lib/config";
+
 import i18n from "./i18n";
 export const ACCESS = ''
 export const USER_STORAGE_KEY = 'user';
 export const TODAY = new Date().toISOString().slice(0, 10);
 export const TOMORROW = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
-// export const LOGIN = `${configuration.IDP_URL}Access/Login?ReturnUrl=${configuration.BASE_URL}login`
-// export const LOGOUT = `${configuration.IDP_URL}Home/Logout`
- export const AVATAR = `${configuration.AVATAR_URL}`
+export const REGISTER = `${configuration.VITE_REGISTER_URL}`
  
 export const statusPill = {
   completed: "bg-emerald-400/20 text-emerald-100",

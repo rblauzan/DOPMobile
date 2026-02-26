@@ -4,17 +4,20 @@ import { useLocation } from "react-router-dom";
 import { Keyboard } from "@capacitor/keyboard";
 import { sileo } from "sileo";
 import { useTranslation } from "react-i18next";
+import ToggleRole from "../UI/Toggle";
+import { REGISTER } from "../../constants";
 
 export default function LoginComponent() {
   // 🔐 Credenciales demo
-  const ADMIN_USER = "admin123";
+  const ADMIN_USER = "admin@gmail.com";
   const VALID_CODE = "1234";
   const { t } = useTranslation();
   // 🚀 Inputs precargados
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isOwner,setisOwner]= useState(false)
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   // Solo mostrar código después de que el usuario hizo click en Sign In y el username es correcto
@@ -22,14 +25,14 @@ export default function LoginComponent() {
   const navigate = useHistory();
   const location = useLocation();
   const prevPathRef = useRef<string | null>(null);
-
+  const role = isOwner ? "Owner" : "User";
   // Limpiar formulario al llegar a Login (p. ej. después de logout)
   useEffect(() => {
     const current = location.pathname;
     const prev = prevPathRef.current;
     prevPathRef.current = current;
     if (current === "/Login" && prev !== "/Login") {
-      setUsername("");
+      setEmail("");
       setCode("");
       setShowCodeInput(false);
       setError("");
@@ -100,7 +103,7 @@ export default function LoginComponent() {
   }, []);
 
   // Validar si el username es válido
-  const isUsernameValid = username === ADMIN_USER;
+  const isUsernameValid = email === ADMIN_USER;
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,7 +111,7 @@ export default function LoginComponent() {
 
     // Primera etapa: validar username al hacer click en Sign In
     if (!showCodeInput) {
-      if (username !== ADMIN_USER) {
+      if (email !== ADMIN_USER) {
         sileo.error({
           fill: "white",
           title: t("Login.notificacion1"),
@@ -116,7 +119,7 @@ export default function LoginComponent() {
         setError("");
         return;
       }
-      // Usuario correcto → mostrar input del código
+      // Email correcto → mostrar input del código
       setShowCodeInput(true);
       return;
     }
@@ -141,14 +144,14 @@ export default function LoginComponent() {
     }
 
     setLoading(true);
-    localStorage.setItem("user", username);
+    localStorage.setItem("user", email);
     sileo.success({ title: t("Login.notificacion3") });
     navigate.push("/Calendar");
     setLoading(false);
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    setEmail(e.target.value);
     setError("");
     // Si cambia el username, ocultar el código y limpiarlo para que tenga que validar de nuevo
     if (showCodeInput) {
@@ -180,15 +183,16 @@ export default function LoginComponent() {
         }}
       >
         {!isKeyboardVisible && <img src="./White-logo.png" className="w-40" />}
-
         <h2 className="text-2xl font-semibold text-center">OPERATIONS PRO</h2>
         <span className="mb-2">{t("Login.welcome")}</span>
-
+        <div className="m-4">
+          <ToggleRole value={isOwner} onChange={setisOwner} />
+        </div>
         <form onSubmit={handleLogin} className="space-y-4 w-full">
           {/* Usuario precargado */}
           <input
-            type="text"
-            value={username}
+            type="email"
+            value={email}
             onChange={handleUsernameChange}
             className={`w-full px-4 py-2.5 rounded-xl bg-white/10 border transition-colors ${
               error && !isUsernameValid
@@ -222,22 +226,26 @@ export default function LoginComponent() {
             disabled={loading}
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? t("Login.loading") : t("Login.button")}
+            {loading ? t("Login.loading") : t(`Login.button${role}`)}
           </button>
         </form>
         <div className="mt-5 w-full flex flex-col items-center">
           <div className="w-full flex items-center justify-center gap-3">
             <div className="w-16 border-t border-gray-200/50 border-[0.5px]" />
-            <span className="text-sm font-medium leading-6 text-gray-400 shrink-0">Or</span>
+            <span className="text-sm font-medium leading-6 text-gray-400 shrink-0">
+              Or
+            </span>
             <div className="w-16 border-t border-gray-200/50 border-[0.5px]" />
           </div>
 
           <div className="mt-6 w-full">
             <a
-              href="https://saasapp.diamondoperationspro.com/#/subscription/wizard/7,2"
+              href={REGISTER}
               className="flex justify-center items-center w-full px-4 py-2 rounded-xl bg-white/10 border-(--glass-border) font-semibold shadow-2xl/20 inset-shadow-sm inset-shadow-current/20 backdrop-blur-sm bg-(--glass-bg) inset-shadow-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="text-md font-semibold leading-6">{t("Login.button1")}</span>
+              <span className="text-md font-semibold leading-6">
+                {t("Login.button1")}
+              </span>
             </a>
           </div>
         </div>

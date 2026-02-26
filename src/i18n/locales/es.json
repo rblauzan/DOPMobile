@@ -28,6 +28,7 @@
   },
   "Empty":{
     "title1": "No hay trabajadores con trabajos para este día",
+    "title2": "No hay trabajos sin asignar para este día",
     "searchNoResults": "No se encontraron trabajadores con esos datos de búsqueda"
   },
   "Fab": {
@@ -71,11 +72,12 @@
   },
   "Login" : {
     "title" : "Dop Owner",
-    "placeholder" : "Nombre de usuario",
+    "placeholder" : "Ingrese su Correo",
     "placeholderCode" : "Código",
-    "button" : "Iniciar sesión", 
+    "buttonUser" : "Iniciar sesión como Usuario", 
+    "buttonOwner" : "Iniciar sesión como Propietario",  
      "button1" : "Registrarse",
-    "notificacion1" : "Usuario incorrecto",
+    "notificacion1" : "Correo incorrecto",
     "notificacion2" : "Código incorrecto",
     "notificacion3" : "Sesión iniciada",
     "loading" : "Cargando.....",
@@ -163,8 +165,8 @@
     "Unpaid": "No pagado",
     "Unsent": "No enviado",
     "Sent": "Enviado",
-    "ToCheck": "Para comprobar",
-    "ToApproval": "Para aprobar",
+    "ToCheck": "Por comprobar",
+    "ToApproval": "Por aprobar",
     "Batched": "Por lotes",
     "Service": "Servicio",
     "Date":"Fecha",
