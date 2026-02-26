@@ -173,7 +173,8 @@
     "Payment":"Payment",
     "ToPay":"To pay",
     "Discount":"Discount",
-    "County":"County"
+    "County":"County",
+    "Team": "Team"
   } 
   
 }
