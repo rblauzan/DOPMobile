@@ -81,7 +81,9 @@
     "notificacion2" : "Código incorrecto",
     "notificacion3" : "Sesión iniciada",
     "loading" : "Cargando.....",
-    "welcome" : "Bienvenido! Inicia sesión para continuar."
+    "welcome" : "Bienvenido! Inicia sesión para continuar.",
+    "toggle": "Eres propetario",
+    "Owner": "Propetario"
   },
   "Settings": {
     "language": "Idioma",
