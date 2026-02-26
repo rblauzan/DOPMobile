@@ -19,6 +19,7 @@ ion-content {
 ion-header {
  border: none;
   --ion-background-color: transparent;
+--min-height: 90px;
   /* border-top: 1px solid rgba(255, 255, 255, 0.12); */
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.12); */
   box-shadow: none;
