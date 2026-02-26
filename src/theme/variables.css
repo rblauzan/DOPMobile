@@ -31,7 +31,8 @@ ion-toolbar {
   --border-width: 0 !important;
   --border-color: transparent !important;
   box-shadow: none !important;
- 
+ height: 90px;
+--min-height: 90px;
 }
 .header-md::after {
   background: transparent !important;
