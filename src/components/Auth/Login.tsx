@@ -45,7 +45,7 @@ export default function LoginComponent() {
     if (user) {
       // Si ya hay un usuario en localStorage, redirigir a Calendar
       navigate.replace("/Calendar");
-    }
+    } 
   }, [navigate]);
 
   // Detectar cuando el teclado se muestra/oculta

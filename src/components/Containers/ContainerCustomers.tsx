@@ -715,7 +715,7 @@ export default function DOPOwnerCRM() {
             <FilterRow
               search={search}
               setSearch={setSearch}
-              leftLabel={t("Customers.leftLabel1")}
+              leftLabel={t("Customers.leftlabel1")}
               onOpenDate={() => setDateSheetOpen(true)}
               onOpenStatus={openInvoiceStatusFilter}
               statusLabel={invoiceStatus}

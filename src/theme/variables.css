@@ -48,10 +48,9 @@ ion-tab-bar {
   backdrop-filter: blur(14px);
   padding-top: 6px;
 
-  /*  estilo IOS Tab flotante
+   /* estilo IOS Tab flotante */
   margin: 20px; 
-  border-radius: 20px;
- */
+  border-radius: 100px;
 }
 
 .user-menu-popover::part(content) {
