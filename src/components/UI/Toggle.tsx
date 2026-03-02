@@ -1,11 +1,12 @@
 
-
+import { useTranslation } from "react-i18next";
 interface Props {
   value: boolean;
   onChange: (value: boolean) => void;
 }
 
 export default function ToggleRole({ value, onChange }: Props) {
+  const { t } = useTranslation("");
   return (
     <div className="flex items-center justify-center gap-3">
       {/* Label dinámico */}
@@ -14,7 +15,7 @@ export default function ToggleRole({ value, onChange }: Props) {
           value ? "text-orange-400" : "text-gray-400"
         }`}
       >
-        {value ? "Owner" : "Are you Owner"}
+        {value ? t("Login.Owner") : t("Login.toggle")}
       </span>
 
       {/* Toggle */}

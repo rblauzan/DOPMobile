@@ -81,7 +81,9 @@
     "notificacion2" : "Code incorrect",
     "notificacion3" : "Session started",
     "loading" : "Loading.....",
-    "welcome" : "Welcome! Sign in to continue."
+    "welcome" : "Welcome! Sign in to continue.",
+    "toggle": "Are you Owner",
+    "Owner": "Owner"
   },
   "Settings": {
     "language": "Language",
