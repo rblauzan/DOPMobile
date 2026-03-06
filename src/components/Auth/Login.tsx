@@ -560,7 +560,7 @@ export default function LoginComponent() {
 
             <div className="mt-6 w-full">
               <a
-                href={REGISTER}
+                href={`https://saasapp.diamondoperationspro.com/#/subscription/wizard/7,2`}
                 className="flex justify-center items-center w-full px-4 py-2 rounded-xl bg-white/10 border border-white/15 font-semibold shadow-2xl/20 backdrop-blur-sm text-white cursor-pointer [&:hover]:scale-95 transition duration-300 hover:bg-orange-600/80"
               >
                 <span className="text-md font-semibold leading-6">{t("Login.button1")}</span>
