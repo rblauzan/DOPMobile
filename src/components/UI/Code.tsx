@@ -1,6 +1,6 @@
 // components/OtpVerification.tsx
 import React, { useState, useEffect } from 'react';
-import OtpInput from './OtpInput';
+import OtpInput from '../Auth/OtpInput';
 
 interface OtpVerificationProps {
   phoneNumber?: string;
@@ -81,7 +81,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({
         {phoneNumber}
       </p>
 
-      <OtpInput length={4} onComplete={handleComplete} />
+      <OtpInput length={6} onComplete={handleComplete} />
 
       {isVerifying && (
         <div className="mt-6 text-center">

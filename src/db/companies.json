@@ -1,0 +1,34 @@
+{
+  "companies": [
+    {
+      "id": "c1",
+      "name": "Diamond Shine Cleaning Enterprises LL",
+      "subtitle": "Cleaning Services",
+      "logoUrl": "🏢"
+    },
+    {
+      "id": "c2",
+      "name": "Luxstays",
+      "subtitle": "Hospitality Management",
+      "logoUrl": "🏢"
+    },
+    {
+      "id": "c3",
+      "name": "DOP",
+      "subtitle": "Operations Management",
+      "logoUrl": "🏢"
+    },
+    {
+      "id": "c4",
+      "name": "Tech Solutions Inc",
+      "subtitle": "Technology Services",
+      "logoUrl": "🏢"
+    },
+    {
+      "id": "c5",
+      "name": "Global Services Ltd",
+      "subtitle": "Consulting Services",
+      "logoUrl": "🏢"
+    }
+  ]
+}

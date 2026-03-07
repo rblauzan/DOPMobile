@@ -1,7 +1,6 @@
 import { Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { USER_STORAGE_KEY } from '../../constants';
-import { Loader } from 'lucide-react';
 import { LoadingIndicator } from '../UI/LoadingIndicator';
 
 
