@@ -404,10 +404,10 @@ export default function LoginComponent() {
       {
         id: "c1",
         name: "Diamond Shine Cleaning Enterprises LL",
-        subtitle: "Enter Dashboard",
+        subtitle: t("Login.enter"),
       },
-      { id: "c2", name: "Luxstays", subtitle: "Enter Dashboard" },
-      { id: "c3", name: "DOP", subtitle: "Enter Dashboard" },
+      { id: "c2", name: "Luxstays", subtitle: t("Login.enter") },
+      { id: "c3", name: "DOP", subtitle: t("Login.enter") },
     ];
 
     return list;
@@ -459,11 +459,11 @@ export default function LoginComponent() {
       await demoSendCompanyCode(email, company);
 
       setCode("");
-      sileo.success({ title: "Access code sent" });
+      sileo.success({ title: t("Login.resendCode1") });
       // step sigue siendo "COMPANY"
     } catch (err: any) {
       setSelectedCompany(null);
-      sileo.error({ fill: "white", title: err?.message || "Failed to send code" });
+      sileo.error({ fill: "white", title: err?.message || t("Login.resendCode2") });
     } finally {
       setLoading(false);
     }
@@ -474,7 +474,7 @@ export default function LoginComponent() {
     if (!selectedCompany) return;
 
     if (!code.trim()) {
-      sileo.error({ fill: "white", title: "Enter the 6-digit code" });
+      sileo.error({ fill: "white", title: t("Login.resendCodePlaceholder") });
       return;
     }
 
@@ -489,7 +489,7 @@ export default function LoginComponent() {
       sileo.success({ title: t("Login.notificacion3") });
       navigate.push("/Calendar");
     } catch (err: any) {
-      sileo.error({ fill: "white", title: err?.message || "Invalid code" });
+      sileo.error({ fill: "white", title: err?.message || t("Login.resendCode3") });
     } finally {
       setLoading(false);
     }
@@ -501,9 +501,9 @@ export default function LoginComponent() {
     try {
       setLoading(true);
       await demoSendCompanyCode(email, selectedCompany);
-      sileo.success({ title: "Code resent" });
+      sileo.success({ title: t("Login.resendCode4") });
     } catch (err: any) {
-      sileo.error({ fill: "white", title: err?.message || "Failed to resend" });
+      sileo.error({ fill: "white", title: err?.message || t("Login.resendCode5") });
     } finally {
       setLoading(false);
     }
@@ -575,20 +575,22 @@ export default function LoginComponent() {
         <div className="w-full max-w-xl">
           <div className="w-full rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl shadow-2xl p-6">
             <h3 className="text-2xl font-bold text-center text-white">
-              Welcome back {email.split("@")[0] || "👋"} <span className="inline-block">👋</span>
+              {t("Login.welcome1")} {email.split("@")[0] || "👋"} <span className="inline-block">👋</span>
             </h3>
             <p className="text-center text-sm text-white/70 mt-1">
-              Select the company you want to access
+              {t("Login.selectCompany")}
             </p>
 
+            {companies.length > 5 && (
             <div className="mt-5">
               <input
                 value={companySearch}
                 onChange={(e) => setCompanySearch(e.target.value)}
-                placeholder="Search company..."
+                placeholder={t("Login.searchCompany")}
                 className="w-full px-4 py-2.5 rounded-2xl bg-white/10 border border-white/15 text-white placeholder:text-white/50 outline-none"
               />
             </div>
+            )}
 
             <div className="mt-5 space-y-3 max-h-[260px] overflow-auto pr-1">
               {filteredCompanies.map((c) => {
@@ -616,7 +618,7 @@ export default function LoginComponent() {
 
                       <div className="text-left">
                         <div className="text-white font-semibold leading-5">{c.name}</div>
-                        <div className="text-white/60 text-xs">{c.subtitle ?? "Enter Dashboard"}</div>
+                        <div className="text-white/60 text-xs">{c.subtitle ?? t("Login.enter")}</div>
                       </div>
                     </div>
 
@@ -626,19 +628,18 @@ export default function LoginComponent() {
               })}
 
               {filteredCompanies.length === 0 && (
-                <div className="text-center text-white/70 text-sm py-6">No companies found.</div>
+                <div className="text-center text-white/70 text-sm py-6"> {t("Login.noCompanies")} </div>
               )}
             </div>
 
             {/* ✅ PANEL DE CÓDIGO DEBAJO (como imagen) */}
             {selectedCompany && (
               <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 backdrop-blur-xl p-5">
-                <div className="text-white font-semibold">Verification code required</div>
+                <div className="text-white font-semibold"> {t("Login.verificationCode")} </div>
 
                 <p className="text-white/70 text-sm mt-2">
-                  A verification code has been sent to{" "}
-                  <span className="text-white font-semibold">{email}</span>. Enter it below
-                  to securely access{" "}
+                      {t("Login.verificationCode1")}{" "}
+                  <span className="text-white font-semibold">{email}</span>. {t("Login.verificationCode2")}{" "}
                   <span className="text-white font-semibold">{selectedCompany.name}</span>.
                 </p>
 
@@ -647,7 +648,7 @@ export default function LoginComponent() {
                     inputMode="numeric"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    placeholder="Enter 6-digit code"
+                    placeholder={t("Login.resendCodePlaceholder")}
                     className="flex-1 px-4 py-3 rounded-2xl bg-white/10 border border-white/15 text-white placeholder:text-white/50 outline-none"
                   />
 
@@ -660,7 +661,7 @@ export default function LoginComponent() {
                     disabled={loading}
                     className="text-sm text-white/80 hover:text-white underline underline-offset-4 disabled:opacity-60"
                   >
-                    Resend code
+                    {t("Login.resendCode")}
                   </button>
 
                   <button
@@ -669,7 +670,7 @@ export default function LoginComponent() {
                     disabled={loading}
                     className="px-6 py-3 rounded-2xl bg-white/10 border border-white/15 text-white font-semibold hover:bg-white/15 transition disabled:opacity-60"
                   >
-                    {loading ? "..." : "Continue"}
+                    {loading ? "..." : t("Login.continue")}
                   </button>
                 </div>
                 
@@ -695,7 +696,7 @@ export default function LoginComponent() {
                 }}
                 className="px-5 py-2.5 rounded-2xl bg-white/10 border border-white/15 text-white hover:bg-white/15 transition"
               >
-                Cancel
+                {t("Login.cancel")}
               </button>
             </div>
           </div>
