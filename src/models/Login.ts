@@ -15,5 +15,4 @@ export type Company = {
   id: string;
   name: string;
   subtitle?: string;
-  logoUrl?: string;
 };

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Keyboard } from "@capacitor/keyboard";
 import { sileo } from "sileo";
 import { useTranslation } from "react-i18next";
+import { Building2, Building, Warehouse, Hotel, Zap } from "lucide-react";
 import ToggleRole from "../UI/Toggle";
 import { ADMIN_USER, DEMO_TOKEN, REGISTER, VALID_CODE } from "../../constants";
 import { Step, Role, Company } from "../../models/Login";
@@ -305,7 +306,7 @@ export default function LoginComponent() {
             )}
 
             <div className="mt-5 space-y-3 max-h-[260px] overflow-auto pr-1">
-              {filteredCompanies.map((c) => {
+              {selectedCompany === null && filteredCompanies.map((c) => {
                 const active = selectedCompany?.id === c.id;
                 return (
                   <button
@@ -320,12 +321,9 @@ export default function LoginComponent() {
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center overflow-hidden">
-                        {c.logoUrl ? (
-                          <img src={c.logoUrl} alt={c.name} className="w-full h-full object-cover" />
-                        ) : (
-                          <span className="text-white/80 text-sm">🏢</span>
-                        )}
+                      {/* Icono de edificio mejorado */}
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 border border-white/20 flex items-center justify-center">
+                        {getCompanyIcon(c.id)}
                       </div>
 
                       <div className="text-left">
@@ -384,3 +382,15 @@ export default function LoginComponent() {
     </div>
   );
 }
+
+// Función para asignar iconos según el ID de la compañía
+const getCompanyIcon = (id: string) => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    c1: <Building2 className="w-6 h-6 text-blue-300" />,
+    c2: <Hotel className="w-6 h-6 text-purple-300" />,
+    c3: <Warehouse className="w-6 h-6 text-green-300" />,
+    c4: <Zap className="w-6 h-6 text-yellow-300" />,
+    c5: <Building className="w-6 h-6 text-cyan-300" />,
+  };
+  return iconMap[id] || <Building2 className="w-6 h-6 text-blue-300" />;
+};
