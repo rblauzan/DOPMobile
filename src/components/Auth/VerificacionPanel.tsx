@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Company, VerificationPanelProps } from "../../models/Login";
-import OTPInput from "../Auth/OTPInput";
+import OTPInput from "../Auth/OtpInput";
 
 
 

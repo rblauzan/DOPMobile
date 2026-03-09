@@ -100,7 +100,8 @@
     "resendCode4": "Code resent",
     "resendCode5": "Failed to resend",
     "continue": "Continue",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "Or": "Or"
   },
   "Settings": {
     "language": "Language",

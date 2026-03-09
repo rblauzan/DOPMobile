@@ -100,7 +100,8 @@
     "resendCode4": "Código reenviado",
     "resendCode5": "Error al reenviar el código",
     "continue": "Continuar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "Or": "O"
   },
   "Settings": {
     "language": "Idioma",

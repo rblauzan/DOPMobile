@@ -268,7 +268,7 @@ export default function LoginComponent() {
           <div className="mt-5 w-full max-w-md flex flex-col items-center">
             <div className="w-full flex items-center justify-center gap-3">
               <div className="w-16 border-t border-gray-200/50 border-[0.5px]" />
-              <span className="text-sm font-medium leading-6 text-gray-400 shrink-0">Or</span>
+              <span className="text-sm font-medium leading-6 text-gray-400 shrink-0">{t("Login.Or")}</span>
               <div className="w-16 border-t border-gray-200/50 border-[0.5px]" />
             </div>
 
