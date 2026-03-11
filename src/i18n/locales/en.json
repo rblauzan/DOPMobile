@@ -15,7 +15,8 @@
   "Toolbar": {
     "title1": "Calendar",
     "title2": "Settings",
-    "title3": "Customers"
+    "title3": "Customers",
+    "title4": "Properties"
   },
   "HeaderLayout": {
    "title1": "Calendar",

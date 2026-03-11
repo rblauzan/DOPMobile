@@ -44,9 +44,9 @@ ion-toolbar {
 ion-tab-bar {
   --background: transparent;
   --color: #ffffffbf;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(247, 103, 25, 0.173);
   backdrop-filter: blur(14px);
-  padding-top: 6px;
+  padding: 6px;
 
    /* estilo IOS Tab flotante */
   margin: 20px; 

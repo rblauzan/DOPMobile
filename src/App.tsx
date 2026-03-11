@@ -10,7 +10,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { calendar, settings, people } from "ionicons/icons";
+import { calendar, settings, people, homeOutline } from "ionicons/icons";
 import CalendarTab from "./pages/Calendar";
 import SettingsTab from "./pages/Settings";
 import CustomersTab from "./pages/Customers";
@@ -37,6 +37,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import { useTranslation } from "react-i18next";
 import { Toaster } from "sileo";
+import DOPOwnerPropertiesModule from "./pages/Properties";
 
 setupIonicReact();
 
@@ -61,6 +62,11 @@ const MainTabs: React.FC = () => {
         <Route path="/Settings">
           <ProtectedRoute>
             <SettingsTab />
+          </ProtectedRoute>
+        </Route>
+        <Route path="/Properties">
+          <ProtectedRoute>
+            <DOPOwnerPropertiesModule />
           </ProtectedRoute>
         </Route>
         <Route path="/Login">
@@ -90,6 +96,11 @@ const MainTabs: React.FC = () => {
         <IonTabButton tab="Customers" href="/Customers">
           <IonIcon aria-hidden="true" icon={people} />
           <IonLabel>{t("Toolbar.title3")}</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Properties" href="/Properties">
+          <IonIcon aria-hidden="true" icon={homeOutline} />
+          <IonLabel>{t("Toolbar.title4")}</IonLabel>
         </IonTabButton>
 
         {/* @ts-expect-error - Ionic React types incompatible with React 19, but works at runtime */}
