@@ -10,6 +10,7 @@ import "./Tab1.css";
 import { UserMenu } from "../components/UI/user/UserMenu";
 import HeaderLayout from "../components/Layout/HeaderLayout";
 import { useTranslation } from "react-i18next";
+import ContainerCalendarPlus from "../components/Containers/ContainerCalendarPlus";
 
 const Calendar: React.FC = () => {
   const { t } = useTranslation("");
@@ -31,7 +32,7 @@ const Calendar: React.FC = () => {
             <IonTitle size="large">{t("Toolbar.title1")}  </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Calendar page" />
+        <ContainerCalendarPlus name="Calendar page" />
       </IonContent>
     </IonPage>
   );
